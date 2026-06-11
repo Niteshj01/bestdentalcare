@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-mint: #00afb9;
+  --color-mint-dark: #00818a;
+  --color-gold: #C9A84C;
+  --color-gold-light: #DFBA5C;
+  --color-deep-green: #074754;
+  --color-charcoal: #011d24;
+  --color-dark-green: #032d36;
+  --color-surface-mint: #f3fafb;
+  --color-pink-hint: #f5fbfb;
+  --color-sage: #5b7f8c;
+
+  --font-cormorant: "Cormorant Garamond", serif;
+  --font-accent: "Playfair Display", serif;
+  --font-dm: "DM Sans", sans-serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: #f3fafb;
+    color: #011d24;
+    overflow-x: hidden;
+  }
+
+  /* Custom luxury scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f3fafb;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #00afb9;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #074754;
+  }
+}
+
+/* Custom Cursor - Hides default cursor on desktop */
+@media (min-width: 1024px) {
+  body.custom-cursor-enabled,
+  body.custom-cursor-enabled * {
+    cursor: none !important;
+  }
+}
+
+/* GPU Acceleration optimizations */
+.animate-gpu {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Glassmorphism styling */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.dark-glass-panel {
+  background: rgba(0, 56, 35, 0.72);
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Asymmetric spa borders */
+.custom-shape-1 {
+  border-radius: 4px 4px 64px 4px;
+}
+.custom-shape-2 {
+  border-radius: 64px 4px 4px 4px;
+}
+.custom-shape-3 {
+  border-radius: 4px 64px 4px 4px;
+}
+
+/* Vector layouts */
+.tooth-pattern {
+  opacity: 0.05;
+  background-image: radial-gradient(#006C4D 0.5px, transparent 0.5px);
+  background-size: 24px 24px;
+}
+
+/* Custom clip-path frames as specified by Stitch specs */
+.blob-frame {
+  clip-path: ellipse(48% 46% at 50% 50%);
+}
+
+/* Lenis CSS integration */
+html.lenis {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  scroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+

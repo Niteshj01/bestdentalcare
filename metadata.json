@@ -1,0 +1,6 @@
+{
+  "name": "Best Dental Care",
+  "description": "Premium multi-specialty dental clinic led by Dr. Sanya Makkar Alawadhi in Hissar Sector 14, combining clinical excellence, sedation dentistry, and advanced oral rehabilitation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
