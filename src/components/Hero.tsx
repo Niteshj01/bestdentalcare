@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -23,15 +23,83 @@ export default function Hero({ startAnimation }: HeroProps) {
   const card2Ref = useRef<HTMLDivElement>(null);
   const toothPatternRef = useRef<HTMLDivElement>(null);
 
+  const fallbackUrls = [
+    "https://i.ibb.co/4wp9kHPj/image.png",
+    "https://i.ibb.co/4wp9kHPj/image.jpg",
+    "https://i.ibb.co/4wp9kHPj/image.webp",
+    "https://i.ibb.co/4wp9kHPj/image.jpeg",
+    "https://i.ibb.co/4wp9kHPj/image.PNG",
+    "https://i.ibb.co/4wp9kHPj/image.JPG",
+    "https://lh3.googleusercontent.com/aida-public/AB6AXuCFoSk0hfkEWMu0nRjm0YGZDwTDXgR703hh94ejRMLtcd1ed7ZCA6VWoOE7ULNVMYFba-sKntdhw_awDtm77cpW8y-vTEwqMEaGvkQu81hF4idMolIPrNix_J--X9MKcyLR9TkV3wmQ59a6wd7UIielpNbZ6HDvfNw_IhhFnPD08x_TkPlTMEnF8GK-l1to4kAELAGSA625De4P8dZFOdswcyhEBVzwNhFKyvTGu5nMDIgiwci2qid_IzLrh5NsVF3iAqrWJ25j9JU"
+  ];
+  const [imgUrlIndex, setImgUrlIndex] = useState(0);
+  const [resolvedImgUrl, setResolvedImgUrl] = useState<string | null>(null);
+
+  const handleImgError = () => {
+    if (imgUrlIndex < fallbackUrls.length - 1) {
+      setImgUrlIndex((prev) => prev + 1);
+    }
+  };
+
+  useEffect(() => {
+    let isMounted = true;
+    const fetchDirectLink = async () => {
+      try {
+        const response = await fetch(
+          "https://api.allorigins.win/get?url=" + encodeURIComponent("https://ibb.co/4wp9kHPj")
+        );
+        if (!response.ok) return;
+        const data = await response.json();
+        if (!data.contents) return;
+
+        // Extract raw og:image URL from the ImgBB HTML structure
+        const ogImageMatch = data.contents.match(/<meta[^>]*property=["']og:image["'][^>]*content=["']([^"']+)["']/i) ||
+                             data.contents.match(/<meta[^>]*content=["']([^"']+)["'][^>]*property=["']og:image["']/i);
+        
+        let foundUrl = ogImageMatch ? ogImageMatch[1] : null;
+
+        if (!foundUrl) {
+          // Broad search fallback for active i.ibb.co patterns
+          const broadMatch = data.contents.match(/(https:\/\/i\.ibb\.co\/[a-zA-Z0-9]+\/[^"'\t >\)\s]+)/i);
+          if (broadMatch) {
+            foundUrl = broadMatch[1];
+          }
+        }
+
+        if (foundUrl && isMounted) {
+          const decoded = foundUrl.replace(/&amp;/g, "&");
+          setResolvedImgUrl(decoded);
+        }
+      } catch (err) {
+        // Safe console warning, fallback mechanism is active
+        console.warn("Could not fetch high-res direct image link dynamically, using static fallback chain.", err);
+      }
+    };
+
+    fetchDirectLink();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   useEffect(() => {
     if (!startAnimation) return;
 
     const noMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (noMotion) {
       // Set properties immediately if reduced motion is requested
-      gsap.set(containerRef.current, { opacity: 1 });
-      gsap.set(badgeRef.current, { opacity: 1 });
+      gsap.set(containerRef.current, { backgroundColor: "rgba(232, 255, 239, 1)", opacity: 1 });
+      gsap.set(badgeRef.current, { opacity: 1, y: 0 });
       gsap.set(headlineRef.current, { opacity: 1 });
+      gsap.set(italicLineRef.current, { opacity: 1, y: 0 });
+      gsap.set(descRef.current, { opacity: 1, y: 0 });
+      gsap.set(primaryBtnRef.current, { opacity: 1, scale: 1 });
+      gsap.set(secondaryBtnRef.current, { opacity: 1, scale: 1 });
+      gsap.set(trustRef.current, { opacity: 1, y: 0 });
+      gsap.set(visualContainerRef.current, { opacity: 1, scale: 1, rotation: 0 });
+      gsap.set(card1Ref.current, { opacity: 1, scale: 1 });
+      gsap.set(card2Ref.current, { opacity: 1, scale: 1 });
+      gsap.set(toothPatternRef.current, { opacity: 0.05 });
       return;
     }
 
@@ -212,6 +280,8 @@ export default function Hero({ startAnimation }: HeroProps) {
 
     // Magnetic effect configuration for CTAs
     const bounceElements = [primaryBtnRef.current, secondaryBtnRef.current];
+    const cleanups: (() => void)[] = [];
+
     bounceElements.forEach((btn) => {
       if (!btn) return;
       const xTo = gsap.quickTo(btn, "x", { duration: 0.3, ease: "power2.out" });
@@ -240,11 +310,15 @@ export default function Hero({ startAnimation }: HeroProps) {
       window.addEventListener("mousemove", onMouseMove);
       btn.addEventListener("mouseleave", onMouseLeave);
 
-      return () => {
+      cleanups.push(() => {
         window.removeEventListener("mousemove", onMouseMove);
         btn.removeEventListener("mouseleave", onMouseLeave);
-      };
+      });
     });
+
+    return () => {
+      cleanups.forEach((c) => c());
+    };
   }, [startAnimation]);
 
   const scrollToConsultation = () => {
@@ -371,7 +445,9 @@ export default function Hero({ startAnimation }: HeroProps) {
                 ref={visualRef}
                 alt="Editorial clinic suite"
                 className="w-full h-[115%] object-cover object-center translate-y-[-5%]"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFoSk0hfkEWMu0nRjm0YGZDwTDXgR703hh94ejRMLtcd1ed7ZCA6VWoOE7ULNVMYFba-sKntdhw_awDtm77cpW8y-vTEwqMEaGvkQu81hF4idMolIPrNix_J--X9MKcyLR9TkV3wmQ59a6wd7UIielpNbZ6HDvfNw_IhhFnPD08x_TkPlTMEnF8GK-l1to4kAELAGSA625De4P8dZFOdswcyhEBVzwNhFKyvTGu5nMDIgiwci2qid_IzLrh5NsVF3iAqrWJ25j9JU"
+                referrerPolicy="no-referrer"
+                src={resolvedImgUrl || fallbackUrls[imgUrlIndex]}
+                onError={handleImgError}
               />
             </div>
 

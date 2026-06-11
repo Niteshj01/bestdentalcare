@@ -135,7 +135,7 @@ export default function Navbar() {
               onClick={() => {
                 document.getElementById("appointment")?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="bg-primary-mint hover:bg-deep-green text-white font-dm text-[11px] uppercase tracking-wider font-semibold px-6 py-2.5 rounded-full transition-all duration-300 hover:shadow-[0_12px_24px_rgba(62,180,137,0.35)] hover:scale-104 active:scale-95 text-center hidden sm:block"
+              className="bg-primary-mint hover:bg-deep-green text-white font-dm text-[11px] uppercase tracking-wider font-semibold px-6 py-2.5 rounded-full transition-all duration-300 hover:shadow-[0_12px_24px_rgba(62,180,137,0.35)] hover:scale-104 active:scale-95 text-center hidden sm:block cursor-pointer"
             >
               Book Appointment
             </button>
@@ -214,14 +214,26 @@ export default function Navbar() {
         </div>
 
         {/* Foot of drawer */}
-        <div className="drawer-link mt-auto">
+        <div className="drawer-link mt-auto flex flex-col gap-3">
+          <button
+            onClick={() => {
+              setMenuOpen(false);
+              setTimeout(() => {
+                window.dispatchEvent(new CustomEvent("open-review-modal"));
+              }, 300);
+            }}
+            className="w-full border border-primary-mint/30 hover:border-primary-mint text-deep-green text-center py-3.5 rounded-full font-dm text-[12px] uppercase tracking-widest font-semibold hover:bg-primary-mint/5 transition-all flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <span className="text-gold">★</span> Leave a Review
+          </button>
+          
           <button
             onClick={() => handleLinkClick("appointment")}
-            className="w-full bg-primary-mint text-white text-center py-4 rounded-full font-dm text-[12px] uppercase tracking-widest font-semibold hover:bg-deep-green transition-colors"
+            className="w-full bg-primary-mint text-white text-center py-3.5 rounded-full font-dm text-[12px] uppercase tracking-widest font-semibold hover:bg-deep-green transition-colors cursor-pointer"
           >
             Request Consult
           </button>
-          <p className="text-center text-[10px] font-dm text-sage mt-6 tracking-widest uppercase">
+          <p className="text-center text-[10px] font-dm text-sage mt-4 tracking-widest uppercase">
             Sector 14, Hissar • Near Community Centre
           </p>
         </div>

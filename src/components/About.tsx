@@ -14,7 +14,16 @@ export default function About() {
 
   useEffect(() => {
     const noMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (noMotion) return;
+    if (noMotion) {
+      gsap.set(imageContainerRef.current, { clipPath: "inset(0% 0% 0% 0%)", opacity: 1 });
+      gsap.set(imgRef.current, { scale: 1 });
+      gsap.set(badgeRef.current, { scale: 1, rotation: 0 });
+      const elements = textColRef.current?.children;
+      if (elements) {
+        gsap.set(elements, { opacity: 1, x: 0 });
+      }
+      return;
+    }
 
     const section = sectionRef.current;
     if (!section) return;
@@ -30,8 +39,8 @@ export default function About() {
     // Curtain reveal from bottom: clip-path inset(0 0 100% 0) -> inset(0 0 0% 0)
     timeline.fromTo(
       imageContainerRef.current,
-      { clipPath: "inset(100% 0 0 0)" },
-      { clipPath: "inset(0% 0 0% 0)", duration: 1.3, ease: "power3.inOut" }
+      { clipPath: "inset(100% 0% 0% 0%)" },
+      { clipPath: "inset(0% 0% 0% 0%)", duration: 1.3, ease: "power3.inOut" }
     );
 
     // Dr. founders slight scale inside image on load
@@ -133,12 +142,13 @@ export default function About() {
           <div
             ref={imageContainerRef}
             className="relative z-10 w-full aspect-[4/5] max-w-[480px] rounded-2xl overflow-hidden shadow-2xl bg-teal-950/15"
-            style={{ clipPath: "inset(100% 0 0 0)" }}
+            style={{ clipPath: "inset(100% 0% 0% 0%)" }}
           >
             <img
               ref={imgRef}
               alt="Dr. Sanya Makkar Alawadhi"
               className="w-full h-full object-cover object-center grayscale hover:grayscale-0 transition-all duration-700 select-none animate-gpu"
+              referrerPolicy="no-referrer"
               src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=640&auto=format&fit=crop"
             />
           </div>

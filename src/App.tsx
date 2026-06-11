@@ -20,6 +20,7 @@ import Appointment from "./components/Appointment";
 import Instagram from "./components/Instagram";
 import Footer from "./components/Footer";
 import FloatingControls from "./components/FloatingControls";
+import ReviewModal from "./components/ReviewModal";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -66,8 +67,14 @@ export default function App() {
       }
     );
 
+    // 5. Force refresh ScrollTrigger calculations once the entering opacity transitions complete and DOM is fully laid out.
+    const refreshTimeout = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 400);
+
     // Cleanup ticker and scroll events on destroy
     return () => {
+      clearTimeout(refreshTimeout);
       gsap.ticker.remove(updateTicker);
       lenis.destroy();
       progressTween.scrollTrigger?.kill();
@@ -104,6 +111,9 @@ export default function App() {
         <Instagram />
         <Footer />
         <FloatingControls />
+        
+        {/* Dynamic review capture modal */}
+        <ReviewModal />
 
       </div>
     </>

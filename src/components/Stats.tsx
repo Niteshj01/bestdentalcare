@@ -60,7 +60,13 @@ export default function Stats() {
 
   useEffect(() => {
     const noMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (noMotion) return;
+    if (noMotion) {
+      const lines = linesRef.current?.querySelectorAll(".dec-line");
+      if (lines && lines.length > 0) {
+        gsap.set(lines, { scaleY: 1 });
+      }
+      return;
+    }
 
     // Scale decorative background lines on Scroll
     const lines = linesRef.current?.querySelectorAll(".dec-line");

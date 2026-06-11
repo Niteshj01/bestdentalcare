@@ -13,7 +13,11 @@ export default function BeforeAfter() {
 
   useEffect(() => {
     const noMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (noMotion) return;
+    if (noMotion) {
+      gsap.set(headingRef.current, { clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)", opacity: 1 });
+      gsap.set(cardRef.current, { opacity: 1, scale: 1, y: 0 });
+      return;
+    }
 
     // Heading wipe animation
     gsap.fromTo(

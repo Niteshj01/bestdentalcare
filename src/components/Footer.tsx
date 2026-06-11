@@ -14,7 +14,12 @@ export default function Footer() {
 
   useEffect(() => {
     const noMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (noMotion) return;
+    if (noMotion) {
+      if (markRef.current) gsap.set(markRef.current, { xPercent: 0 });
+      const columns = containerRef.current?.querySelectorAll(".footer-column");
+      if (columns && columns.length > 0) gsap.set(columns, { opacity: 1, y: 0 });
+      return;
+    }
 
     // Horizontal scroll layout watermark sliding on scroll
     gsap.fromTo(

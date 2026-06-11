@@ -72,7 +72,15 @@ export default function Services() {
 
   useEffect(() => {
     const noMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (noMotion) return;
+    if (noMotion) {
+      gsap.set(headerRef.current, { clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)", opacity: 1 });
+      gsap.set(underlineRef.current, { scaleX: 1 });
+      const cards = cardsRef.current?.querySelectorAll(".service-card-item");
+      if (cards && cards.length > 0) {
+        gsap.set(cards, { opacity: 1, y: 0, scale: 1 });
+      }
+      return;
+    }
 
     // Header wipe animation
     gsap.fromTo(

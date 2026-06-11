@@ -37,7 +37,21 @@ export default function Doctors() {
 
   useEffect(() => {
     const noMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (noMotion) return;
+    if (noMotion) {
+      if (cardLeftRef.current) {
+        gsap.set(cardLeftRef.current, { x: 0, opacity: 1 });
+        gsap.set(cardLeftRef.current.querySelector(".doctor-frame"), { scale: 1, rotation: 0, opacity: 1 });
+        const pills = cardLeftRef.current.querySelectorAll(".qual-pill");
+        if (pills.length > 0) gsap.set(pills, { scale: 1, opacity: 1 });
+      }
+      if (cardRightRef.current) {
+        gsap.set(cardRightRef.current, { x: 0, opacity: 1 });
+        gsap.set(cardRightRef.current.querySelector(".doctor-frame"), { scale: 1, rotation: 0, opacity: 1 });
+        const pills = cardRightRef.current.querySelectorAll(".qual-pill");
+        if (pills.length > 0) gsap.set(pills, { scale: 1, opacity: 1 });
+      }
+      return;
+    }
 
     const leftCard = cardLeftRef.current;
     const rightCard = cardRightRef.current;
@@ -194,6 +208,7 @@ export default function Doctors() {
                 className={`w-full h-full object-cover object-center transition-all duration-700 group-hover:scale-115 group-hover:grayscale-0 ${
                   clickedDocId === clinicians[0].id ? "grayscale-0 scale-110" : "grayscale"
                 }`}
+                referrerPolicy="no-referrer"
                 src={clinicians[0].image}
                 onError={(e) => {
                   e.currentTarget.src = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=640&auto=format&fit=crop";
@@ -249,6 +264,7 @@ export default function Doctors() {
                 className={`w-full h-full object-cover object-center transition-all duration-700 group-hover:scale-115 group-hover:grayscale-0 ${
                   clickedDocId === clinicians[1].id ? "grayscale-0 scale-110" : "grayscale"
                 }`}
+                referrerPolicy="no-referrer"
                 src={clinicians[1].image}
               />
               <div className="absolute top-2 left-2 bg-gradient-to-br from-gold to-gold-light text-charcoal font-dm text-[8px] font-bold tracking-widest uppercase px-3 py-1 rounded-full shadow z-10">
@@ -322,6 +338,7 @@ export default function Doctors() {
                 <img
                   alt={selectedDoctor.name}
                   className="w-full h-full object-cover object-center grayscale-0 scale-105"
+                  referrerPolicy="no-referrer"
                   src={selectedDoctor.image}
                   onError={(e) => {
                     e.currentTarget.src = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=640&auto=format&fit=crop";

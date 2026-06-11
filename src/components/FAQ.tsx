@@ -47,7 +47,14 @@ export default function FAQ() {
 
   useEffect(() => {
     const noMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (noMotion) return;
+    if (noMotion) {
+      gsap.set(headingRef.current, { clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)", opacity: 1 });
+      const items = containerRef.current?.querySelectorAll(".faq-item-row");
+      if (items && items.length > 0) {
+        gsap.set(items, { opacity: 1, y: 0 });
+      }
+      return;
+    }
 
     // Heading wipe animation
     gsap.fromTo(

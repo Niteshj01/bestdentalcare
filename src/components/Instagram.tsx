@@ -44,7 +44,13 @@ export default function Instagram() {
 
   useEffect(() => {
     const noMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (noMotion) return;
+    if (noMotion) {
+      const items = trackRef.current?.querySelectorAll(".ig-item");
+      if (items && items.length > 0) {
+        gsap.set(items, { scale: 1, opacity: 1 });
+      }
+      return;
+    }
 
     const items = trackRef.current?.querySelectorAll(".ig-item");
     if (items && items.length > 0) {
@@ -115,6 +121,7 @@ export default function Instagram() {
               <img
                 alt={post.alt}
                 className="w-full h-full object-cover object-center group-hover:scale-112 transition-transform duration-700 select-none animate-gpu"
+                referrerPolicy="no-referrer"
                 src={post.image}
               />
 
