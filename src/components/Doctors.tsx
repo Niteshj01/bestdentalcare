@@ -23,15 +23,6 @@ export default function Doctors() {
       image: "https://i.ibb.co/PsMks3YZ/image.jpg",
       badge: "Expert Director",
       qualifications: ["B.D.S. Specialist", "Restorations Expert", "Oral Rehabilitation"]
-    },
-    {
-      id: "associated-surgeons",
-      name: "Associated Specialist Team",
-      role: "Implantologists, Oral Surgeons & Orthodontists",
-      bio: "Our clinic is backed by a highly dedicated panel of surgical consultants, dental assistants, and hygiene certified staff committed to painless and comfortable digital therapies.",
-      image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=640&auto=format&fit=crop",
-      badge: "Elite Consultants",
-      qualifications: ["Sterilized Hygiene Standards", "Painless Implants Team", "Patient-Centric Care"]
     }
   ];
 
@@ -187,13 +178,13 @@ export default function Doctors() {
           </p>
         </div>
 
-        {/* Asymmetrical Doctor Layout Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-stretch">
+        {/* Centered Premium Doctor Card layout */}
+        <div className="flex justify-center">
           
           {/* Doctor 1 Card (Left slide) */}
           <div
             ref={cardLeftRef}
-            className="doctor-card-wrapper relative bg-white border border-primary-mint/10 rounded-2xl p-8 md:p-12 shadow-xl hover:shadow-[0_24px_50px_rgba(62,180,137,0.12)] transition-shadow duration-500 flex flex-col md:flex-row gap-8 items-center md:items-start text-left select-none animate-gpu"
+            className="doctor-card-wrapper max-w-2xl relative bg-white border border-primary-mint/10 rounded-2xl p-8 md:p-12 shadow-xl hover:shadow-[0_24px_50px_rgba(62,180,137,0.12)] transition-shadow duration-500 flex flex-col md:flex-row gap-8 items-center md:items-start text-left select-none animate-gpu"
           >
             {/* Visual Frame Block with morph hover and tap-to-popout */}
             <div
@@ -235,59 +226,6 @@ export default function Doctors() {
               {/* Qualification Pills list */}
               <div className="flex flex-wrap gap-2 pt-2">
                 {clinicians[0].qualifications.map((qual, index) => (
-                  <span
-                    key={index}
-                    className="qual-pill bg-surface-mint border border-primary-mint/10 text-primary-mint font-dm text-[9px] uppercase tracking-wider px-3 py-1 rounded-full"
-                  >
-                    {qual}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Doctor 2 Card (Right slide) */}
-          <div
-            ref={cardRightRef}
-            className="doctor-card-wrapper relative bg-white border border-primary-mint/10 rounded-2xl p-8 md:p-12 shadow-xl hover:shadow-[0_24px_50px_rgba(62,180,137,0.12)] transition-shadow duration-500 flex flex-col md:flex-row-reverse gap-8 items-center md:items-start text-left select-none animate-gpu"
-          >
-            {/* Visual Frame Block with morph hover and tap-to-popout */}
-            <div
-              onClick={() => {
-                setClickedDocId(clinicians[1].id);
-                setSelectedDoctor(clinicians[1]);
-              }}
-              className="relative flex-shrink-0 w-44 h-44 rounded-full overflow-hidden doctor-frame border border-primary-mint/20 shadow-md cursor-pointer group active:scale-95 transition-transform duration-200"
-            >
-              <img
-                alt={clinicians[1].name}
-                className={`w-full h-full object-cover object-center transition-all duration-700 group-hover:scale-115 group-hover:grayscale-0 ${
-                  clickedDocId === clinicians[1].id ? "grayscale-0 scale-110" : "grayscale"
-                }`}
-                referrerPolicy="no-referrer"
-                src={clinicians[1].image}
-              />
-              <div className="absolute top-2 left-2 bg-gradient-to-br from-gold to-gold-light text-charcoal font-dm text-[8px] font-bold tracking-widest uppercase px-3 py-1 rounded-full shadow z-10">
-                {clinicians[1].badge}
-              </div>
-            </div>
-
-            <div className="space-y-4 flex-grow">
-              <div>
-                <h3 className="font-cormorant text-2xl font-semibold text-charcoal hover:text-primary-mint transition-colors">
-                  {clinicians[1].name}
-                </h3>
-                <span className="font-accent italic text-sage text-sm block mt-1">
-                  {clinicians[1].role}
-                </span>
-              </div>
-              <p className="font-sans text-xs md:text-sm text-[#3D4943] leading-relaxed">
-                {clinicians[1].bio}
-              </p>
-
-              {/* Qualification Pills list */}
-              <div className="flex flex-wrap gap-2 pt-2">
-                {clinicians[1].qualifications.map((qual, index) => (
                   <span
                     key={index}
                     className="qual-pill bg-surface-mint border border-primary-mint/10 text-primary-mint font-dm text-[9px] uppercase tracking-wider px-3 py-1 rounded-full"

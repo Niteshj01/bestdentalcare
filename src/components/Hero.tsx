@@ -1,6 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+// @ts-ignore
+import heroClinicImg from "../assets/images/regenerated_image_1781202656255.jpg";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,65 +24,6 @@ export default function Hero({ startAnimation }: HeroProps) {
   const card1Ref = useRef<HTMLDivElement>(null);
   const card2Ref = useRef<HTMLDivElement>(null);
   const toothPatternRef = useRef<HTMLDivElement>(null);
-
-  const fallbackUrls = [
-    "https://i.ibb.co/4wp9kHPj/image.png",
-    "https://i.ibb.co/4wp9kHPj/image.jpg",
-    "https://i.ibb.co/4wp9kHPj/image.webp",
-    "https://i.ibb.co/4wp9kHPj/image.jpeg",
-    "https://i.ibb.co/4wp9kHPj/image.PNG",
-    "https://i.ibb.co/4wp9kHPj/image.JPG",
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuCFoSk0hfkEWMu0nRjm0YGZDwTDXgR703hh94ejRMLtcd1ed7ZCA6VWoOE7ULNVMYFba-sKntdhw_awDtm77cpW8y-vTEwqMEaGvkQu81hF4idMolIPrNix_J--X9MKcyLR9TkV3wmQ59a6wd7UIielpNbZ6HDvfNw_IhhFnPD08x_TkPlTMEnF8GK-l1to4kAELAGSA625De4P8dZFOdswcyhEBVzwNhFKyvTGu5nMDIgiwci2qid_IzLrh5NsVF3iAqrWJ25j9JU"
-  ];
-  const [imgUrlIndex, setImgUrlIndex] = useState(0);
-  const [resolvedImgUrl, setResolvedImgUrl] = useState<string | null>(null);
-
-  const handleImgError = () => {
-    if (imgUrlIndex < fallbackUrls.length - 1) {
-      setImgUrlIndex((prev) => prev + 1);
-    }
-  };
-
-  useEffect(() => {
-    let isMounted = true;
-    const fetchDirectLink = async () => {
-      try {
-        const response = await fetch(
-          "https://api.allorigins.win/get?url=" + encodeURIComponent("https://ibb.co/4wp9kHPj")
-        );
-        if (!response.ok) return;
-        const data = await response.json();
-        if (!data.contents) return;
-
-        // Extract raw og:image URL from the ImgBB HTML structure
-        const ogImageMatch = data.contents.match(/<meta[^>]*property=["']og:image["'][^>]*content=["']([^"']+)["']/i) ||
-                             data.contents.match(/<meta[^>]*content=["']([^"']+)["'][^>]*property=["']og:image["']/i);
-        
-        let foundUrl = ogImageMatch ? ogImageMatch[1] : null;
-
-        if (!foundUrl) {
-          // Broad search fallback for active i.ibb.co patterns
-          const broadMatch = data.contents.match(/(https:\/\/i\.ibb\.co\/[a-zA-Z0-9]+\/[^"'\t >\)\s]+)/i);
-          if (broadMatch) {
-            foundUrl = broadMatch[1];
-          }
-        }
-
-        if (foundUrl && isMounted) {
-          const decoded = foundUrl.replace(/&amp;/g, "&");
-          setResolvedImgUrl(decoded);
-        }
-      } catch (err) {
-        // Safe console warning, fallback mechanism is active
-        console.warn("Could not fetch high-res direct image link dynamically, using static fallback chain.", err);
-      }
-    };
-
-    fetchDirectLink();
-    return () => {
-      isMounted = false;
-    };
-  }, []);
 
   useEffect(() => {
     if (!startAnimation) return;
@@ -444,10 +387,10 @@ export default function Hero({ startAnimation }: HeroProps) {
               <img
                 ref={visualRef}
                 alt="Editorial clinic suite"
-                className="w-full h-[115%] object-cover object-center translate-y-[-5%]"
+                className="w-full h-[115%] object-cover object-center translate-y-[-5%] rendering-crisp"
+                style={{ imageRendering: "-webkit-optimize-contrast" }}
                 referrerPolicy="no-referrer"
-                src={resolvedImgUrl || fallbackUrls[imgUrlIndex]}
-                onError={handleImgError}
+                src={heroClinicImg}
               />
             </div>
 

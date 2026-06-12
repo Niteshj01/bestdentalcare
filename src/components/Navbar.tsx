@@ -5,10 +5,27 @@ import BDLogo from "./BDLogo";
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [desktopDropdownOpen, setDesktopDropdownOpen] = useState(false);
+  const [mobileServicesExpanded, setMobileServicesExpanded] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const menuBtnRef = useRef<HTMLButtonElement>(null);
+
+  const handleServiceDropdownClick = (category: "dental" | "cosmetics") => {
+    setDesktopDropdownOpen(false);
+    
+    // Switch category state
+    window.dispatchEvent(new CustomEvent("set-service-category", { detail: category }));
+    
+    // Smooth scroll to services section
+    const element = document.getElementById("services");
+    if (element) {
+      setTimeout(() => {
+        element.scrollIntoView({ behavior: "smooth" });
+      }, 50);
+    }
+  };
 
   // Shrink/Glass navbar on scroll
   useEffect(() => {
@@ -86,7 +103,8 @@ export default function Navbar() {
 
   const handleLinkClick = (id: string) => {
     setMenuOpen(false);
-    const element = document.getElementById(id);
+    const targetId = id === "clinician" ? "clinicians" : id;
+    const element = document.getElementById(targetId);
     if (element) {
       // Wait for drawer to close before smooth scrolling
       setTimeout(() => {
@@ -116,16 +134,82 @@ export default function Navbar() {
 
           {/* Desktop Nav Links */}
           <div className="hidden md:flex items-center gap-10">
-            {["Services", "Philosophy", "Clinicians", "Gallery"].map((link) => (
-              <a
-                key={link}
-                href={`#${link.toLowerCase()}`}
-                className="relative font-dm text-[11.5px] uppercase tracking-widest text-[#4A5E54] hover:text-primary-mint font-medium py-1 transition-colors duration-250 hover:-translate-y-[1px] block group"
-              >
-                {link}
-                <span className="absolute bottom-0 left-0 w-full h-[1.5px] bg-primary-mint scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100" />
-              </a>
-            ))}
+            {["Services", "Philosophy", "Clinician", "Gallery"].map((link) => {
+              if (link === "Services") {
+                return (
+                  <div
+                    key={link}
+                    className="relative py-2 group"
+                    onMouseEnter={() => setDesktopDropdownOpen(true)}
+                    onMouseLeave={() => setDesktopDropdownOpen(false)}
+                  >
+                    <button
+                      onClick={() => handleServiceDropdownClick("dental")}
+                      className="flex items-center gap-1.5 font-dm text-[11.5px] uppercase tracking-widest text-[#4A5E54] hover:text-primary-mint font-medium py-1 transition-colors duration-250 hover:-translate-y-[1px] cursor-pointer"
+                    >
+                      Services
+                      <svg
+                        className={`w-2.5 h-2.5 transition-transform duration-300 ${
+                          desktopDropdownOpen ? "rotate-180 text-primary-mint" : "text-sage"
+                        }`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        strokeWidth="2.5"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+
+                    {/* Desktop Dropdown Card Menu */}
+                    <div
+                      className={`absolute left-1/2 -translate-x-1/2 top-full mt-1.5 w-60 bg-white/95 backdrop-blur-md border border-primary-mint/15 rounded-2xl p-2 shadow-[0_12px_36px_rgba(62,180,137,0.18)] transition-all duration-300 origin-top flex flex-col gap-1 z-50 ${
+                        desktopDropdownOpen
+                          ? "opacity-100 translate-y-0 scale-100 pointer-events-auto"
+                          : "opacity-0 -translate-y-3 scale-95 pointer-events-none"
+                      }`}
+                    >
+                      <button
+                        onClick={() => handleServiceDropdownClick("dental")}
+                        className="w-full text-left font-dm text-[10.5px] uppercase tracking-wider font-semibold text-[#4A5E54] hover:text-primary-mint hover:bg-primary-mint/5 px-4.5 py-3 rounded-xl transition-all duration-250 flex items-center justify-between group/item cursor-pointer"
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <span className="material-symbols-outlined text-base text-primary-mint">dentistry</span>
+                          <span>Dental Care</span>
+                        </div>
+                        <span className="material-symbols-outlined text-xs text-primary-mint/40 group-hover/item:translate-x-1 transition-transform">
+                          chevron_right
+                        </span>
+                      </button>
+                      <div className="h-[1px] bg-primary-mint/5 mx-2" />
+                      <button
+                        onClick={() => handleServiceDropdownClick("cosmetics")}
+                        className="w-full text-left font-dm text-[10.5px] uppercase tracking-wider font-semibold text-[#4A5E54] hover:text-primary-mint hover:bg-primary-mint/5 px-4.5 py-3 rounded-xl transition-all duration-250 flex items-center justify-between group/item cursor-pointer"
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <span className="material-symbols-outlined text-base text-primary-mint">spa</span>
+                          <span>Aesthetic Cosmetics</span>
+                        </div>
+                        <span className="material-symbols-outlined text-xs text-primary-mint/40 group-hover/item:translate-x-1 transition-transform">
+                          chevron_right
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                );
+              }
+
+              return (
+                <a
+                  key={link}
+                  href={`#${link === "Clinician" ? "clinicians" : link.toLowerCase()}`}
+                  className="relative font-dm text-[11.5px] uppercase tracking-widest text-[#4A5E54] hover:text-primary-mint font-medium py-1 transition-colors duration-250 hover:-translate-y-[1px] block group"
+                >
+                  {link}
+                  <span className="absolute bottom-0 left-0 w-full h-[1.5px] bg-primary-mint scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100" />
+                </a>
+              );
+            })}
           </div>
 
           {/* Book Appointment CTA */}
@@ -200,33 +284,78 @@ export default function Navbar() {
           </div>
 
           {/* Links list */}
-          <div className="flex flex-col gap-6">
-            {["Services", "Philosophy", "Clinicians", "Gallery"].map((link) => (
-              <button
-                key={link}
-                onClick={() => handleLinkClick(link.toLowerCase())}
-                className="drawer-link text-left font-cormorant text-3xl font-medium text-deep-green hover:text-primary-mint transition-colors duration-200"
-              >
-                {link}
-              </button>
-            ))}
+          <div className="flex flex-col gap-5">
+            {["Services", "Philosophy", "Clinician", "Gallery"].map((link) => {
+              if (link === "Services") {
+                return (
+                  <div key={link} className="flex flex-col">
+                    <button
+                      onClick={() => setMobileServicesExpanded(!mobileServicesExpanded)}
+                      className="drawer-link text-left font-cormorant text-3.5xl font-medium text-deep-green hover:text-primary-mint transition-colors duration-200 flex items-center justify-between"
+                    >
+                      <span>{link}</span>
+                      <svg
+                        className={`w-5 h-5 text-sage transition-transform duration-300 ${
+                          mobileServicesExpanded ? "rotate-180 text-primary-mint" : ""
+                        }`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        strokeWidth="2"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+                    {/* Collapsible Mobile Sub-options */}
+                    <div
+                      className={`flex flex-col pl-4 gap-3.5 overflow-hidden transition-all duration-300 ${
+                        mobileServicesExpanded ? "max-h-28 mt-3.5 opacity-100" : "max-h-0 opacity-0 pointer-events-none"
+                      }`}
+                    >
+                      <button
+                        onClick={() => {
+                          setMenuOpen(false);
+                          window.dispatchEvent(new CustomEvent("set-service-category", { detail: "dental" }));
+                          setTimeout(() => {
+                            document.getElementById("services")?.scrollIntoView({ behavior: "smooth" });
+                          }, 320);
+                        }}
+                        className="text-left font-dm text-[11px] uppercase tracking-widest text-[#4A5E54] hover:text-primary-mint font-semibold py-1 transition-colors duration-200 flex items-center gap-2 cursor-pointer"
+                      >
+                        <span className="text-primary-mint text-[9px]">✦</span> Dental Care
+                      </button>
+                      <button
+                        onClick={() => {
+                          setMenuOpen(false);
+                          window.dispatchEvent(new CustomEvent("set-service-category", { detail: "cosmetics" }));
+                          setTimeout(() => {
+                            document.getElementById("services")?.scrollIntoView({ behavior: "smooth" });
+                          }, 320);
+                        }}
+                        className="text-left font-dm text-[11px] uppercase tracking-widest text-[#4A5E54] hover:text-primary-mint font-semibold py-1 transition-colors duration-200 flex items-center gap-2 cursor-pointer"
+                      >
+                        <span className="text-primary-mint text-[9px]">✦</span> Aesthetic Cosmetics
+                      </button>
+                    </div>
+                  </div>
+                );
+              }
+
+              return (
+                <button
+                  key={link}
+                  onClick={() => handleLinkClick(link.toLowerCase())}
+                  className="drawer-link text-left font-cormorant text-3.5xl font-medium text-deep-green hover:text-primary-mint transition-colors duration-200"
+                >
+                  {link}
+                </button>
+              );
+            })}
           </div>
         </div>
 
         {/* Foot of drawer */}
         <div className="drawer-link mt-auto flex flex-col gap-3">
-          <button
-            onClick={() => {
-              setMenuOpen(false);
-              setTimeout(() => {
-                window.dispatchEvent(new CustomEvent("open-review-modal"));
-              }, 300);
-            }}
-            className="w-full border border-primary-mint/30 hover:border-primary-mint text-deep-green text-center py-3.5 rounded-full font-dm text-[12px] uppercase tracking-widest font-semibold hover:bg-primary-mint/5 transition-all flex items-center justify-center gap-2 cursor-pointer"
-          >
-            <span className="text-gold">★</span> Leave a Review
-          </button>
-          
           <button
             onClick={() => handleLinkClick("appointment")}
             className="w-full bg-primary-mint text-white text-center py-3.5 rounded-full font-dm text-[12px] uppercase tracking-widest font-semibold hover:bg-deep-green transition-colors cursor-pointer"
