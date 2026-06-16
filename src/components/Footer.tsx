@@ -88,7 +88,7 @@ export default function Footer() {
         ref={markRef}
         className="absolute bottom-16 left-0 right-0 font-cormorant text-[11vw] md:text-[8vw] font-bold text-white/[0.02] uppercase tracking-[0.2em] whitespace-nowrap pointer-events-none select-none text-center"
       >
-        BEST DENTAL CARE
+        THE DENTAL ELEGANCE
       </div>
 
       <div className="w-full max-w-7xl mx-auto space-y-16 relative z-10">
@@ -104,14 +104,14 @@ export default function Footer() {
             >
               <BDLogo className="w-10 h-10 inline-block mr-2" />
               <span className="font-cormorant text-xl font-bold tracking-[0.05em] align-middle">
-                BEST DENTAL CARE
+                THE DENTAL ELEGANCE
               </span>
             </div>
             <p className="font-sans text-xs text-surface-mint/70 leading-relaxed max-w-xs">
-              Providing top-notch multi-specialty dental care and advanced oral health solutions with safe, comfortable, and reliable procedures.
+              Providing team-based, comprehensive, and painless oral care with zirconia smile designing, micro-endodontics, implants, and pediatric dentistry.
             </p>
             <p className="font-dm text-xs text-primary-mint font-semibold tracking-wide">
-              Sector 14 • Hissar • Haryana
+              Old Railway Road • Gurgaon
             </p>
           </div>
 
@@ -142,13 +142,13 @@ export default function Footer() {
               CLINIC HOURS
             </h5>
             <ul className="space-y-2 font-sans text-xs text-white/60">
-              <li>Mon — Sat: 9:00 AM — 7:00 PM</li>
-              <li>Sunday: By Appointment Only</li>
+              <li>Mon — Sun: 10:00 AM — 08:00 PM</li>
               <li className="pt-2 text-primary-mint font-medium font-dm">
-                Contact: +91 98962 46544
+                Contact: +91 98115 54100
               </li>
-              <li className="text-white/40">
-                Sector 14, Near Community Centre, Hisar
+              <li className="text-white/40 leading-relaxed">
+                284/9, Ground Floor, Old Railway Road,<br />
+                Next to Nangia Skin Care, Gurgaon
               </li>
             </ul>
           </div>
@@ -205,7 +205,7 @@ export default function Footer() {
                 star
               </span>
             </div>
-            <p>© 2026 BEST Dental Care Hisar. All rights reserved.</p>
+            <p>© 2026 The Dental Elegance. All rights reserved.</p>
           </div>
 
           <div className="flex gap-6 uppercase tracking-widest font-semibold">

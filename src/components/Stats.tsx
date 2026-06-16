@@ -128,10 +128,10 @@ export default function Stats() {
       </div>
 
       <div className="w-full max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 relative z-10">
-        <IndividualStat value={12} suffix="k+" label="Happy Patients" />
-        <IndividualStat value={15} suffix="y+" label="Expert Experience" />
+        <IndividualStat value={2} suffix="k+" label="Happy Patients" />
+        <IndividualStat value={11} suffix="y+" label="Expert Experience" />
         <IndividualStat value={100} suffix="%" label="Sterilized Hygiene" />
-        <IndividualStat value={5} suffix="★" label="Google Star Rating" />
+        <IndividualStat value={5} suffix="★" label="Google Stars Rating" />
       </div>
     </section>
   );

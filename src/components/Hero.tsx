@@ -298,7 +298,7 @@ export default function Hero({ startAnimation }: HeroProps) {
               <span className="absolute inset-0 bg-primary-mint rounded-full animate-ping opacity-75" />
             </span>
             <span className="font-dm text-[11px] font-semibold uppercase tracking-widest text-deep-green">
-              PREMIER CLINIC • SECTOR 14 HISSAR
+              PREMIER CLINIC • RAILWAY ROAD GURGAON
             </span>
           </div>
 
@@ -308,13 +308,13 @@ export default function Hero({ startAnimation }: HeroProps) {
               ref={headlineRef}
               className="text-5xl md:text-7xl font-cormorant font-light text-charcoal tracking-tight leading-[1.05]"
             >
-              Expertise. Compassion. Precision.
+              The Dental Elegance.
             </h1>
             <div
               ref={italicLineRef}
               className="text-lg md:text-2xl font-accent italic text-sage opacity-0"
             >
-              Advanced dental laminates, oral rehabilitation &amp; sedation care
+              Multi-Speciality Clinic led by Dr. Aashu Thakran (BDS, MDS)
             </div>
           </div>
 
@@ -323,7 +323,7 @@ export default function Hero({ startAnimation }: HeroProps) {
             ref={descRef}
             className="text-base md:text-lg text-[#3D4943] max-w-lg leading-relaxed font-sans opacity-0"
           >
-            Led by Dr. Sanya Makkar Alawadhi, BEST Dental Care is dedicated to providing top-notch oral health solutions. We deliver a premier patient-centric dental experience that combines advanced technology with comfortable, reliable care.
+            Welcome to Gurgaon's premier team-based dental clinic. Led by senior Endodontist Dr. Aashu Thakran, we provide painless root canals, smile designing with zirconia crowns, pediatric dentistry, and dental implants at highly reasonable costs.
           </p>
 
           {/* Button CTA Group */}
@@ -365,7 +365,7 @@ export default function Hero({ startAnimation }: HeroProps) {
               ))}
             </div>
             <p className="text-xs md:text-sm font-dm uppercase tracking-wider text-deep-green font-medium">
-              ★ 4.9 on Google Reviews • 1,200+ Satisfied Patients
+              ★ 5.0 on Google Business • 27 Patient Stories &amp; 100% Recommendation
             </p>
           </div>
         </div>

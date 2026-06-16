@@ -63,7 +63,7 @@ export default function Appointment() {
           </div>
 
           <p className="font-sans text-sm md:text-base text-[#46544D] leading-relaxed">
-            Reserve an exclusive diagnostic appointment with Dr. Sanya Makkar Alawadhi. Together, we will custom-formulate a treatment blueprint that celebrates your oral wellbeing and pristine smile.
+            Reserve an exclusive diagnostic appointment with Dr. Aashu Thakran. Together, we will custom-formulate a treatment blueprint that celebrates your oral wellbeing and pristine smile.
           </p>
 
           {/* Premium features checklist */}
@@ -111,7 +111,7 @@ export default function Appointment() {
 
             {/* Premium, Gilded Google Form Button */}
             <a
-              href="https://forms.gle/best-dental-care-hisar"
+              href="https://forms.gle/the-dental-elegance-gurgaon"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full max-w-xs bg-primary-mint text-white font-dm text-[12px] uppercase tracking-widest font-semibold py-4 px-8 rounded-full hover:bg-deep-green hover:shadow-[0_12px_24px_rgba(62,180,137,0.3)] transition-all duration-300 flex items-center justify-center gap-3 select-none active:scale-98 cursor-pointer"

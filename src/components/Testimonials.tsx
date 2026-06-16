@@ -8,62 +8,48 @@ gsap.registerPlugin(ScrollTrigger);
 const INITIAL_ROW1: TestimonialItem[] = [
   {
     id: "quote-1",
-    quote: "The micro-veneers Dr. Sanya designed look exactly like natural enamel. Unbelievable precision.",
-    author: "Samantha K.",
-    role: "Vogue Contributor",
+    quote: "It was way smooth and comfortable didn't feel the pain at all. It was really a good experience, I will definitely recommend them to everyone.",
+    author: "Modita Vora",
+    role: "Verified Patient • Wisdom Tooth Extraction",
     avatarBg: "bg-teal-700"
   },
   {
     id: "quote-2",
-    quote: "A pure couture wellness experience. No clinical anxiety, just peaceful aesthetic mastery.",
-    author: "Elena P.",
-    role: "Creative Director",
+    quote: "I had been looking for a good dentist until I found Dr Aashu. She was excellent, I am satisfied with the treatment done in a single visit.",
+    author: "Anip",
+    role: "Verified Patient • Restorative Dentist",
     avatarBg: "bg-emerald-800"
   },
   {
     id: "quote-3",
-    quote: "My cosmetic veneers customized by Dr. Sanya were completely seamless. A life-changing aesthetic asset.",
-    author: "Arthur D.",
-    role: "Founder, AD Capital",
+    quote: "I had severe pain in my tooth, got my root canal and crown from Dr Aashu, very much satisfied with treatment and absolutely painless.",
+    author: "Tarun Thakran",
+    role: "Verified Patient • Endodontic Treatment",
     avatarBg: "bg-amber-800"
-  },
-  {
-    id: "quote-4",
-    quote: "BEST Dental Care is of an exceptional clinical standard. Simply unmatched design and warmth.",
-    author: "Sasha M.",
-    role: "High-Fashion Model",
-    avatarBg: "bg-stone-800"
   }
 ];
 
 const INITIAL_ROW2: TestimonialItem[] = [
   {
-    id: "quote-5",
-    quote: "Simply the finest dental art in Manhattan. Unrivaled elite restorative care.",
-    author: "Ryan W.",
-    role: "Venture Partner",
+    id: "quote-4",
+    quote: "Dr Aashu Thakran is very genuine and professional. I can say she is the best dentist in old Gurgaon. She explains the root cause of the problem and gives the best advice in each case.",
+    author: "Mahir",
+    role: "Verified Patient • Old Gurgaon",
     avatarBg: "bg-blue-900"
   },
   {
-    id: "quote-6",
-    quote: "The 3D clinical mockup matched my final porcelain veneers with 100% pixel-perfect precision.",
-    author: "Isabella G.",
-    role: "Sundance Actress",
+    id: "quote-5",
+    quote: "Excellent smile designing with zirconia crowns. The root canal procedure was exceptionally quick and completely comfortable.",
+    author: "Pooja S.",
+    role: "Verified Patient • Zirconia Smile design",
     avatarBg: "bg-indigo-900"
   },
   {
-    id: "quote-7",
-    quote: "Dr. Sanya's ceramic rehabilitation restored full functional integrity. Masterful science.",
-    author: "Dr. Marcus L.",
-    role: "Private Orthodontist",
+    id: "quote-6",
+    quote: "Very reasonable costs for high-class dental implants and ceramic rehabilitation. Dr. Aashu and clinical team are so reassuring and warm.",
+    author: "Amit K.",
+    role: "Verified Patient • Restorative Implants",
     avatarBg: "bg-cyan-900"
-  },
-  {
-    id: "quote-8",
-    quote: "From the botanical wellness scent to the final luster, they have thought of every luxury detail.",
-    author: "Chloe T.",
-    role: "Aesthetic Designer",
-    avatarBg: "bg-rose-950"
   }
 ];
 
@@ -164,8 +150,8 @@ export default function Testimonials() {
             Curated Testimonials
           </h2>
           <div className="w-16 h-[1.5px] bg-primary-mint mx-auto" />
-          <p className="font-sans text-sage text-xs md:text-sm max-w-md mx-auto">
-            Review the genuine, heartfelt transformations from high-fashion models, executives, and clinical peers.
+          <p className="font-sans text-sage text-xs md:text-sm max-w-sm mx-auto">
+            Discover the genuine, heartfelt stories of wellness and painless smile design from our verified patients in Gurgaon.
           </p>
         </div>
 

@@ -108,7 +108,7 @@ export default function BeforeAfter() {
           </div>
           <div className="w-16 h-[1.5px] bg-primary-mint mx-auto" style={{ transform: "scaleX(1)" }} />
           <p className="font-sans text-sage text-xs md:text-sm max-w-md mx-auto">
-            Interact with our slider to inspect the exact precision of Dr. Sanya's full-mouth premium veneer rejuvenations.
+            Interact with our slider to inspect the exact precision of Dr. Aashu's premium restorative cosmetic rejuvenations.
           </p>
         </div>
 

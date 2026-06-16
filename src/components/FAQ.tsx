@@ -16,8 +16,8 @@ export default function FAQ() {
 
   const faqs: FAQItem[] = [
     {
-      question: "Why choose BEST Dental Care?",
-      answer: "BEST Dental Care is the premier multi-speciality dental clinic located in Sector 14, Hisar (Near Community Centre). Led by Dr. Sanya Makkar Alawadhi, we are dedicated to providing top-notch dental care and oral health solutions with a perfect blend of high-end clinical expertise, deep compassion, and advanced digital technology."
+      question: "Why choose The Dental Elegance?",
+      answer: "The Dental Elegance is Gurgaon's premier multi-speciality dental clinic located on Old Railway Road. Led by senior Endodontist Dr. Aashu Thakran (BDS, MDS), we are dedicated to providing team-based, comprehensive, and painless oral care using state-of-the-art restorative procedures, customized smile design, single-visit root canals, and gentle pediatric treatments."
     },
     {
       question: "What services does the clinic offer?",

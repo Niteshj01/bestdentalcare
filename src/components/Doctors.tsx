@@ -16,13 +16,13 @@ export default function Doctors() {
 
   const clinicians: DoctorProfile[] = [
     {
-      id: "sanya-makkar",
-      name: "Dr. Sanya Makkar Alawadhi",
-      role: "Lead Clinician & Dental Stylist",
-      bio: "A highly accomplished B.D.S. expert specializing in premium dental laminates, microscopic restorations, smile design, and holistic full-mouth oral rehabilitation.",
-      image: "https://i.ibb.co/PsMks3YZ/image.jpg",
-      badge: "Expert Director",
-      qualifications: ["B.D.S. Specialist", "Restorations Expert", "Oral Rehabilitation"]
+      id: "aashu-thakran",
+      name: "Dr. Aashu Thakran",
+      role: "BDS, MDS - Conservative Dentistry & Endodontics",
+      bio: "Dr. Aashu Thakran has over 11 years of clinical experience, specializing in micro-endodontics, single-visit root canals, customized porcelain and ceramic smile designing, pediatric wellness care, and painless restorative procedures.",
+      image: "/src/assets/images/regenerated_image_1781599321845.jpg",
+      badge: "Lead Endodontist",
+      qualifications: ["B.D.S. & M.D.S. Specialist", "Conservative Dentistry", "11 Years Experience Overall"]
     }
   ];
 

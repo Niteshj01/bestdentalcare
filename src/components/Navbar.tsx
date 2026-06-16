@@ -363,7 +363,7 @@ export default function Navbar() {
             Request Consult
           </button>
           <p className="text-center text-[10px] font-dm text-sage mt-4 tracking-widest uppercase">
-            Sector 14, Hissar • Near Community Centre
+            Old Railway Road • Gurgaon
           </p>
         </div>
       </div>
