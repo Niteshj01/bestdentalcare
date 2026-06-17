@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+// @ts-ignore
+import aboutDoctorImg from "../assets/images/regenerated_image_1781599956169.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -146,10 +148,10 @@ export default function About() {
           >
             <img
               ref={imgRef}
-              alt="Dr. Aashu Thakran"
+              alt="Dr. Gagandeep S Gauba"
               className="w-full h-full object-cover object-center grayscale hover:grayscale-0 transition-all duration-700 select-none animate-gpu"
               referrerPolicy="no-referrer"
-              src="/src/assets/images/regenerated_image_1781599956169.png"
+              src={aboutDoctorImg}
             />
           </div>
 
@@ -158,7 +160,7 @@ export default function About() {
             ref={badgeRef}
             className="absolute -bottom-6 -right-2 bg-gradient-to-br from-gold to-gold-light text-charcoal font-dm font-bold text-[11px] uppercase tracking-widest px-8 py-4 rounded-full shadow-xl z-20 select-none"
           >
-            ESTD. 2015
+            ESTD. 2012
           </div>
         </div>
 
@@ -172,7 +174,7 @@ export default function About() {
           </h2>
           
           <p className="font-sans text-base md:text-lg text-[#3D4943] leading-relaxed">
-            Led by Dr. Aashu Thakran (BDS, MDS), The Dental Elegance is Gurgaon's premier dental clinic dedicated to providing team-based, comprehensive, and painless oral care. We provide custom smile designing, single-visit root canals, restorative dentistry, zirconia crowns, and specialized children's dentistry in a warm, anxiety-free medical environment.
+            Led by Dr. Gagandeep S Gauba, DR. SKY DENTISTRY is Jalandhar's premier dental clinic dedicated to providing team-based, comprehensive, and painless oral care. We provide advanced dental implants, smile design makeovers, single-visit root canals, restorative dentistry, premium ceramic crowns, orthodontic braces, and specialized wellness treatments in a advanced and warm medical environment.
           </p>
           
           <p className="font-accent text-xl italic text-deep-green leading-relaxed border-l-2 border-primary-mint pl-6 py-2">

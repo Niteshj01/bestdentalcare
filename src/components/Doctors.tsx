@@ -3,6 +3,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { DoctorProfile } from "../types";
 import { motion, AnimatePresence } from "motion/react";
+// @ts-ignore
+import doctorImg from "../assets/images/regenerated_image_1781715483180.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,13 +18,13 @@ export default function Doctors() {
 
   const clinicians: DoctorProfile[] = [
     {
-      id: "aashu-thakran",
-      name: "Dr. Aashu Thakran",
-      role: "BDS, MDS - Conservative Dentistry & Endodontics",
-      bio: "Dr. Aashu Thakran has over 11 years of clinical experience, specializing in micro-endodontics, single-visit root canals, customized porcelain and ceramic smile designing, pediatric wellness care, and painless restorative procedures.",
-      image: "/src/assets/images/regenerated_image_1781599321845.jpg",
-      badge: "Lead Endodontist",
-      qualifications: ["B.D.S. & M.D.S. Specialist", "Conservative Dentistry", "11 Years Experience Overall"]
+      id: "gagandeep-s-gauba",
+      name: "Dr. Gagandeep S Gauba",
+      role: "BDS, MDS - Senior Dentist & Dental Implants Specialist",
+      bio: "Dr. Gagandeep S Gauba is a highly distinguished dental implants provider and senior clinician with over 14 years of clinical experience. Specializing in advanced painless implantology, dental aesthetics, single-visit root canals, and precision orthodontics, Dr. Gauba is dedicated to transforming smiles using the latest advancements like digital radiovisiography, endomotors, and state-of-the-art restorative techniques.",
+      image: doctorImg,
+      badge: "Lead Implantologist",
+      qualifications: ["B.D.S. & M.D.S. Specialist", "Advanced Implantology", "14+ Years Clinical Excellence"]
     }
   ];
 

@@ -63,7 +63,7 @@ export default function Appointment() {
           </div>
 
           <p className="font-sans text-sm md:text-base text-[#46544D] leading-relaxed">
-            Reserve an exclusive diagnostic appointment with Dr. Aashu Thakran. Together, we will custom-formulate a treatment blueprint that celebrates your oral wellbeing and pristine smile.
+            Reserve an exclusive diagnostic appointment with Dr. Gagandeep S Gauba. Together, we will custom-formulate a treatment blueprint that celebrates your oral wellbeing and pristine smile.
           </p>
 
           {/* Premium features checklist */}

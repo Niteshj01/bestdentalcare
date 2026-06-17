@@ -14,17 +14,17 @@ export default function BDLogo({ className = "w-10 h-10", showText = false }: BD
         <img
           src={logoImg}
           className={`${className} object-cover`}
-          alt="The Dental Elegance Logo"
+          alt="DR. SKY DENTISTRY Logo"
           referrerPolicy="no-referrer"
         />
       </div>
       {showText && (
         <div className="flex flex-col text-left select-none">
           <span className="font-cormorant font-bold text-[#011d24] tracking-[0.06em] text-[17px] md:text-[21px] leading-tight">
-            THE DENTAL ELEGANCE
+            DR. SKY DENTISTRY
           </span>
           <span className="font-dm text-[8.5px] font-bold tracking-[0.25em] text-[#00afb9] uppercase mt-0.5 leading-none">
-            DR. AASHU THAKRAN
+            DR. GAGANDEEP S GAUBA
           </span>
         </div>
       )}

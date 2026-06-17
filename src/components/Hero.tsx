@@ -298,7 +298,7 @@ export default function Hero({ startAnimation }: HeroProps) {
               <span className="absolute inset-0 bg-primary-mint rounded-full animate-ping opacity-75" />
             </span>
             <span className="font-dm text-[11px] font-semibold uppercase tracking-widest text-deep-green">
-              PREMIER CLINIC • RAILWAY ROAD GURGAON
+              PREMIER CLINIC • SHASTRI NAGAR JALANDHAR
             </span>
           </div>
 
@@ -308,13 +308,13 @@ export default function Hero({ startAnimation }: HeroProps) {
               ref={headlineRef}
               className="text-5xl md:text-7xl font-cormorant font-light text-charcoal tracking-tight leading-[1.05]"
             >
-              The Dental Elegance.
+              DR. SKY DENTISTRY.
             </h1>
             <div
               ref={italicLineRef}
               className="text-lg md:text-2xl font-accent italic text-sage opacity-0"
             >
-              Multi-Speciality Clinic led by Dr. Aashu Thakran (BDS, MDS)
+              Multi-Speciality Clinic led by Dr. Gagandeep S Gauba
             </div>
           </div>
 
@@ -323,7 +323,7 @@ export default function Hero({ startAnimation }: HeroProps) {
             ref={descRef}
             className="text-base md:text-lg text-[#3D4943] max-w-lg leading-relaxed font-sans opacity-0"
           >
-            Welcome to Gurgaon's premier team-based dental clinic. Led by senior Endodontist Dr. Aashu Thakran, we provide painless root canals, smile designing with zirconia crowns, pediatric dentistry, and dental implants at highly reasonable costs.
+            Welcome to Jalandhar's premier team-based dental clinic. Led by senior clinician Dr. Gagandeep S Gauba, we provide advanced dental implants, smile designs, single-visit root canals, and pain-free restorative dental care utilizing the latest advancements in dentistry.
           </p>
 
           {/* Button CTA Group */}
@@ -364,8 +364,8 @@ export default function Hero({ startAnimation }: HeroProps) {
                 </svg>
               ))}
             </div>
-            <p className="text-xs md:text-sm font-dm uppercase tracking-wider text-deep-green font-medium">
-              ★ 5.0 on Google Business • 27 Patient Stories &amp; 100% Recommendation
+            <p className="text-xs md:text-sm font-dm uppercase tracking-wider text-deep-green font-medium font-bold">
+              ★ 5.0 on Google Business • 1,507 Verified Google Reviews
             </p>
           </div>
         </div>

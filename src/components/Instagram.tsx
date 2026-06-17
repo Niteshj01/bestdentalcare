@@ -97,7 +97,7 @@ export default function Instagram() {
             referrerPolicy="no-referrer"
             className="font-dm text-[11px] uppercase tracking-widest font-semibold text-primary-mint hover:text-deep-green flex items-center gap-1.5 transition-colors"
           >
-            Follow @TheDentalElegance
+            Follow @DrSkyDentistry
             <span className="material-symbols-outlined text-sm font-semibold select-none">
               arrow_outward
             </span>

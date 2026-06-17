@@ -95,9 +95,9 @@ export default function FloatingControls() {
       <div className="fixed bottom-6 left-6 z-40 flex flex-col items-start gap-4 select-none">
         {/* 3. Floating Call button */}
         <a
-          href="tel:+919006490024"
+          href="tel:+917717642334"
           className="w-12 h-12 rounded-full bg-gold text-charcoal flex items-center justify-center shadow-lg transition-transform duration-300 hover:scale-112 active:scale-95 group relative pulse-call"
-          aria-label="Call Best Dental Care"
+          aria-label="Call DR. SKY DENTISTRY"
         >
           <span className="material-symbols-outlined text-[20px] font-semibold text-charcoal leading-none">
             call
@@ -111,7 +111,7 @@ export default function FloatingControls() {
         {/* 4. Floating WhatsApp button with tooltips */}
         <a
           ref={waBtnRef}
-          href="https://wa.me/919006490024"
+          href="https://wa.me/917717642334"
           target="_blank"
           referrerPolicy="no-referrer"
           className="w-12 h-12 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-lg transition-transform duration-300 hover:scale-112 active:scale-95 group relative pulse-wa"

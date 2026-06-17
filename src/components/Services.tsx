@@ -99,205 +99,14 @@ const dentalServices: ServiceItem[] = [
   }
 ];
 
-const cosmeticsServices: ServiceItem[] = [
-  {
-    id: "prp",
-    icon: "water_drop",
-    title: "PRP",
-    description: "Advanced autologous platelet enrichment therapy designed to inject direct nutrient healing blocks to hair follicles and skin layers.",
-    bullets: ["100% natural biometric solution", "Fosters intense cellular health", "Superb for deep hair root restoration"]
-  },
-  {
-    id: "gfc",
-    icon: "opacity",
-    title: "GFC",
-    description: "Growth Factor Concentrate clinical therapy harnessing pure plate-derived proteins to rejuvenate facial volume and scalp vitality safely.",
-    bullets: ["Highly concentrated premium formula", "Accelerated collagen density rebuild", "Dramatically controls dermal aging speed"]
-  },
-  {
-    id: "botox",
-    icon: "spa",
-    title: "Botox",
-    description: "Targeted, hyper-precise cosmetic relaxation injectables formulated to effortlessly smooth out frown lines and dynamic facial folds.",
-    bullets: ["Virtually zero recovery time", "Extremely natural soft finish", "Fades forehead lines in 3-7 days"]
-  },
-  {
-    id: "threads",
-    icon: "gesture",
-    title: "Threads",
-    description: "Sophisticated surgical PDO thread suspension designed to lift saggy lower cheeks, double chins, and trigger structural skin scaffolding.",
-    bullets: ["Instant physical vectors elevation", "Absorbable micro-structural fiber bonds", "Ongoing continuous collagen induction"]
-  },
-  {
-    id: "hydrafacial",
-    icon: "air",
-    title: "Hydrafacial",
-    description: "Luxury multi-step vacuum-assisted epidermal deep-cleanse, acid peel correction, sebum extraction, and pure antioxidant serum locking.",
-    bullets: ["Sucks out persistent blackheads", "Intense hydration quench protection", "Incredible skin luminosity in minutes"]
-  },
-  {
-    id: "vit-c-facial",
-    icon: "wb_sunny",
-    title: "Vitamin C facial",
-    description: "Antioxidant dermal conditioning designed to eliminate free radicals, diminish pigmentation, and deliver an intense glowing luster.",
-    bullets: ["Soothes cellular sun damage lines", "Blocks sudden melanin overproduction", "Locks in natural bright cell health"]
-  },
-  {
-    id: "brightening-drips",
-    icon: "vaccines",
-    title: "Skin brightening drips",
-    description: "Targeted intravenous hydration rich in Glutathione and high-dose Vitamin C to cleanse toxins and brighten complexions globally.",
-    bullets: ["Direct cellular system infusion", "Fades persistent hyperpigmentation", "Aesthetic and hepatic cellular detox"]
-  },
-  {
-    id: "vampire-facial",
-    icon: "blur_on",
-    title: "Vampire facial",
-    description: "Precision medical micro-needling coupled directly with platelet-derived growth signaling to refine deep texture, scars, and pores.",
-    bullets: ["Collapses old acne scars", "Refines stretched dermal pores", "Rebuilds elastic skin tension values"]
-  },
-  {
-    id: "bb-glow",
-    icon: "palette",
-    title: "BB Glow facial",
-    description: "Innovative micro-infusion of safe, tinted botanical ampoules to neutralize redness, dark circles, and establish a long-term makeup glow.",
-    bullets: ["Locks in soft semi-permanent tinting", "Provides continuous deep face skin blending", "Deeply hydrates the epidermal layer"]
-  },
-  {
-    id: "party-peel",
-    icon: "celebration",
-    title: "Party Peel facial",
-    description: "Lightweight, express chemical peel customized to lift away dull, dry skin cells and instantly deliver perfect brightness for any big event.",
-    bullets: ["Absolutely no post-peel dryness downtime", "Flawless smooth canvas for makeup", "Noticeable luminous glow in one hour"]
-  },
-  {
-    id: "lip-lightening",
-    icon: "face",
-    title: "Lip lightening Treatment",
-    description: "Laser correction or soft chemical pinking peel targeting dark cellular melanin deposits to reveal soft, rosy hydrated lip layers.",
-    bullets: ["Clears smoking or genetics darkening", "Restores rich pink organic lip borders", "Includes custom moisture-lock hydrators"]
-  },
-  {
-    id: "dark-circle",
-    icon: "remove_red_eye",
-    title: "Dark Circle Treatment",
-    description: "Advanced cosmetic therapy fusing soothing hydration peptides and target circulation lasers to brighten lower eye bags.",
-    bullets: ["Boosts capillary oxygen pathways", "Significantly fades under-eye shadowing", "Replumps tired and sunken eye frames"]
-  },
-  {
-    id: "derma-planning",
-    icon: "cleaning_services",
-    title: "Derma planning",
-    description: "Expert manual exfoliating procedure to shave away dead epidermal builds and soft vellus peach fuzz hairs perfectly.",
-    bullets: ["Dramatically boosts skin cream absorption", "Leaves skin velvety smooth instantly", "Ensures zero clumpy patchiness in makeup"]
-  },
-  {
-    id: "mole-warts",
-    icon: "lens",
-    title: "Mole & Warts Removal",
-    description: "Advanced clinical radiofrequency ablation to quickly and painlessly clear unsightly warts, mole tags, and epidermal growths.",
-    bullets: ["Completed in minutes with minor healing", "Zero stitches or painful scalpels needed", "Includes antiseptic medical cover packs"]
-  },
-  {
-    id: "stretch-marks",
-    icon: "stacked_line_chart",
-    title: "Stretch mark Removal",
-    description: "High-grade fractional skin-needling and dynamic resurfacing focused on restoring torn collagen fibers in old stretch lines.",
-    bullets: ["Smooths physical skin indent textures", "Restores original elastic skin colors", "Highly effective for postpartum stretch marks"]
-  },
-  {
-    id: "laser-hair-removal",
-    icon: "flash_on",
-    title: "Laser Hair Removal",
-    description: "Painless high-frequency diode laser technology focused on destroying hair growth follicles with maximum cooling tip defense.",
-    bullets: ["Permanent hair reduction across sessions", "Frictionless sapphire cooling tip tech", "Perfect for all aesthetic body areas"]
-  },
-  {
-    id: "facial-hair-laser",
-    icon: "person",
-    title: "Facial Hair Removal",
-    description: "Precision diode laser sessions specifically calibrated for feminine facial zones (upper lip, chin, sideburns) for flawless smoothness.",
-    bullets: ["Extremely gentle on facial skin", "Halts irritating hormonal hair growth", "Smooth, touchable face without razor burn"]
-  },
-  {
-    id: "full-body-hair",
-    icon: "accessibility_new",
-    title: "Full Body Hair Removal",
-    description: "The ultimate aesthetic grooming experience covering all body sections with clinical-grade laser systems for total, uniform silkiness.",
-    bullets: ["Saves countless hours of painful waxing", "Improves overall skin hygiene feel", "Includes post-laser cooling moisturizers"]
-  },
-  {
-    id: "double-chin-removal",
-    icon: "self_improvement",
-    title: "Double chin Removal",
-    description: "Non-surgical therapeutic lipolysis or high-intensity therapeutic waves dedicated to dissolving localized submental fat pads.",
-    bullets: ["Tightens loose jaw and chin outlines", "Melts down heavy genetic chin double fold", "Highly precise localized dermal lift"]
-  },
-  {
-    id: "hair-fall-treatment",
-    icon: "grain",
-    title: "Hair fall Treatment",
-    description: "Multi-layered medical scalp therapy utilizing growth factors, vitamins, and clinical peptide serums to halt active thinning.",
-    bullets: ["Reinforces hair root anchoring strength", "Stimulates sleeping follicles back to life", "Thickens thin hair shafts dramatically"]
-  },
-  {
-    id: "melasma",
-    icon: "filter_tilt_shift",
-    title: "Melasma Treatment",
-    description: "Multi-pronged depigmentation protocol combining clinical melasma chemical peels, barrier healers, and cooling spot laser lasers.",
-    bullets: ["Breaks down concentrated cheek melasma", "Builds up dermal skin barrier resilience", "Reduces risk of sudden dark cell rebound"]
-  },
-  {
-    id: "chemical-peels",
-    icon: "dry_cleaning",
-    title: "Chemical Peels",
-    description: "Clinically customized chemical peels designed to gently lift away damaged, hyperpigmented surfaces and reveal fresh, radiant skin.",
-    bullets: ["Fades persistent spots & acne marks", "Controls overactive oily sebaceous glands", "Triggers fresh, hydrated baby-skin renewal"]
-  },
-  {
-    id: "acne-treatment",
-    icon: "radio_button_checked",
-    title: "Acne Treatment",
-    description: "Professional medical-grade acne program targeting active pustules, regulating oil production, and healing post-acne marks.",
-    bullets: ["Soothes red, irritated acne flareups", "Purges deep clogged follicular sebum", "Minimizes risks of permanent indent scars"]
-  }
-];
-
 export default function Services() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const underlineRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
-  const [activeTab, setActiveTab] = useState<"dental" | "cosmetics">("dental");
   const [activeCard, setActiveCard] = useState<string | null>(null);
 
-  const services = activeTab === "dental" ? dentalServices : cosmeticsServices;
-
-  // React to external tab switching (from Navbar dropdown links)
-  useEffect(() => {
-    const handleSetCategory = (e: Event) => {
-      const customEvent = e as CustomEvent<"dental" | "cosmetics">;
-      if (customEvent.detail === "dental" || customEvent.detail === "cosmetics") {
-        setActiveTab(customEvent.detail);
-        setActiveCard(null); // Reset active cards on tab switch
-        
-        // Stagger in the new cards beautifully
-        setTimeout(() => {
-          const cards = cardsRef.current?.querySelectorAll(".service-card-item");
-          if (cards && cards.length > 0) {
-            gsap.fromTo(
-              cards,
-              { opacity: 0, y: 30, scale: 0.95 },
-              { opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: 0.05, ease: "power2.out" }
-            );
-          }
-        }, 50);
-      }
-    };
-
-    window.addEventListener("set-service-category", handleSetCategory);
-    return () => window.removeEventListener("set-service-category", handleSetCategory);
-  }, []);
+  const services = dentalServices;
 
   useEffect(() => {
     const noMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -365,11 +174,10 @@ export default function Services() {
         once: true
       });
     }
-  }, [activeTab]);
+  }, []);
 
   // Soft Ripple effect on click
   const [ripples, setRipples] = useState<{ id: number; x: number; y: number; cardId: string }[]>([]);
-  let rippleId = 0;
 
   const handleCardClick = (e: React.MouseEvent<HTMLDivElement>, cardId: string) => {
     setActiveCard(activeCard === cardId ? null : cardId);
@@ -379,7 +187,7 @@ export default function Services() {
     const y = e.clientY - rect.top;
 
     const newRipple = {
-      id: ++rippleId,
+      id: Date.now() + Math.random(),
       x,
       y,
       cardId
@@ -390,24 +198,6 @@ export default function Services() {
     setTimeout(() => {
       setRipples((prev) => prev.filter((r) => r.id !== newRipple.id));
     }, 600);
-  };
-
-  const handleTabChange = (tab: "dental" | "cosmetics") => {
-    if (activeTab === tab) return;
-    setActiveTab(tab);
-    setActiveCard(null);
-
-    // Fade and stagger animate cards of new tab
-    setTimeout(() => {
-      const cards = cardsRef.current?.querySelectorAll(".service-card-item");
-      if (cards && cards.length > 0) {
-        gsap.fromTo(
-          cards,
-          { opacity: 0, y: 30, scale: 0.95 },
-          { opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: 0.04, ease: "power2.out" }
-        );
-      }
-    }, 50);
   };
 
   return (
@@ -435,34 +225,8 @@ export default function Services() {
             style={{ transform: "scaleX(0)" }}
           />
           <p className="font-sans text-[#4A5E54] text-sm md:text-base leading-relaxed max-w-lg mx-auto">
-            Our luxury catalog synthesizes biological health standards with high-fashion cosmetic facial and dental makeovers.
+            Our luxury catalog synthesizes biological health standards with pain-free, state-of-the-art dental treatments and smile design.
           </p>
-        </div>
-
-        {/* Tab Switcher Selector */}
-        <div className="flex justify-center">
-          <div className="bg-white/80 backdrop-blur-md border border-primary-mint/10 p-1.5 rounded-full flex gap-1 shadow-sm">
-            <button
-              onClick={() => handleTabChange("dental")}
-              className={`px-8 py-3 rounded-full font-dm text-[11px] md:text-xs uppercase tracking-widest font-semibold transition-all duration-300 cursor-pointer ${
-                activeTab === "dental"
-                  ? "bg-primary-mint text-white shadow-md shadow-primary-mint/15 scale-102"
-                  : "text-[#4A5E54] hover:text-primary-mint hover:bg-primary-mint/5"
-              }`}
-            >
-              Dental Care
-            </button>
-            <button
-              onClick={() => handleTabChange("cosmetics")}
-              className={`px-8 py-3 rounded-full font-dm text-[11px] md:text-xs uppercase tracking-widest font-semibold transition-all duration-300 cursor-pointer ${
-                activeTab === "cosmetics"
-                  ? "bg-primary-mint text-white shadow-md shadow-primary-mint/15 scale-102"
-                  : "text-[#4A5E54] hover:text-primary-mint hover:bg-primary-mint/5"
-              }`}
-            >
-              Aesthetic Cosmetics
-            </button>
-          </div>
         </div>
 
         {/* Carousel Grid Cards */}

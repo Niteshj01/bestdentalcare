@@ -16,8 +16,8 @@ export default function FAQ() {
 
   const faqs: FAQItem[] = [
     {
-      question: "Why choose The Dental Elegance?",
-      answer: "The Dental Elegance is Gurgaon's premier multi-speciality dental clinic located on Old Railway Road. Led by senior Endodontist Dr. Aashu Thakran (BDS, MDS), we are dedicated to providing team-based, comprehensive, and painless oral care using state-of-the-art restorative procedures, customized smile design, single-visit root canals, and gentle pediatric treatments."
+      question: "Why choose DR. SKY DENTISTRY?",
+      answer: "DR. SKY DENTISTRY is Jalandhar's premier multi-speciality dental clinic located near Nakodar Chowk in Shastri Nagar, Jalandhar, Punjab. Led by senior clinician Dr. Gagandeep S Gauba, we are dedicated to providing team-based, comprehensive, and painless oral care using state-of-the-art restorative procedures, dental implants, customized smile design, single-visit root canals, and advanced orthodontic braces."
     },
     {
       question: "What services does the clinic offer?",

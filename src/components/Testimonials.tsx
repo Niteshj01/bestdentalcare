@@ -8,23 +8,23 @@ gsap.registerPlugin(ScrollTrigger);
 const INITIAL_ROW1: TestimonialItem[] = [
   {
     id: "quote-1",
-    quote: "It was way smooth and comfortable didn't feel the pain at all. It was really a good experience, I will definitely recommend them to everyone.",
-    author: "Modita Vora",
-    role: "Verified Patient • Wisdom Tooth Extraction",
+    quote: "Best at his work, staff is also well at service!",
+    author: "smily mahajan",
+    role: "Verified Google Review • 5.0 Rating",
     avatarBg: "bg-teal-700"
   },
   {
     id: "quote-2",
-    quote: "I had been looking for a good dentist until I found Dr Aashu. She was excellent, I am satisfied with the treatment done in a single visit.",
-    author: "Anip",
-    role: "Verified Patient • Restorative Dentist",
+    quote: "Highly recommend this place for anyone looking for quality dental care!",
+    author: "pranav gupta",
+    role: "Verified Google Review • 5.0 Rating",
     avatarBg: "bg-emerald-800"
   },
   {
     id: "quote-3",
-    quote: "I had severe pain in my tooth, got my root canal and crown from Dr Aashu, very much satisfied with treatment and absolutely painless.",
-    author: "Tarun Thakran",
-    role: "Verified Patient • Endodontic Treatment",
+    quote: "Very reasonable costs for high-class dental implants and single-visit root canal treatments. Dr. Gagandeep S Gauba is excellent.",
+    author: "Gurdip Singh",
+    role: "Verified Patient • Implant Treatment",
     avatarBg: "bg-amber-800"
   }
 ];
@@ -32,23 +32,23 @@ const INITIAL_ROW1: TestimonialItem[] = [
 const INITIAL_ROW2: TestimonialItem[] = [
   {
     id: "quote-4",
-    quote: "Dr Aashu Thakran is very genuine and professional. I can say she is the best dentist in old Gurgaon. She explains the root cause of the problem and gives the best advice in each case.",
-    author: "Mahir",
-    role: "Verified Patient • Old Gurgaon",
+    quote: "The clinic environment was spotless, and the equipment looked brand new.",
+    author: "Gurdip Singh",
+    role: "Verified Google Review",
     avatarBg: "bg-blue-900"
   },
   {
     id: "quote-5",
-    quote: "Excellent smile designing with zirconia crowns. The root canal procedure was exceptionally quick and completely comfortable.",
-    author: "Pooja S.",
-    role: "Verified Patient • Zirconia Smile design",
+    quote: "Dr Gagandeep S Gauba is very genuine and professional. I can say he is the best dentist in Jalandhar. He explains the root cause of the problem and gives the best advice.",
+    author: "Harpreet Singh",
+    role: "Verified Patient • Jalandhar",
     avatarBg: "bg-indigo-900"
   },
   {
     id: "quote-6",
-    quote: "Very reasonable costs for high-class dental implants and ceramic rehabilitation. Dr. Aashu and clinical team are so reassuring and warm.",
-    author: "Amit K.",
-    role: "Verified Patient • Restorative Implants",
+    quote: "Got my crown and pain-free cavity restorations. Superb hand skill, extremely courteous staff, and outstanding clean clinic.",
+    author: "Amandeep Kaur",
+    role: "Verified Patient • Aesthetic crown",
     avatarBg: "bg-cyan-900"
   }
 ];
@@ -150,8 +150,8 @@ export default function Testimonials() {
             Curated Testimonials
           </h2>
           <div className="w-16 h-[1.5px] bg-primary-mint mx-auto" />
-          <p className="font-sans text-sage text-xs md:text-sm max-w-sm mx-auto">
-            Discover the genuine, heartfelt stories of wellness and painless smile design from our verified patients in Gurgaon.
+          <p className="font-sans text-sage text-xs md:text-sm max-w-md mx-auto">
+            Discover genuine, heartfelt stories of wellness and painless smile design from our verified patients in Jalandhar.
           </p>
         </div>
 

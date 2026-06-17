@@ -262,7 +262,7 @@ export default function ReviewModal() {
                       rows={4}
                       value={quote}
                       onChange={(e) => setQuote(e.target.value)}
-                      placeholder="How has Dr. Aashu transformed your smile today? Experience details..."
+                      placeholder="How has Dr. Gagandeep transformed your smile today? Experience details..."
                       className="w-full bg-surface-mint border border-primary-mint/15 rounded-xl px-4 py-2.5 font-sans text-sm text-charcoal focus:outline-none focus:border-primary-mint focus:ring-1 focus:ring-primary-mint transition-colors placeholder:text-sage/40 resize-none"
                     />
                   </div>

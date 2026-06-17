@@ -1,6 +1,6 @@
 {
-  "name": "The Dental Elegance",
-  "description": "Premium multi-specialty dental clinic led by Dr. Aashu Thakran, MDS, on Old Railway Road in Gurgaon. Specialized in conservative dentistry, single-visit root canals, customized zirconia smile designs, and expert pediatric care.",
+  "name": "Dr. Sky Dentistry",
+  "description": "Premium multi-specialty dental clinic - DR. SKY DENTISTRY led by Dr. Gagandeep S Gauba, specializing in advanced dental implants, RCT, cosmetic dentistry, and dental care in Jalandhar, Punjab.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
