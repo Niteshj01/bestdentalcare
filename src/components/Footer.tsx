@@ -209,10 +209,11 @@ export default function Footer() {
             <p>© 2026 DR. SKY DENTISTRY. All rights reserved.</p>
           </div>
 
-          <div className="flex gap-6 uppercase tracking-widest font-semibold">
+          <div className="flex flex-wrap gap-6 uppercase tracking-widest font-semibold justify-center sm:justify-end">
             <a href="#services" className="hover:text-primary-mint transition-colors">Services</a>
             <a href="#philosophy" className="hover:text-primary-mint transition-colors">Story</a>
             <a href="#appointment" className="hover:text-primary-mint transition-colors">Reserve</a>
+            <a href="/admin" className="text-white/40 hover:text-[#ffe08f] transition-colors border-l border-white/10 pl-6 hidden sm:inline-block">Staff Portal</a>
           </div>
         </div>
 

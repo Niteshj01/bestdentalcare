@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // Import custom sections
 import Loader from "./components/Loader";
@@ -21,10 +22,11 @@ import Instagram from "./components/Instagram";
 import Footer from "./components/Footer";
 import FloatingControls from "./components/FloatingControls";
 import ReviewModal from "./components/ReviewModal";
+import AdminRouter from "./admin/AdminRouter";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function App() {
+function LandingPage() {
   const [loaderFinished, setLoaderFinished] = useState(false);
   const progressBarRef = useRef<HTMLDivElement>(null);
 
@@ -117,5 +119,16 @@ export default function App() {
 
       </div>
     </>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/admin/*" element={<AdminRouter />} />
+        <Route path="*" element={<LandingPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }

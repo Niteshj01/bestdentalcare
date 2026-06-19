@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { getGallery } from "../firebase/firestore";
+import { GalleryItem } from "../types";
+import { motion, AnimatePresence } from "motion/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,6 +13,17 @@ export default function BeforeAfter() {
   const cardRef = useRef<HTMLDivElement>(null);
   const [sliderPos, setSliderPos] = useState(50); // percentage (0 - 100)
   const [isDragging, setIsDragging] = useState(false);
+
+  // Live Gallery State
+  const [galleryImages, setGalleryImages] = useState<GalleryItem[]>([]);
+  const [activeZoomUrl, setActiveZoomUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Read Firestore Gallery items
+    getGallery()
+      .then(items => setGalleryImages(items))
+      .catch(err => console.error("Could not fetch homepage gallery items:", err));
+  }, []);
 
   useEffect(() => {
     const noMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -92,9 +106,9 @@ export default function BeforeAfter() {
     <section
       id="gallery"
       ref={containerRef}
-      className="py-24 md:py-36 bg-[#f2fff6] px-6 md:px-12 relative overflow-hidden"
+      className="py-24 md:py-36 bg-[#f2fff6] px-6 md:px-12 relative overflow-hidden text-center"
     >
-      <div className="w-full max-w-4xl mx-auto space-y-16 relative z-10">
+      <div className="w-full max-w-5xl mx-auto space-y-16 relative z-10">
         
         {/* Section Heading */}
         <div className="text-center space-y-4">
@@ -108,14 +122,14 @@ export default function BeforeAfter() {
           </div>
           <div className="w-16 h-[1.5px] bg-primary-mint mx-auto" style={{ transform: "scaleX(1)" }} />
           <p className="font-sans text-sage text-xs md:text-sm max-w-md mx-auto">
-            Interact with our slider to inspect the exact precision of Dr. Gagandeep's premium restorative cosmetic rejuvenations.
+            Interact with our slider to inspect the exact precision of Dr. Sky's premium restorative cosmetic rejuvenations.
           </p>
         </div>
 
         {/* Interactive Case Slider Card */}
         <div
           ref={cardRef}
-          className="relative aspect-[16/10] md:aspect-[16/9] w-full rounded-2xl overflow-hidden shadow-2xl border border-primary-mint/15 select-none md:cursor-ew-resize opacity-0 animate-gpu bg-teal-950/20"
+          className="relative aspect-[16/10] md:aspect-[16/9] w-full max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-2xl border border-primary-mint/15 select-none md:cursor-ew-resize opacity-0 animate-gpu bg-teal-950/20"
           onMouseMove={handleMouseMove}
           onTouchMove={handleTouchMove}
           onMouseDown={() => setIsDragging(true)}
@@ -167,7 +181,76 @@ export default function BeforeAfter() {
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] hover:translate-x-[100%] transition-transform duration-1000 pointer-events-none" />
         </div>
 
+        {/* Live Photo Gallery Grid Section */}
+        {galleryImages.length > 0 && (
+          <div className="space-y-8 pt-8 text-left border-t border-primary-mint/10">
+            <div className="space-y-1.5">
+              <h3 className="font-cormorant text-2xl font-light text-charcoal flex items-center gap-2">
+                <span className="w-1.5 h-3 bg-primary-mint rounded-full inline-block" />
+                Smile Transformations Registry
+              </h3>
+              <p className="font-sans text-[#4A5E54] text-xs">
+                Browse our real-time clinic catalog of patient smile upgrades and completed dental procedures.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+              {galleryImages.map((img, idx) => (
+                <div 
+                  key={img.id || idx}
+                  onClick={() => setActiveZoomUrl(img.url)}
+                  className="group relative bg-[#112d1f]/5 aspect-square rounded-2xl overflow-hidden cursor-zoom-in border border-primary-mint/5 hover:border-primary-mint/20 hover:scale-[1.02] transition-all shadow-sm"
+                >
+                  <img 
+                    src={img.url} 
+                    alt="Smile Makeover Portfolio Case" 
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 bg-[#001D11]/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <span className="material-symbols-outlined text-white font-light text-xl">zoom_in</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
       </div>
+
+      {/* Lightbox zoomed preview dialogue */}
+      <AnimatePresence>
+        {activeZoomUrl && (
+          <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setActiveZoomUrl(null)}
+              className="absolute inset-0 cursor-zoom-out"
+            />
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              className="relative max-w-3xl w-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl z-20 bg-neutral-900"
+            >
+              <button 
+                onClick={() => setActiveZoomUrl(null)}
+                className="absolute top-4 right-4 text-white/70 hover:text-white bg-black/40 hover:bg-black/60 w-9 h-9 flex items-center justify-center rounded-full transition-colors z-30"
+              >
+                <span className="material-symbols-outlined text-xl">close</span>
+              </button>
+              <img 
+                src={activeZoomUrl} 
+                alt="Smile Zoom" 
+                className="w-full h-auto max-h-[80vh] object-contain mx-auto"
+                referrerPolicy="no-referrer"
+              />
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       <style>{`
         .pulse-badge {

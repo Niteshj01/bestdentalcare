@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ServiceItem } from "../types";
+import { useServices } from "../hooks/useServices";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -106,7 +107,8 @@ export default function Services() {
   const cardsRef = useRef<HTMLDivElement>(null);
   const [activeCard, setActiveCard] = useState<string | null>(null);
 
-  const services = dentalServices;
+  const { services: liveServices, loading } = useServices();
+  const services = liveServices && liveServices.length > 0 ? liveServices : dentalServices;
 
   useEffect(() => {
     const noMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

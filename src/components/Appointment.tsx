@@ -1,6 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { addAppointment } from "../firebase/firestore";
+import { useServices } from "../hooks/useServices";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -8,6 +10,16 @@ export default function Appointment() {
   const containerRef = useRef<HTMLDivElement>(null);
   const leftColRef = useRef<HTMLDivElement>(null);
   const rightColRef = useRef<HTMLDivElement>(null);
+
+  const { services, loading: servicesLoading } = useServices();
+
+  // Form Fields
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [selectedService, setSelectedService] = useState("");
+  const [date, setDate] = useState("");
+  const [submitLoading, setSubmitLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     const noMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -21,7 +33,6 @@ export default function Appointment() {
       }
     });
 
-    // Left column cascade slide-in
     const leftElements = leftColRef.current?.children;
     if (leftElements) {
       timeline.fromTo(
@@ -31,7 +42,6 @@ export default function Appointment() {
       );
     }
 
-    // Right column scale bounce-in
     timeline.fromTo(
       rightColRef.current,
       { opacity: 0, scale: 0.9, y: 40 },
@@ -39,6 +49,45 @@ export default function Appointment() {
       "-=0.6"
     );
   }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitLoading(true);
+
+    try {
+      await addAppointment({
+        name,
+        phone,
+        service: selectedService || (services[0]?.title || "General Consultation"),
+        date: date || new Date().toISOString().split("T")[0]
+      });
+
+      setSuccess(true);
+      setName("");
+      setPhone("");
+      setSelectedService("");
+      setDate("");
+    } catch (err) {
+      console.error("Booking error:", err);
+      alert("Submission encountered a transient failure. Please check details and try again.");
+    } finally {
+      setSubmitLoading(false);
+    }
+  };
+
+  const treatmentOptions = [
+    ...(services && services.length > 0
+      ? services.map(s => ({ id: s.id, name: s.title }))
+      : [
+          { id: "root-canal", name: "Root Canal Treatment" },
+          { id: "orthodontic", name: "Orthodontic Treatment" },
+          { id: "implants", name: "Dental Implants" },
+          { id: "crowns", name: "Crowns, Bridges & Veneers" },
+          { id: "fillings", name: "Tooth Colour Fillings" },
+          { id: "whitening", name: "Teeth Whitening" }
+        ]),
+    { id: "other", name: "Other / General Consultation" }
+  ];
 
   return (
     <section
@@ -63,7 +112,7 @@ export default function Appointment() {
           </div>
 
           <p className="font-sans text-sm md:text-base text-[#46544D] leading-relaxed">
-            Reserve an exclusive diagnostic appointment with Dr. Gagandeep S Gauba. Together, we will custom-formulate a treatment blueprint that celebrates your oral wellbeing and pristine smile.
+            Reserve an exclusive diagnostic appointment with Dr. Sky Dentistry. Together, we will custom-formulate a treatment blueprint that celebrates your oral wellbeing and pristine smile.
           </p>
 
           {/* Premium features checklist */}
@@ -74,11 +123,11 @@ export default function Appointment() {
               "Comprehensive custom biological tooth planning",
               "Careful, patient-centric hygiene reception"
             ].map((perk, idx) => (
-              <div key={idx} className="flex items-start gap-3">
+              <div key={idx} className="flex items-start gap-3 text-left">
                 <span className="material-symbols-outlined text-primary-mint text-xl font-light mt-0.5">
                   check_circle
                 </span>
-                <span className="font-dm text-xs md:text-sm text-charcoal font-medium">
+                <span className="font-dm text-xs md:text-sm text-charcoal font-medium text-left">
                   {perk}
                 </span>
               </div>
@@ -86,45 +135,123 @@ export default function Appointment() {
           </div>
         </div>
 
-        {/* Right Form column (Google Form Portal Card) */}
+        {/* Right Form column (Direct Appointment Scheduler) */}
         <div ref={rightColRef} className="lg:col-span-7 flex justify-center">
-          <div className="w-full max-w-lg bg-white border border-primary-mint/10 p-10 md:p-14 rounded-3xl shadow-2xl relative text-center flex flex-col items-center justify-center space-y-8">
+          <div className="w-full max-w-lg bg-white border border-primary-mint/10 p-8 md:p-12 rounded-3xl shadow-2xl relative flex flex-col justify-center space-y-6">
             
-            {/* Elegant clinical emblem */}
-            <div className="w-16 h-16 rounded-full bg-surface-mint border border-primary-mint/20 flex items-center justify-center text-primary-mint shadow-inner">
-              <span className="material-symbols-outlined text-[28px] font-light select-none">
-                assignment_turned_in
-              </span>
-            </div>
+            {success ? (
+              <div className="py-12 flex flex-col items-center justify-center space-y-5 animate-gpu">
+                <div className="w-16 h-16 rounded-full bg-emerald-50 text-emerald-500 border border-emerald-100 flex items-center justify-center animate-bounce">
+                  <span className="material-symbols-outlined text-3xl font-bold leading-none select-none">check</span>
+                </div>
+                <div className="space-y-2">
+                  <h3 className="font-cormorant text-2xl font-bold text-gray-900 leading-tight">
+                    Appointment Registered!
+                  </h3>
+                  <p className="font-sans text-xs text-gray-500 max-w-xs mx-auto leading-relaxed">
+                    Thank you. Your diagnostic request was written securely. Dr. Sky's desk coordinator will call you shortly to finalize details.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setSuccess(false)}
+                  className="font-sans text-[11px] font-semibold text-primary-mint border border-primary-mint/20 px-5 py-2.5 rounded-full hover:bg-primary-mint/5 uppercase tracking-widest transition-all cursor-pointer"
+                >
+                  Book another session
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-5 text-left font-sans text-xs text-gray-700">
+                <div className="space-y-1">
+                  <span className="font-dm text-[9px] font-bold tracking-[0.25em] text-primary-mint uppercase block text-center mb-1">
+                    SECURE REGISTRATION GATEWAY
+                  </span>
+                  <h3 className="font-cormorant text-2xl font-medium text-charcoal leading-tight text-center">
+                    Clinical Booking Request
+                  </h3>
+                </div>
 
-            <div className="space-y-3">
-              <span className="font-dm text-[10px] font-bold tracking-[0.25em] text-primary-mint uppercase block">
-                SECURE REGISTRATION GATEWAY
-              </span>
-              <h3 className="font-cormorant text-3xl font-light text-charcoal leading-tight">
-                Complete Clinical Booking Request
-              </h3>
-              <p className="font-sans text-sm text-[#46544D] leading-relaxed max-w-sm mx-auto">
-                We accept patient intake surveys, treatment preferences, and appointment details securely via official Google Forms for a flawless clinical check-in experience.
-              </p>
-            </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {/* Name field */}
+                  <div className="space-y-1.5">
+                    <label className="text-[9px] uppercase font-bold tracking-widest text-gray-400">Patient Name</label>
+                    <input
+                      required
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="e.g. John Doe"
+                      className="w-full px-4 py-3 border border-gray-150 rounded-xl outline-none focus:border-primary-mint/55 focus:ring-1 focus:ring-primary-mint/5 font-medium"
+                    />
+                  </div>
 
-            {/* Premium, Gilded Google Form Button */}
-            <a
-              href="https://forms.gle/the-dental-elegance-gurgaon"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full max-w-xs bg-primary-mint text-white font-dm text-[12px] uppercase tracking-widest font-semibold py-4 px-8 rounded-full hover:bg-deep-green hover:shadow-[0_12px_24px_rgba(62,180,137,0.3)] transition-all duration-300 flex items-center justify-center gap-3 select-none active:scale-98 cursor-pointer"
-            >
-              <span>Launch Google Form</span>
-              <span className="material-symbols-outlined text-[16px] leading-none">
-                open_in_new
-              </span>
-            </a>
+                  {/* Phone field */}
+                  <div className="space-y-1.5">
+                    <label className="text-[9px] uppercase font-bold tracking-widest text-gray-400">Mobile Phone</label>
+                    <input
+                      required
+                      type="tel"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      placeholder="e.g. +91 99999 12345"
+                      className="w-full px-4 py-3 border border-gray-150 rounded-xl outline-none focus:border-primary-mint/55 focus:ring-1 focus:ring-primary-mint/5 font-medium"
+                    />
+                  </div>
+                </div>
 
-            <div className="text-[10px] font-dm text-[#8A9C91] uppercase tracking-wider">
-              Takes less than 2 minutes to fill out
-            </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {/* Service selection menu */}
+                  <div className="space-y-1.5">
+                    <label className="text-[9px] uppercase font-bold tracking-widest text-gray-400">Select Service</label>
+                    <select
+                      value={selectedService}
+                      onChange={(e) => setSelectedService(e.target.value)}
+                      className="w-full px-4 py-3 border border-gray-150 bg-white rounded-xl outline-none focus:border-[#42b68d]/60 text-xs text-gray-800 transition-all font-medium"
+                    >
+                      <option value="">-- Treatment selection --</option>
+                      {treatmentOptions.map((opt, idx) => (
+                        <option key={`${opt.id}-${idx}`} value={opt.name}>{opt.name}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Date selection field */}
+                  <div className="space-y-1.5">
+                    <label className="text-[9px] uppercase font-bold tracking-widest text-gray-400">Target Date</label>
+                    <input
+                      required
+                      type="date"
+                      value={date}
+                      onChange={(e) => setDate(e.target.value)}
+                      min={new Date().toISOString().split("T")[0]}
+                      className="w-full px-4 py-3 border border-gray-150 bg-white rounded-xl outline-none focus:border-primary-mint/55 text-xs font-semibold text-gray-800 transition-all"
+                    />
+                  </div>
+                </div>
+
+                {/* Submit trigger button */}
+                <button
+                  type="submit"
+                  disabled={submitLoading}
+                  className="w-full bg-[#3eb489] hover:bg-[#21956c] font-dm text-[11px] uppercase tracking-widest font-bold py-4 rounded-full text-white shadow-lg shadow-primary-mint/10 hover:shadow-primary-mint/20 hover:translate-y-[-0.5px] transition-all cursor-pointer flex items-center justify-center gap-2.5 disabled:opacity-50"
+                >
+                  {submitLoading ? (
+                    <>
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      <span>Writing appointment file...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="material-symbols-outlined text-sm font-bold">event_available</span>
+                      <span>Book Diagnostic Appointment</span>
+                    </>
+                  )}
+                </button>
+
+
+              </form>
+            )}
+
           </div>
         </div>
 
