@@ -5,11 +5,12 @@ interface SidebarProps {
   currentTab: string;
   onSelectTab: (tab: string) => void;
   onLogout: () => void;
+  onChangePassword: () => void;
   mobileOpen: boolean;
   setMobileOpen: (open: boolean) => void;
 }
 
-export default function Sidebar({ currentTab, onSelectTab, onLogout, mobileOpen, setMobileOpen }: SidebarProps) {
+export default function Sidebar({ currentTab, onSelectTab, onLogout, onChangePassword, mobileOpen, setMobileOpen }: SidebarProps) {
   const menuItems = [
     { id: "dashboard", label: "Dashboard", icon: "dashboard" },
     { id: "services", label: "Services", icon: "healing" },
@@ -79,10 +80,21 @@ export default function Sidebar({ currentTab, onSelectTab, onLogout, mobileOpen,
         </nav>
 
         {/* Action controls footer */}
-        <div className="p-4 border-t border-[#002f1d]">
+        <div className="p-4 border-t border-[#002f1d] flex flex-col gap-2">
+          <button
+            onClick={() => {
+              onChangePassword();
+              setMobileOpen(false);
+            }}
+            className="w-full flex items-center justify-center gap-2.5 px-4 py-3 bg-[#dfba5c]/15 text-[#dfba5c] hover:bg-[#dfba5c]/25 rounded-xl font-sans text-[11px] uppercase tracking-widest font-bold border border-[#dfba5c]/30 transition-all cursor-pointer"
+          >
+            <span className="material-symbols-outlined text-[16px] leading-none">key</span>
+            <span>Change Password</span>
+          </button>
+          
           <button
             onClick={onLogout}
-            className="w-full flex items-center justify-center gap-2.5 px-4 py-3.5 rounded-xl font-sans text-[11px] uppercase tracking-widest font-bold border border-rose-500/20 text-rose-400 hover:text-white hover:bg-rose-500/10 transition-all cursor-pointer"
+            className="w-full flex items-center justify-center gap-2.5 px-4 py-3 rounded-xl font-sans text-[11px] uppercase tracking-widest font-bold border border-rose-500/20 text-rose-400 hover:text-white hover:bg-rose-500/10 transition-all cursor-pointer"
           >
             <span className="material-symbols-outlined text-[16px] leading-none">logout</span>
             <span>Exit Session</span>

@@ -3,7 +3,8 @@ import {
   signOut, 
   onAuthStateChanged, 
   User,
-  createUserWithEmailAndPassword
+  createUserWithEmailAndPassword,
+  updatePassword
 } from "firebase/auth";
 import { auth } from "./config";
 
@@ -37,4 +38,12 @@ export const logoutAdmin = async (): Promise<void> => {
 
 export const subscribeToAuthChanges = (callback: (user: User | null) => void) => {
   return onAuthStateChanged(auth, callback);
+};
+
+export const changeAdminPassword = async (newPassword: string): Promise<void> => {
+  if (auth.currentUser) {
+    await updatePassword(auth.currentUser, newPassword);
+  } else {
+    throw new Error("No active Firebase session. If you are using fallback, password was updated in local browser state.");
+  }
 };

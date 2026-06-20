@@ -4,9 +4,10 @@ interface TopBarProps {
   currentTab: string;
   adminEmail: string | null;
   onHamburgerClick: () => void;
+  onChangePasswordClick: () => void;
 }
 
-export default function TopBar({ currentTab, adminEmail, onHamburgerClick }: TopBarProps) {
+export default function TopBar({ currentTab, adminEmail, onHamburgerClick, onChangePasswordClick }: TopBarProps) {
   const getTabTitle = () => {
     switch (currentTab) {
       case "dashboard": return "Command Core";
@@ -44,6 +45,15 @@ export default function TopBar({ currentTab, adminEmail, onHamburgerClick }: Top
       </div>
 
       <div className="flex items-center gap-4">
+        {/* Change password button */}
+        <button
+          onClick={onChangePasswordClick}
+          className="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#dfba5c]/30 text-[#bf9b38] hover:bg-[#dfba5c]/5 font-sans font-bold text-[10.5px] uppercase tracking-widest transition-all cursor-pointer"
+        >
+          <span className="material-symbols-outlined text-[13px] leading-none">key</span>
+          <span>Update Password</span>
+        </button>
+
         {/* Main clinic link */}
         <Link
           to="/"

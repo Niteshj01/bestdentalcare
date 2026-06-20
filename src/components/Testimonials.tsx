@@ -237,9 +237,34 @@ export default function Testimonials() {
                 </div>
               ))}
 
-            </div>
           </div>
+        </div>
 
+        </div>
+
+        {/* Google Reviews CTA & Local Review Portal Button */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-10 relative z-20">
+          <a
+            href="https://share.google/uC0l8cNq78xL2o3Ot"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 bg-charcoal hover:bg-black text-white font-dm text-[11px] uppercase tracking-widest font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer decoration-none"
+          >
+            <svg className="w-4 h-4 fill-white" viewBox="0 0 24 24">
+              <path d="M12.24 10.285V13.4h6.887c-.275 1.565-1.88 4.604-6.887 4.604-4.33 0-7.859-3.578-7.859-8s3.529-8 7.859-8c2.46 0 4.105 1.025 5.047 1.926l2.427-2.334C17.955 2.192 15.34 1 12.24 1 5.922 1 12 5.922 12 12s4.922 11 11.24 11c6.593 0 11-4.643 11-11.188 0-.756-.08-1.334-.176-1.527H12.24z"/>
+            </svg>
+            <span>See More Reviews on Google</span>
+          </a>
+
+          <a
+            href="https://share.google/uC0l8cNq78xL2o3Ot"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2.5 border border-primary-mint/35 bg-white text-primary-mint hover:bg-primary-mint/5 font-dm text-[11px] uppercase tracking-widest font-semibold px-8 py-4 rounded-full shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer decoration-none"
+          >
+            <span className="material-symbols-outlined text-[16px] leading-none">rate_review</span>
+            <span>Write Guest Review</span>
+          </a>
         </div>
 
       </div>

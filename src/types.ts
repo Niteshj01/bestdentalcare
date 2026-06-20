@@ -4,6 +4,7 @@ export interface ServiceItem {
   title: string;
   description: string;
   bullets: string[];
+  image?: string;
 }
 
 export interface DoctorProfile {

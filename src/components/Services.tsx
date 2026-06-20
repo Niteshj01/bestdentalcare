@@ -4,6 +4,34 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ServiceItem } from "../types";
 import { useServices } from "../hooks/useServices";
 
+// Import generated premium gallery assets for orthodontic and therapeutic specialties
+// @ts-ignore
+import rootCanalImg from "../assets/images/regenerated_image_1781921934529.png";
+// @ts-ignore
+import orthodonticImg from "../assets/images/regenerated_image_1781921945111.png";
+// @ts-ignore
+import dentalImplantsImg from "../assets/images/regenerated_image_1781921954398.png";
+// @ts-ignore
+import crownsBridgesImg from "../assets/images/regenerated_image_1781921963854.png";
+// @ts-ignore
+import toothFillingsImg from "../assets/images/regenerated_image_1781921972325.png";
+// @ts-ignore
+import extractionsImg from "../assets/images/regenerated_image_1781921981614.png";
+// @ts-ignore
+import denturesImg from "../assets/images/regenerated_image_1781921990910.png";
+// @ts-ignore
+import whiteningImg from "../assets/images/regenerated_image_1781921999545.png";
+// @ts-ignore
+import laserSurgeryImg from "../assets/images/regenerated_image_1781922011120.png";
+// @ts-ignore
+import kidsDentistryImg from "../assets/images/regenerated_image_1781922022012.png";
+// @ts-ignore
+import digitalXrayImg from "../assets/images/regenerated_image_1781922031595.png";
+// @ts-ignore
+import scalingPolishingImg from "../assets/images/regenerated_image_1781922041714.png";
+// @ts-ignore
+import alignersImg from "../assets/images/regenerated_image_1781922055486.png";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const dentalServices: ServiceItem[] = [
@@ -100,15 +128,123 @@ const dentalServices: ServiceItem[] = [
   }
 ];
 
+// Curated high-resolution dental photography matching exactly their clinic contexts
+const serviceImagesMap: Record<string, string> = {
+  "root-canal": rootCanalImg,
+  "orthodontic": orthodonticImg,
+  "dental-implants": dentalImplantsImg,
+  "crowns-bridges-veneers": crownsBridgesImg,
+  "tooth-fillings": toothFillingsImg,
+  "extractions-impactions": extractionsImg,
+  "dentures": denturesImg,
+  "teeth-whitening": whiteningImg,
+  "laser-surgery": laserSurgeryImg,
+  "kids-dentistry": kidsDentistryImg,
+  "digital-xray": digitalXrayImg,
+  "scaling-polishing": scalingPolishingImg,
+  "aligners": alignersImg
+};
+
+const getServiceImage = (id: string, title?: string) => {
+  if (serviceImagesMap[id]) return serviceImagesMap[id];
+  const normalizedId = id.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  if (serviceImagesMap[normalizedId]) return serviceImagesMap[normalizedId];
+  
+  // Keyword fallback match for custom added services
+  const normalizedTitle = (title || "").toLowerCase();
+  if (normalizedTitle.includes("canal") || normalizedTitle.includes("root")) {
+    return serviceImagesMap["root-canal"];
+  }
+  if (normalizedTitle.includes("aligner") || normalizedTitle.includes("brace") || normalizedTitle.includes("ortho")) {
+    return serviceImagesMap["aligners"];
+  }
+  if (normalizedTitle.includes("implant")) {
+    return serviceImagesMap["dental-implants"];
+  }
+  if (normalizedTitle.includes("crown") || normalizedTitle.includes("veneer") || normalizedTitle.includes("bridge")) {
+    return serviceImagesMap["crowns-bridges-veneers"];
+  }
+  if (normalizedTitle.includes("filling") || normalizedTitle.includes("composite") || normalizedTitle.includes("bond")) {
+    return serviceImagesMap["tooth-fillings"];
+  }
+  if (normalizedTitle.includes("whiten") || normalizedTitle.includes("bleach")) {
+    return serviceImagesMap["teeth-whitening"];
+  }
+  if (normalizedTitle.includes("kid") || normalizedTitle.includes("child") || normalizedTitle.includes("pediatric")) {
+    return serviceImagesMap["kids-dentistry"];
+  }
+  if (normalizedTitle.includes("xray") || normalizedTitle.includes("x-ray") || normalizedTitle.includes("diagnostic")) {
+    return serviceImagesMap["digital-xray"];
+  }
+  if (normalizedTitle.includes("clean") || normalizedTitle.includes("scal") || normalizedTitle.includes("polish")) {
+    return serviceImagesMap["scaling-polishing"];
+  }
+  
+  // Generic beautiful premium dental office fallback
+  return "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800";
+};
+
+const getServiceCategory = (id: string, title?: string): "cosmetic" | "restorative" | "preventive" | "orthodontics" => {
+  const normTitle = (title || "").toLowerCase();
+  const normId = (id || "").toLowerCase();
+
+  if (
+    normId.includes("whiten") || normTitle.includes("whitening") ||
+    normId.includes("crown") || normTitle.includes("crown") ||
+    normId.includes("veneer") || normTitle.includes("veneer") ||
+    normId.includes("bridge") || normTitle.includes("bridge") ||
+    normId.includes("fillings") || normTitle.includes("filling")
+  ) {
+    return "cosmetic";
+  }
+
+  if (
+    normId.includes("orthodontic") || normTitle.includes("orthodontic") ||
+    normId.includes("aligners") || normTitle.includes("aligner") ||
+    normId.includes("braces") || normTitle.includes("braces")
+  ) {
+    return "orthodontics";
+  }
+
+  if (
+    normId.includes("kid") || normTitle.includes("kid") ||
+    normId.includes("child") || normTitle.includes("child") ||
+    normId.includes("pediatric") || normTitle.includes("pediatric") ||
+    normId.includes("xray") || normTitle.includes("x-ray") ||
+    normId.includes("scaling") || normTitle.includes("polishing") ||
+    normId.includes("clean") || normTitle.includes("laser") ||
+    normId.includes("gum")
+  ) {
+    return "preventive";
+  }
+
+  return "restorative";
+};
+
+const CATEGORIES = [
+  { id: "all", label: "All Treatments" },
+  { id: "restorative", label: "Restorative care" },
+  { id: "cosmetic", label: "Cosmetic artistry" },
+  { id: "preventive", label: "Preventive & Pediatric" },
+  { id: "orthodontics", label: "Orthodontics" }
+];
+
 export default function Services() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const underlineRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
   const [activeCard, setActiveCard] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
   const { services: liveServices, loading } = useServices();
   const services = liveServices && liveServices.length > 0 ? liveServices : dentalServices;
+
+  // Filter services dynamically by category tabs
+  const filteredServices = services.filter((item) => {
+    if (selectedCategory === "all") return true;
+    return getServiceCategory(item.id, item.title) === selectedCategory;
+  });
 
   useEffect(() => {
     const noMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -153,30 +289,27 @@ export default function Services() {
         }
       }
     );
+  }, []);
 
-    // Initial Cards batch entrance
+  // Trigger batch animations whenever categories change
+  useEffect(() => {
     const cards = cardsRef.current?.querySelectorAll(".service-card-item");
     if (cards && cards.length > 0) {
-      ScrollTrigger.batch(cards, {
-        onEnter: (batch) => {
-          gsap.fromTo(
-            batch,
-            { opacity: 0, y: 50, scale: 0.95 },
-            {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              stagger: 0.08,
-              duration: 0.6,
-              ease: "power2.out",
-              overwrite: "auto"
-            }
-          );
-        },
-        once: true
-      });
+      gsap.fromTo(
+        cards,
+        { opacity: 0, y: 30, scale: 0.97 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          stagger: 0.05,
+          duration: 0.4,
+          ease: "power2.out",
+          overwrite: "auto"
+        }
+      );
     }
-  }, []);
+  }, [selectedCategory, services]);
 
   // Soft Ripple effect on click
   const [ripples, setRipples] = useState<{ id: number; x: number; y: number; cardId: string }[]>([]);
@@ -231,16 +364,36 @@ export default function Services() {
           </p>
         </div>
 
+        {/* Elegant Service Category Tabs Filters */}
+        <div className="flex flex-wrap items-center justify-center gap-2 max-w-4xl mx-auto border-b border-primary-mint/10 pb-6">
+          {CATEGORIES.map((tab) => {
+            const isActive = selectedCategory === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setSelectedCategory(tab.id)}
+                className={`px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider font-sans transition-all duration-300 uppercase cursor-pointer border ${
+                  isActive
+                    ? "bg-primary-mint text-white border-primary-mint shadow-md shadow-primary-mint/25 scale-102"
+                    : "bg-white/80 hover:bg-white text-[#4A5E54] border-primary-mint/10 hover:border-primary-mint/30 shadow-sm"
+                }`}
+              >
+                {tab.label}
+              </button>
+            );
+          })}
+        </div>
+
         {/* Carousel Grid Cards */}
         <div
           ref={cardsRef}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-6 justify-center"
         >
-          {services.map((item) => (
+          {filteredServices.map((item) => (
             <div
               key={item.id}
               onClick={(e) => handleCardClick(e, item.id)}
-              className="service-card-item relative group bg-white border border-primary-mint/10 rounded-2xl p-8 md:p-10 shadow-lg shadow-black/2 hover:shadow-[0_20px_50px_rgba(62,180,137,0.15)] hover:-translate-y-2 transition-all duration-500 ease-out cursor-pointer overflow-hidden flex flex-col justify-between h-full select-none animate-gpu"
+              className="service-card-item relative group bg-white border border-primary-mint/10 rounded-2xl p-6 shadow-lg shadow-black/2 hover:shadow-[0_20px_50px_rgba(62,180,137,0.15)] hover:-translate-y-2 transition-all duration-500 ease-out cursor-pointer overflow-hidden flex flex-col justify-between h-full select-none animate-gpu"
             >
               {/* Card click ripples */}
               {ripples
@@ -261,26 +414,38 @@ export default function Services() {
               {/* Shimmer sweep beam */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-[150%] rotate-20 skew-x-12 group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out pointer-events-none" />
 
-              <div className="space-y-6">
-                {/* Icon wrapper & rotate scale effect */}
-                <div className="w-14 h-14 rounded-full bg-surface-mint flex items-center justify-center border border-primary-mint/10 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12">
-                  <span className="material-symbols-outlined text-2xl text-primary-mint font-light">
-                    {item.icon}
-                  </span>
+              <div className="space-y-5">
+                {/* Visual Image Header */}
+                <div className="relative w-full h-44 rounded-xl overflow-hidden shadow-sm">
+                  <img
+                    src={getServiceImage(item.id, item.title)}
+                    alt={item.title}
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-106"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
                 </div>
 
-                <div className="space-y-3">
-                  <h3 className="font-cormorant text-2xl font-normal text-charcoal">
+                <div className="flex items-center gap-4">
+                  {/* Icon wrapper & rotate scale effect */}
+                  <div className="w-12 h-12 rounded-full bg-surface-mint flex items-center justify-center border border-primary-mint/10 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12 shrink-0">
+                    <span className="material-symbols-outlined text-xl text-primary-mint font-light">
+                      {item.icon}
+                    </span>
+                  </div>
+
+                  <h3 className="font-cormorant text-xl md:text-2xl font-normal text-charcoal leading-snug">
                     {item.title}
                   </h3>
-                  <p className="font-sans text-sm text-[#3D4943] leading-relaxed">
-                    {item.description}
-                  </p>
                 </div>
+
+                <p className="font-sans text-xs md:text-sm text-[#3D4943] leading-relaxed">
+                  {item.description}
+                </p>
               </div>
 
               {/* Expandable and hover features: dynamic bullet dropdown lists */}
-              <div className="mt-8 pt-6 border-t border-primary-mint/10 flex flex-col gap-3">
+              <div className="mt-6 pt-5 border-t border-primary-mint/10 flex flex-col gap-3">
                 <div
                   className={`space-y-2 overflow-hidden transition-all duration-500 ease-in-out ${
                     activeCard === item.id || activeCard === null
@@ -296,8 +461,8 @@ export default function Services() {
                   ))}
                 </div>
 
-                <div className="flex items-center justify-between pt-2">
-                  <span className="font-dm text-[10px] font-bold tracking-widest text-primary-mint uppercase">
+                <div className="flex items-center justify-between pt-1">
+                  <span className="font-dm text-[9px] font-bold tracking-widest text-primary-mint uppercase">
                     {activeCard === item.id ? "Minimize" : "Explore Detail"}
                   </span>
                   <span className={`material-symbols-outlined text-primary-mint font-light transition-transform duration-300 ${
@@ -309,6 +474,12 @@ export default function Services() {
               </div>
             </div>
           ))}
+
+          {filteredServices.length === 0 && (
+            <div className="col-span-full py-16 text-center text-gray-500 font-sans">
+              No services found in this category.
+            </div>
+          )}
         </div>
 
       </div>
