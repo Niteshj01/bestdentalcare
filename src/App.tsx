@@ -16,6 +16,7 @@ import Doctors from "./components/Doctors";
 import Stats from "./components/Stats";
 import BeforeAfter from "./components/BeforeAfter";
 import Testimonials from "./components/Testimonials";
+import JournalAndVideos from "./components/JournalAndVideos";
 import FAQ from "./components/FAQ";
 import Appointment from "./components/Appointment";
 import Instagram from "./components/Instagram";
@@ -108,6 +109,7 @@ function LandingPage() {
         <Stats />
         <BeforeAfter />
         <Testimonials />
+        <JournalAndVideos />
         <FAQ />
         <Appointment />
         <Instagram />
