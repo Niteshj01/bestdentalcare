@@ -8,7 +8,7 @@ import { useServices } from "../hooks/useServices";
 // @ts-ignore
 import rootCanalImg from "../assets/images/regenerated_image_1781921934529.png";
 // @ts-ignore
-import orthodonticImg from "../assets/images/regenerated_image_1781921945111.png";
+import orthodonticImg from "https://ibb.co/LzSr17V7";
 // @ts-ignore
 import dentalImplantsImg from "../assets/images/regenerated_image_1781921954398.png";
 // @ts-ignore
