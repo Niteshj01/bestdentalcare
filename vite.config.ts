@@ -21,6 +21,7 @@ function fetchHtml(url: string): Promise<string> {
 
 export default defineConfig(() => {
   return {
+    base: "./",
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {

@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 
 // Import custom sections
 import Loader from "./components/Loader";
@@ -126,11 +126,11 @@ function LandingPage() {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/admin/*" element={<AdminRouter />} />
         <Route path="*" element={<LandingPage />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
