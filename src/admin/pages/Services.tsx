@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useServices } from "../../hooks/useServices";
+import { uploadFile } from "../../firebase/storage";
 import { ServiceItem } from "../../types";
 import Modal from "../components/Modal";
 
@@ -17,7 +18,11 @@ export default function Services({ showToast }: ServicesProps) {
   const [description, setDescription] = useState("");
   const [icon, setIcon] = useState("healing");
   const [bulletsText, setBulletsText] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [uploadProgress, setUploadProgress] = useState<number | null>(null);
   const [submitLoading, setSubmitLoading] = useState(false);
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleOpenAddModal = () => {
     setCurrentService(null);
@@ -25,6 +30,8 @@ export default function Services({ showToast }: ServicesProps) {
     setDescription("");
     setIcon("healing");
     setBulletsText("");
+    setImageUrl("");
+    setUploadProgress(null);
     setModalOpen(true);
   };
 
@@ -34,7 +41,27 @@ export default function Services({ showToast }: ServicesProps) {
     setDescription(service.description);
     setIcon(service.icon || "healing");
     setBulletsText(service.bullets ? service.bullets.join("\n") : "");
+    setImageUrl(service.image || "");
+    setUploadProgress(null);
     setModalOpen(true);
+  };
+
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploadProgress(1); // initiate loader
+    try {
+      const url = await uploadFile(file, "services", (progress) => {
+        setUploadProgress(progress);
+      });
+      setImageUrl(url);
+      showToast("Service image loaded successfully.", "success");
+    } catch (err) {
+      showToast("Failed to upload service image.", "error");
+    } finally {
+      setUploadProgress(null);
+    }
   };
 
   const handleDelete = async (id: string, name: string) => {
@@ -63,6 +90,7 @@ export default function Services({ showToast }: ServicesProps) {
       title,
       description,
       icon,
+      image: imageUrl,
       bullets: parsedBullets.length > 0 ? parsedBullets : ["Painless professional care"]
     };
 
@@ -217,6 +245,39 @@ export default function Services({ showToast }: ServicesProps) {
                 <option key={opt.value} value={opt.value}>{opt.label}</option>
               ))}
             </select>
+          </div>
+
+          <div className="space-y-1 text-left">
+            <label className="text-[10px] uppercase font-bold tracking-widest text-gray-400">Treatment Image</label>
+            <div className="flex items-center gap-2">
+              <input
+                type="text"
+                value={imageUrl}
+                onChange={(e) => setImageUrl(e.target.value)}
+                placeholder="Insert image URL or upload below..."
+                className="flex-1 px-4 py-3 border border-gray-150 rounded-xl outline-none focus:border-primary-mint/55 text-xs text-gray-800 transition-all font-medium"
+              />
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className="px-4 py-3 rounded-xl border border-gray-150 hover:bg-gray-50 text-gray-600 flex items-center justify-center cursor-pointer transition-all shrink-0"
+                title="Upload service image file"
+              >
+                <span className="material-symbols-outlined text-sm leading-none">cloud_upload</span>
+              </button>
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleImageChange}
+                accept="image/*"
+                className="hidden"
+              />
+            </div>
+            {uploadProgress !== null && (
+              <div className="w-full bg-gray-50 h-1.5 rounded-full mt-1.5 overflow-hidden">
+                <div className="bg-primary-mint h-full transition-all duration-300" style={{ width: `${uploadProgress}%` }} />
+              </div>
+            )}
           </div>
 
           <div className="space-y-1 text-left">
