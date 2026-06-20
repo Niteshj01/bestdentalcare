@@ -118,7 +118,10 @@ const serviceImagesMap: Record<string, string> = {
   "aligners": "/123.jpg"
 };
 
-const getServiceImage = (id: string, title?: string) => {
+const getServiceImage = (id: string, title?: string, itemImage?: string) => {
+  if (itemImage && !itemImage.includes("ibb.co")) {
+    return itemImage;
+  }
   if (serviceImagesMap[id]) return serviceImagesMap[id];
   const normalizedId = id.toLowerCase().replace(/[^a-z0-9]+/g, "-");
   if (serviceImagesMap[normalizedId]) return serviceImagesMap[normalizedId];
@@ -391,7 +394,7 @@ export default function Services() {
                 {/* Visual Image Header */}
                 <div className="relative w-full h-44 rounded-xl overflow-hidden shadow-sm">
                   <SafeImage
-                    src={getServiceImage(item.id, item.title)}
+                    src={getServiceImage(item.id, item.title, item.image)}
                     alt={item.title}
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-106"

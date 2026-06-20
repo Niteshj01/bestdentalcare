@@ -35,42 +35,24 @@ const SafeImage = forwardRef<HTMLImageElement, SafeImageProps>(({
 
       case "doctor":
         return (
-          <div
-            className={`w-full h-full flex flex-col items-center justify-center p-6 text-center bg-gradient-to-b from-[#e8ffef] to-white border border-primary-mint/10 relative ${className}`}
+          <img
+            src="/888.jpg"
+            alt={alt || "Doctor"}
+            className={className}
             style={style}
-            id="placeholder-doctor"
-          >
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(62,180,137,0.05),transparent_60%)] pointer-events-none" />
-            <div className="w-16 h-16 rounded-full bg-[#3eb489]/10 flex items-center justify-center text-[#3eb489] mb-4 border border-[#3eb489]/20 shadow-inner">
-              <User className="w-8 h-8 stroke-[1.25]" />
-            </div>
-            <p className="font-cormorant text-2xl font-semibold text-charcoal tracking-tight">{alt || "Senior Dentist"}</p>
-            <span className="font-dm text-[9px] uppercase tracking-[0.2em] text-[#3eb489] mt-2 block font-bold">DR. SKY CLINICAL STAFF</span>
-          </div>
+            {...props}
+          />
         );
 
       case "clinic":
         return (
-          <div
-            className={`w-full h-full flex flex-col items-center justify-center p-8 text-center bg-gradient-to-tr from-[#001d11] via-[#002f1d] to-[#001d11] border border-primary-mint/15 relative overflow-hidden ${className}`}
+          <img
+            src="/19.jpg"
+            alt={alt || "Clinic"}
+            className={className}
             style={style}
-            id="placeholder-clinic"
-          >
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(223,186,92,0.08),transparent_60%)] pointer-events-none" />
-            
-            {/* Elegant vector mock geometry */}
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#dfba5c]/20 to-[#dfba5c]/5 border border-[#dfba5c]/35 flex items-center justify-center text-[#dfba5c] mx-auto shadow-md">
-                <Sparkles className="w-5 h-5 animate-pulse" />
-              </div>
-              <div className="space-y-1.5">
-                <h4 className="font-cormorant text-xl font-medium text-white max-w-[280px] mx-auto tracking-normal">DR. SKY CLINIC SUITE</h4>
-                <p className="text-[10px] text-gray-400 font-sans tracking-wide leading-relaxed max-w-[200px] mx-auto">
-                  Premium biological diagnostics & therapeutic dental suite
-                </p>
-              </div>
-            </div>
-          </div>
+            {...props}
+          />
         );
 
       case "instagram":
@@ -118,17 +100,13 @@ const SafeImage = forwardRef<HTMLImageElement, SafeImageProps>(({
       case "service":
       default:
         return (
-          <div
-            className={`w-full h-full flex flex-col items-center justify-center p-6 text-center bg-gradient-to-b from-[#f2fff6] to-white border border-primary-mint/10 relative overflow-hidden ${className}`}
+          <img
+            src="/19.jpg"
+            alt={alt || "Service Treatment Room"}
+            className={className}
             style={style}
-            id="placeholder-service"
-          >
-            <div className="absolute inset-x-0 bottom-0 h-1.5 bg-gradient-to-r from-[#dfba5c] to-[#3eb489]" />
-            <div className="w-10 h-10 rounded-full bg-primary-mint/10 border border-primary-mint/15 flex items-center justify-center text-primary-mint mb-3 animate-pulse">
-              <HeartPulse className="w-5 h-5 stroke-[1.25]" />
-            </div>
-            <p className="font-cormorant text-lg font-medium text-charcoal tracking-tight px-4">{alt || "Treatment Room"}</p>
-          </div>
+            {...props}
+          />
         );
     }
   };

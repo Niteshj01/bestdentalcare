@@ -77,7 +77,7 @@ export default function Doctors() {
                     clickedDocId === doc.id ? "grayscale-0 scale-110" : "grayscale"
                   }`}
                   referrerPolicy="no-referrer"
-                  src={doc.image}
+                  src={doc.image && doc.image.trim() !== "" && !doc.image.includes("ibb.co") ? doc.image : "/888.jpg"}
                   placeholderType="doctor"
                 />
                 <div className="absolute top-2 right-2 bg-gradient-to-br from-gold to-gold-light text-[#001D11] font-dm text-[7px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full shadow z-10">
