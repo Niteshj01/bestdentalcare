@@ -3,7 +3,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ServiceItem } from "../types";
 import { useServices } from "../hooks/useServices";
-import SafeImage from "./SafeImage";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -393,12 +392,11 @@ export default function Services() {
               <div className="space-y-5">
                 {/* Visual Image Header */}
                 <div className="relative w-full h-44 rounded-xl overflow-hidden shadow-sm">
-                  <SafeImage
+                  <img
                     src={getServiceImage(item.id, item.title, item.image)}
                     alt={item.title}
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-106"
-                    placeholderType="service"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
                 </div>

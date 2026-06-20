@@ -1,5 +1,4 @@
 import React from "react";
-import SafeImage from "./SafeImage";
 
 interface BDLogoProps {
   className?: string;
@@ -10,12 +9,11 @@ export default function BDLogo({ className = "w-10 h-10", showText = false }: BD
   return (
     <div className="flex items-center gap-3">
       <div className="bg-[#dce1e7] rounded-xl overflow-hidden shadow-[inset_0_1px_1.5px_rgba(255,255,255,0.6),_0_2.5px_5px_rgba(0,0,0,0.08)] flex items-center justify-center transition-transform duration-300 hover:scale-[1.03]">
-        <SafeImage
+        <img
           src="/images/logo.png"
           className={`${className} object-cover`}
           alt="DR. SKY DENTISTRY Logo"
           referrerPolicy="no-referrer"
-          placeholderType="logo"
         />
       </div>
       {showText && (

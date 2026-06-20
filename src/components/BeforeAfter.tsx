@@ -4,7 +4,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { getGallery } from "../firebase/firestore";
 import { GalleryItem } from "../types";
 import { motion, AnimatePresence } from "motion/react";
-import SafeImage from "./SafeImage";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -139,11 +138,10 @@ export default function BeforeAfter() {
           {/* Slower bottom brightness shifts on hover */}
           {/* Before Case Wrapper: Underlay */}
           <div className="absolute inset-0 w-full h-full" style={{ filter: "brightness(0.9) contrast(1.02)" }}>
-            <SafeImage
+            <img
               src="/images/before_case.jpg"
               alt="Case #0492 Before"
               className="absolute inset-0 w-full h-full object-cover"
-              placeholderType="before-after"
             />
             {/* Before Tag badge */}
             <div className="absolute top-6 left-6 bg-charcoal/70 backdrop-blur text-white font-dm text-[9px] uppercase tracking-widest px-4 py-2 rounded-full z-10">
@@ -160,11 +158,10 @@ export default function BeforeAfter() {
               width: cardRef.current?.getBoundingClientRect().width || "100%",
               maxWidth: "100vw"
             }}>
-              <SafeImage
+              <img
                 src="/images/after_case.jpg"
                 alt="Case #0492 After"
                 className="absolute inset-0 w-full h-full object-cover"
-                placeholderType="before-after"
               />
               {/* After Tag badge with glow pulse */}
               <div className="absolute top-6 right-6 bg-gradient-to-r from-gold to-gold-light text-charcoal font-dm text-[9.5px] font-bold uppercase tracking-widest px-5 py-2 rounded-full shadow-lg pulse-badge z-10">

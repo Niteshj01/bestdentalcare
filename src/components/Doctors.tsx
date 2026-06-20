@@ -4,7 +4,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { DoctorProfile } from "../types";
 import { motion, AnimatePresence } from "motion/react";
 import { useDoctors } from "../hooks/useDoctors";
-import SafeImage from "./SafeImage";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -71,14 +70,13 @@ export default function Doctors() {
                 }}
                 className="relative flex-shrink-0 w-36 h-36 rounded-full overflow-hidden border border-primary-mint/20 shadow-md cursor-pointer group active:scale-95 transition-transform duration-200"
               >
-                <SafeImage
+                <img
                   alt={doc.name}
                   className={`w-full h-full object-cover object-center transition-all duration-700 group-hover:scale-115 group-hover:grayscale-0 ${
                     clickedDocId === doc.id ? "grayscale-0 scale-110" : "grayscale"
                   }`}
                   referrerPolicy="no-referrer"
                   src={doc.image && doc.image.trim() !== "" && !doc.image.includes("ibb.co") ? doc.image : "/888.jpg"}
-                  placeholderType="doctor"
                 />
                 <div className="absolute top-2 right-2 bg-gradient-to-br from-gold to-gold-light text-[#001D11] font-dm text-[7px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full shadow z-10">
                   {doc.badge || "Specialist"}
@@ -148,12 +146,11 @@ export default function Doctors() {
 
               {/* Large, colorful popped-out image container */}
               <div className="relative w-48 h-48 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-gold shadow-lg">
-                <SafeImage
+                <img
                   alt={selectedDoctor.name}
                   className="w-full h-full object-cover object-center grayscale-0 scale-105"
                   referrerPolicy="no-referrer"
                   src={selectedDoctor.image}
-                  placeholderType="doctor"
                 />
                 <div className="absolute top-2 right-1/2 translate-x-1/2 bg-gradient-to-br from-gold to-gold-light text-[#1F2C24] font-dm text-[8px] font-bold tracking-widest uppercase px-3 py-1 rounded-full shadow">
                   {selectedDoctor.badge}

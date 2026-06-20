@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import SafeImage from "./SafeImage";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -145,13 +144,12 @@ export default function About() {
             className="relative z-10 w-full aspect-[4/5] max-w-[480px] rounded-2xl overflow-hidden shadow-2xl bg-teal-950/15"
             style={{ clipPath: "inset(100% 0% 0% 0%)" }}
           >
-            <SafeImage
+            <img
               ref={imgRef}
               alt="Dr. Gagandeep S Gauba"
               className="w-full h-full object-cover object-center grayscale hover:grayscale-0 transition-all duration-700 select-none animate-gpu"
               referrerPolicy="no-referrer"
               src="/88899.jpg"
-              placeholderType="doctor"
             />
           </div>
 

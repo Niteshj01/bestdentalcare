@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import SafeImage from "./SafeImage";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -383,14 +382,13 @@ export default function Hero({ startAnimation }: HeroProps) {
                 animation: "morphBlob 10s ease-in-out infinite",
               }}
             >
-              <SafeImage
+              <img
                 ref={visualRef}
                 alt="Editorial clinic suite"
                 className="w-full h-[115%] object-cover object-center translate-y-[-5%] rendering-crisp"
                 style={{ imageRendering: "-webkit-optimize-contrast" }}
                 referrerPolicy="no-referrer"
                 src="/19.jpg"
-                placeholderType="clinic"
               />
             </div>
 

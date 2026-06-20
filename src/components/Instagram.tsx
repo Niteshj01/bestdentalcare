@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { InstagramPost } from "../types";
-import SafeImage from "./SafeImage";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -119,12 +118,11 @@ export default function Instagram() {
               className="ig-item relative block aspect-square rounded-2xl overflow-hidden group shadow-md hover:shadow-xl transition-all duration-300 opacity-0 bg-teal-950/15"
             >
               {/* Actual Image */}
-              <SafeImage
+              <img
                 alt={post.alt}
                 className="w-full h-full object-cover object-center group-hover:scale-112 transition-transform duration-700 select-none animate-gpu"
                 referrerPolicy="no-referrer"
                 src={post.image}
-                placeholderType="instagram"
               />
 
               {/* Mint hover overlay with central vector symbol */}
