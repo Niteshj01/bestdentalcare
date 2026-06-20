@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import { DoctorProfile } from "../types";
 import { getDoctors, addDoctor, updateDoctor, deleteDoctor } from "../firebase/firestore";
-// @ts-ignore
-import doctorImg from "../assets/images/regenerated_image_1781715483180.png";
+
+const doctorImgPath = "/888.jpg";
 
 export function useDoctors() {
   const [doctors, setDoctors] = useState<DoctorProfile[]>([]);
@@ -13,7 +13,7 @@ export function useDoctors() {
     setLoading(true);
     setError(null);
     try {
-      const data = await getDoctors(doctorImg);
+      const data = await getDoctors(doctorImgPath);
       setDoctors(data);
     } catch (err: any) {
       console.error("Error fetching doctors:", err);

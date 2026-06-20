@@ -4,8 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { DoctorProfile } from "../types";
 import { motion, AnimatePresence } from "motion/react";
 import { useDoctors } from "../hooks/useDoctors";
-// @ts-ignore
-import doctorImg from "../assets/images/regenerated_image_1781715483180.png";
+import SafeImage from "./SafeImage";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,7 +21,7 @@ export default function Doctors() {
       name: "Dr. Gagandeep S Gauba",
       role: "BDS, MDS - Senior Dentist & Dental Implants Specialist",
       bio: "Dr. Gagandeep S Gauba is a highly distinguished dental implants provider and senior clinician with over 14 years of clinical experience. Specializing in advanced painless implantology, dental aesthetics, single-visit root canals, and precision orthodontics, Dr. Gauba is dedicated to transforming smiles using the latest advancements like digital radiovisiography, endomotors, and state-of-the-art restorative techniques.",
-      image: doctorImg,
+      image: "/888.jpg",
       badge: "Lead Implantologist",
       qualifications: ["B.D.S. & M.D.S. Specialist", "Advanced Implantology", "14+ Years Clinical Excellence"]
     }
@@ -72,16 +71,14 @@ export default function Doctors() {
                 }}
                 className="relative flex-shrink-0 w-36 h-36 rounded-full overflow-hidden border border-primary-mint/20 shadow-md cursor-pointer group active:scale-95 transition-transform duration-200"
               >
-                <img
+                <SafeImage
                   alt={doc.name}
                   className={`w-full h-full object-cover object-center transition-all duration-700 group-hover:scale-115 group-hover:grayscale-0 ${
                     clickedDocId === doc.id ? "grayscale-0 scale-110" : "grayscale"
                   }`}
                   referrerPolicy="no-referrer"
                   src={doc.image}
-                  onError={(e) => {
-                    e.currentTarget.src = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=640&auto=format&fit=crop";
-                  }}
+                  placeholderType="doctor"
                 />
                 <div className="absolute top-2 right-2 bg-gradient-to-br from-gold to-gold-light text-[#001D11] font-dm text-[7px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full shadow z-10">
                   {doc.badge || "Specialist"}
@@ -151,14 +148,12 @@ export default function Doctors() {
 
               {/* Large, colorful popped-out image container */}
               <div className="relative w-48 h-48 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-gold shadow-lg">
-                <img
+                <SafeImage
                   alt={selectedDoctor.name}
                   className="w-full h-full object-cover object-center grayscale-0 scale-105"
                   referrerPolicy="no-referrer"
                   src={selectedDoctor.image}
-                  onError={(e) => {
-                    e.currentTarget.src = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=640&auto=format&fit=crop";
-                  }}
+                  placeholderType="doctor"
                 />
                 <div className="absolute top-2 right-1/2 translate-x-1/2 bg-gradient-to-br from-gold to-gold-light text-[#1F2C24] font-dm text-[8px] font-bold tracking-widest uppercase px-3 py-1 rounded-full shadow">
                   {selectedDoctor.badge}

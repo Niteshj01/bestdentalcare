@@ -3,34 +3,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ServiceItem } from "../types";
 import { useServices } from "../hooks/useServices";
-
-// Import generated premium gallery assets for orthodontic and therapeutic specialties
-// @ts-ignore
-import rootCanalImg from "https://ibb.co/LzSr17V7";
-// @ts-ignore
-import orthodonticImg from "https://ibb.co/HpVPFbxj";
-// @ts-ignore
-import dentalImplantsImg from "https://ibb.co/gLqGHJdH";
-// @ts-ignore
-import crownsBridgesImg from "https://ibb.co/tMh0LQxB";
-// @ts-ignore
-import toothFillingsImg from "https://ibb.co/ZR36Br3w";
-// @ts-ignore
-import extractionsImg from "https://ibb.co/N6M9qKJ2";
-// @ts-ignore
-import denturesImg from "https://ibb.co/pBCVWG5R";
-// @ts-ignore
-import whiteningImg from "https://ibb.co/bgPScJJB";
-// @ts-ignore
-import laserSurgeryImg from "https://ibb.co/WW3qPPqT";
-// @ts-ignore
-import kidsDentistryImg from "https://ibb.co/fYV9F3LR";
-// @ts-ignore
-import digitalXrayImg from "https://ibb.co/k2wcytGS";
-// @ts-ignore
-import scalingPolishingImg from "https://ibb.co/8D1bB9bN";
-// @ts-ignore
-import alignersImg from "https://ibb.co/VpQQwBhV";
+import SafeImage from "./SafeImage";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -130,19 +103,19 @@ const dentalServices: ServiceItem[] = [
 
 // Curated high-resolution dental photography matching exactly their clinic contexts
 const serviceImagesMap: Record<string, string> = {
-  "root-canal": rootCanalImg,
-  "orthodontic": orthodonticImg,
-  "dental-implants": dentalImplantsImg,
-  "crowns-bridges-veneers": crownsBridgesImg,
-  "tooth-fillings": toothFillingsImg,
-  "extractions-impactions": extractionsImg,
-  "dentures": denturesImg,
-  "teeth-whitening": whiteningImg,
-  "laser-surgery": laserSurgeryImg,
-  "kids-dentistry": kidsDentistryImg,
-  "digital-xray": digitalXrayImg,
-  "scaling-polishing": scalingPolishingImg,
-  "aligners": alignersImg
+  "root-canal": "/111.jpg",
+  "orthodontic": "/112.jpg",
+  "dental-implants": "/113.jpg",
+  "crowns-bridges-veneers": "/114.jpg",
+  "tooth-fillings": "/115.jpg",
+  "extractions-impactions": "/116.jpg",
+  "dentures": "/117.jpg",
+  "teeth-whitening": "/118.jpg",
+  "laser-surgery": "/119.jpg",
+  "kids-dentistry": "/120.jpg",
+  "digital-xray": "/121.jpg",
+  "scaling-polishing": "/122.jpg",
+  "aligners": "/123.jpg"
 };
 
 const getServiceImage = (id: string, title?: string) => {
@@ -181,7 +154,7 @@ const getServiceImage = (id: string, title?: string) => {
   }
   
   // Generic beautiful premium dental office fallback
-  return "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800";
+  return "/19.jpg";
 };
 
 const getServiceCategory = (id: string, title?: string): "cosmetic" | "restorative" | "preventive" | "orthodontics" => {
@@ -417,11 +390,12 @@ export default function Services() {
               <div className="space-y-5">
                 {/* Visual Image Header */}
                 <div className="relative w-full h-44 rounded-xl overflow-hidden shadow-sm">
-                  <img
+                  <SafeImage
                     src={getServiceImage(item.id, item.title)}
                     alt={item.title}
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-106"
+                    placeholderType="service"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
                 </div>

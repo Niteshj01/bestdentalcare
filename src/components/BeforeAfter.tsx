@@ -4,6 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { getGallery } from "../firebase/firestore";
 import { GalleryItem } from "../types";
 import { motion, AnimatePresence } from "motion/react";
+import SafeImage from "./SafeImage";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -137,12 +138,15 @@ export default function BeforeAfter() {
         >
           {/* Slower bottom brightness shifts on hover */}
           {/* Before Case Wrapper: Underlay */}
-          <div className="absolute inset-0 w-full h-full bg-cover bg-center" style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1200&auto=format&fit=crop')`,
-            filter: "brightness(0.9) contrast(1.02)"
-          }}>
+          <div className="absolute inset-0 w-full h-full" style={{ filter: "brightness(0.9) contrast(1.02)" }}>
+            <SafeImage
+              src="/images/before_case.jpg"
+              alt="Case #0492 Before"
+              className="absolute inset-0 w-full h-full object-cover"
+              placeholderType="before-after"
+            />
             {/* Before Tag badge */}
-            <div className="absolute top-6 left-6 bg-charcoal/70 backdrop-blur text-white font-dm text-[9px] uppercase tracking-widest px-4 py-2 rounded-full">
+            <div className="absolute top-6 left-6 bg-charcoal/70 backdrop-blur text-white font-dm text-[9px] uppercase tracking-widest px-4 py-2 rounded-full z-10">
               Case #0492 • Before
             </div>
           </div>
@@ -152,13 +156,18 @@ export default function BeforeAfter() {
             className="absolute inset-0 w-full h-full overflow-hidden border-r-2 border-gold/40"
             style={{ width: `${sliderPos}%` }}
           >
-            <div className="absolute inset-0 w-full h-full bg-cover bg-center" style={{
-              backgroundImage: `url('https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?q=80&w=1200&auto=format&fit=crop')`,
+            <div className="absolute inset-0 w-full h-full" style={{
               width: cardRef.current?.getBoundingClientRect().width || "100%",
               maxWidth: "100vw"
             }}>
+              <SafeImage
+                src="/images/after_case.jpg"
+                alt="Case #0492 After"
+                className="absolute inset-0 w-full h-full object-cover"
+                placeholderType="before-after"
+              />
               {/* After Tag badge with glow pulse */}
-              <div className="absolute top-6 right-6 bg-gradient-to-r from-gold to-gold-light text-charcoal font-dm text-[9.5px] font-bold uppercase tracking-widest px-5 py-2 rounded-full shadow-lg pulse-badge">
+              <div className="absolute top-6 right-6 bg-gradient-to-r from-gold to-gold-light text-charcoal font-dm text-[9.5px] font-bold uppercase tracking-widest px-5 py-2 rounded-full shadow-lg pulse-badge z-10">
                 Restructured • After
               </div>
             </div>

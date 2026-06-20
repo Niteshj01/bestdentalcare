@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { InstagramPost } from "../types";
+import SafeImage from "./SafeImage";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,32 +13,32 @@ export default function Instagram() {
   const posts: InstagramPost[] = [
     {
       id: "ig-1",
-      image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=400&auto=format&fit=crop",
+      image: "/images/instagram/post1.jpg",
       alt: "Pristine clinical rooms and reception"
     },
     {
       id: "ig-2",
-      image: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=400&auto=format&fit=crop",
+      image: "/images/instagram/post2.jpg",
       alt: "Pristine technical precision tools"
     },
     {
       id: "ig-3",
-      image: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?q=80&w=400&auto=format&fit=crop",
+      image: "/images/instagram/post3.jpg",
       alt: "Beautiful sparkling alignment results"
     },
     {
       id: "ig-4",
-      image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=400&auto=format&fit=crop",
+      image: "/images/instagram/post4.jpg",
       alt: "Boutique clinic reads and reception"
     },
     {
       id: "ig-5",
-      image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=400&auto=format&fit=crop",
+      image: "/images/instagram/post5.jpg",
       alt: "Botanical wellness components and spa feel"
     },
     {
       id: "ig-6",
-      image: "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?q=80&w=400&auto=format&fit=crop",
+      image: "/images/instagram/post6.jpg",
       alt: "Cosmetic facial consulting suites"
     }
   ];
@@ -118,11 +119,12 @@ export default function Instagram() {
               className="ig-item relative block aspect-square rounded-2xl overflow-hidden group shadow-md hover:shadow-xl transition-all duration-300 opacity-0 bg-teal-950/15"
             >
               {/* Actual Image */}
-              <img
+              <SafeImage
                 alt={post.alt}
                 className="w-full h-full object-cover object-center group-hover:scale-112 transition-transform duration-700 select-none animate-gpu"
                 referrerPolicy="no-referrer"
                 src={post.image}
+                placeholderType="instagram"
               />
 
               {/* Mint hover overlay with central vector symbol */}
