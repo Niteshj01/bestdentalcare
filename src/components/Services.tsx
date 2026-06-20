@@ -6,31 +6,31 @@ import { useServices } from "../hooks/useServices";
 
 // Import generated premium gallery assets for orthodontic and therapeutic specialties
 // @ts-ignore
-import rootCanalImg from "../assets/images/regenerated_image_1781921934529.png";
+import rootCanalImg from "https://ibb.co/LzSr17V7";
 // @ts-ignore
-import orthodonticImg from "../assets/images/regenerated_image_1781921945111.png";
+import orthodonticImg from "https://ibb.co/HpVPFbxj";
 // @ts-ignore
-import dentalImplantsImg from "../assets/images/regenerated_image_1781921954398.png";
+import dentalImplantsImg from "https://ibb.co/gLqGHJdH";
 // @ts-ignore
-import crownsBridgesImg from "../assets/images/regenerated_image_1781921963854.png";
+import crownsBridgesImg from "https://ibb.co/tMh0LQxB";
 // @ts-ignore
-import toothFillingsImg from "../assets/images/regenerated_image_1781921972325.png";
+import toothFillingsImg from "https://ibb.co/ZR36Br3w";
 // @ts-ignore
-import extractionsImg from "../assets/images/regenerated_image_1781921981614.png";
+import extractionsImg from "https://ibb.co/N6M9qKJ2";
 // @ts-ignore
-import denturesImg from "../assets/images/regenerated_image_1781921990910.png";
+import denturesImg from "https://ibb.co/pBCVWG5R";
 // @ts-ignore
-import whiteningImg from "../assets/images/regenerated_image_1781921999545.png";
+import whiteningImg from "https://ibb.co/bgPScJJB";
 // @ts-ignore
-import laserSurgeryImg from "../assets/images/regenerated_image_1781922011120.png";
+import laserSurgeryImg from "https://ibb.co/WW3qPPqT";
 // @ts-ignore
-import kidsDentistryImg from "../assets/images/regenerated_image_1781922022012.png";
+import kidsDentistryImg from "https://ibb.co/fYV9F3LR";
 // @ts-ignore
-import digitalXrayImg from "../assets/images/regenerated_image_1781922031595.png";
+import digitalXrayImg from "https://ibb.co/k2wcytGS";
 // @ts-ignore
-import scalingPolishingImg from "../assets/images/regenerated_image_1781922041714.png";
+import scalingPolishingImg from "https://ibb.co/8D1bB9bN";
 // @ts-ignore
-import alignersImg from "../assets/images/regenerated_image_1781922055486.png";
+import alignersImg from "https://ibb.co/VpQQwBhV";
 
 gsap.registerPlugin(ScrollTrigger);
 
