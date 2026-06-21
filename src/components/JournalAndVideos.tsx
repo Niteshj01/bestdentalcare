@@ -115,8 +115,21 @@ export default function JournalAndVideos() {
   };
 
   useEffect(() => {
-    // No data loading required - utilizando fallback statically
-  }, []);
+    if (selectedArticle) {
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+      (window as any).lenis?.stop();
+    } else {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      (window as any).lenis?.start();
+    }
+    return () => {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      (window as any).lenis?.start();
+    };
+  }, [selectedArticle]);
 
   const getYoutubeId = (url: string): string | null => {
     try {
@@ -344,7 +357,10 @@ export default function JournalAndVideos() {
             </div>
 
             {/* Scrollable Document Content */}
-            <div className="p-6 md:p-8 overflow-y-auto space-y-6 scrollbar-thin">
+            <div 
+              data-lenis-prevent
+              className="flex-1 min-h-0 p-6 md:p-8 overflow-y-auto space-y-6 scrollbar-thin animate-gpu"
+            >
               {/* Cover Banner */}
               {selectedArticle.coverImage && (
                 <div className="w-full aspect-[21/9] rounded-xl overflow-hidden bg-emerald-950/30">

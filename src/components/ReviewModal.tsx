@@ -33,6 +33,8 @@ export default function ReviewModal() {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+      (window as any).lenis?.stop();
       gsap.fromTo(
         overlayRef.current,
         { opacity: 0 },
@@ -44,10 +46,14 @@ export default function ReviewModal() {
         { opacity: 1, scale: 1, y: 0, duration: 0.4, ease: "back.out(1.2)" }
       );
     } else {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      (window as any).lenis?.start();
     }
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      (window as any).lenis?.start();
     };
   }, [isOpen]);
 
@@ -178,7 +184,10 @@ export default function ReviewModal() {
           <X className="w-4 h-4" />
         </button>
 
-        <div className="p-8 md:p-10 overflow-y-auto">
+        <div 
+          data-lenis-prevent
+          className="p-8 md:p-10 overflow-y-auto"
+        >
           {!isSuccess ? (
             <div className="space-y-6">
               <div className="text-center space-y-2">

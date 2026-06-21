@@ -43,6 +43,7 @@ function LandingPage() {
       duration: 1.4,
       infinite: false,
     });
+    (window as any).lenis = lenis;
 
     // 2. Synchronize GSAP ticker with Lenis scroll
     const updateTicker = (time: number) => {
@@ -79,6 +80,7 @@ function LandingPage() {
       clearTimeout(refreshTimeout);
       gsap.ticker.remove(updateTicker);
       lenis.destroy();
+      delete (window as any).lenis;
       progressTween.scrollTrigger?.kill();
       progressTween.kill();
     };
