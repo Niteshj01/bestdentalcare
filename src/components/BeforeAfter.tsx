@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { resolveAsset } from "../utils/resolveAsset";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -163,7 +164,7 @@ export default function BeforeAfter() {
           {/* Before Case Wrapper: Underlay (shows the Left half) */}
           <div className="absolute inset-0 w-full h-full" style={{ filter: "brightness(0.9) contrast(1.02)" }}>
             <img
-              src={activeCase === "whitening" ? "/118.jpg" : "/122.jpg"}
+              src={resolveAsset(activeCase === "whitening" ? "/118.jpg" : "/122.jpg")}
               alt="Before Treatment"
               className="absolute inset-y-0 left-0 h-full max-w-none pointer-events-none"
               style={{
@@ -185,7 +186,7 @@ export default function BeforeAfter() {
           >
             <div className="absolute inset-y-0 h-full" style={{ width: cardWidth }}>
               <img
-                src={activeCase === "whitening" ? "/118.jpg" : "/122.jpg"}
+                src={resolveAsset(activeCase === "whitening" ? "/118.jpg" : "/122.jpg")}
                 alt="After Treatment"
                 className="absolute inset-y-0 h-full max-w-none pointer-events-none"
                 style={{

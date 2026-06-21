@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ServiceItem } from "../types";
+import { resolveAsset } from "../utils/resolveAsset";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -117,45 +118,49 @@ const serviceImagesMap: Record<string, string> = {
 };
 
 const getServiceImage = (id: string, title?: string, itemImage?: string) => {
-  if (itemImage && !itemImage.includes("ibb.co")) {
-    return itemImage;
-  }
-  if (serviceImagesMap[id]) return serviceImagesMap[id];
-  const normalizedId = id.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  if (serviceImagesMap[normalizedId]) return serviceImagesMap[normalizedId];
-  
-  // Keyword fallback match for custom added services
-  const normalizedTitle = (title || "").toLowerCase();
-  if (normalizedTitle.includes("canal") || normalizedTitle.includes("root")) {
-    return serviceImagesMap["root-canal"];
-  }
-  if (normalizedTitle.includes("aligner") || normalizedTitle.includes("brace") || normalizedTitle.includes("ortho")) {
-    return serviceImagesMap["aligners"];
-  }
-  if (normalizedTitle.includes("implant")) {
-    return serviceImagesMap["dental-implants"];
-  }
-  if (normalizedTitle.includes("crown") || normalizedTitle.includes("veneer") || normalizedTitle.includes("bridge")) {
-    return serviceImagesMap["crowns-bridges-veneers"];
-  }
-  if (normalizedTitle.includes("filling") || normalizedTitle.includes("composite") || normalizedTitle.includes("bond")) {
-    return serviceImagesMap["tooth-fillings"];
-  }
-  if (normalizedTitle.includes("whiten") || normalizedTitle.includes("bleach")) {
-    return serviceImagesMap["teeth-whitening"];
-  }
-  if (normalizedTitle.includes("kid") || normalizedTitle.includes("child") || normalizedTitle.includes("pediatric")) {
-    return serviceImagesMap["kids-dentistry"];
-  }
-  if (normalizedTitle.includes("xray") || normalizedTitle.includes("x-ray") || normalizedTitle.includes("diagnostic")) {
-    return serviceImagesMap["digital-xray"];
-  }
-  if (normalizedTitle.includes("clean") || normalizedTitle.includes("scal") || normalizedTitle.includes("polish")) {
-    return serviceImagesMap["scaling-polishing"];
-  }
-  
-  // Generic beautiful premium dental office fallback
-  return "/19.jpg";
+  const getRawImage = () => {
+    if (itemImage && !itemImage.includes("ibb.co")) {
+      return itemImage;
+    }
+    if (serviceImagesMap[id]) return serviceImagesMap[id];
+    const normalizedId = id.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+    if (serviceImagesMap[normalizedId]) return serviceImagesMap[normalizedId];
+    
+    // Keyword fallback match for custom added services
+    const normalizedTitle = (title || "").toLowerCase();
+    if (normalizedTitle.includes("canal") || normalizedTitle.includes("root")) {
+      return serviceImagesMap["root-canal"];
+    }
+    if (normalizedTitle.includes("aligner") || normalizedTitle.includes("brace") || normalizedTitle.includes("ortho")) {
+      return serviceImagesMap["aligners"];
+    }
+    if (normalizedTitle.includes("implant")) {
+      return serviceImagesMap["dental-implants"];
+    }
+    if (normalizedTitle.includes("crown") || normalizedTitle.includes("veneer") || normalizedTitle.includes("bridge")) {
+      return serviceImagesMap["crowns-bridges-veneers"];
+    }
+    if (normalizedTitle.includes("filling") || normalizedTitle.includes("composite") || normalizedTitle.includes("bond")) {
+      return serviceImagesMap["tooth-fillings"];
+    }
+    if (normalizedTitle.includes("whiten") || normalizedTitle.includes("bleach")) {
+      return serviceImagesMap["teeth-whitening"];
+    }
+    if (normalizedTitle.includes("kid") || normalizedTitle.includes("child") || normalizedTitle.includes("pediatric")) {
+      return serviceImagesMap["kids-dentistry"];
+    }
+    if (normalizedTitle.includes("xray") || normalizedTitle.includes("x-ray") || normalizedTitle.includes("diagnostic")) {
+      return serviceImagesMap["digital-xray"];
+    }
+    if (normalizedTitle.includes("clean") || normalizedTitle.includes("scal") || normalizedTitle.includes("polish")) {
+      return serviceImagesMap["scaling-polishing"];
+    }
+    
+    // Generic beautiful premium dental office fallback
+    return "/19.jpg";
+  };
+
+  return resolveAsset(getRawImage());
 };
 
 const getServiceCategory = (id: string, title?: string): "cosmetic" | "restorative" | "preventive" | "orthodontics" => {

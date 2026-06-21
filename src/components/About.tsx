@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { resolveAsset } from "../utils/resolveAsset";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -149,7 +150,7 @@ export default function About() {
               alt="Dr. Gagandeep S Gauba"
               className="w-full h-full object-cover object-center grayscale hover:grayscale-0 transition-all duration-700 select-none animate-gpu"
               referrerPolicy="no-referrer"
-              src="/88899.jpg"
+              src={resolveAsset("/88899.jpg")}
             />
           </div>
 

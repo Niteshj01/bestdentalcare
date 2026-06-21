@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { resolveAsset } from "../utils/resolveAsset";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -388,7 +389,7 @@ export default function Hero({ startAnimation }: HeroProps) {
                 className="w-full h-[115%] object-cover object-center translate-y-[-5%] rendering-crisp"
                 style={{ imageRendering: "-webkit-optimize-contrast" }}
                 referrerPolicy="no-referrer"
-                src="/19.jpg"
+                src={resolveAsset("/19.jpg")}
               />
             </div>
 

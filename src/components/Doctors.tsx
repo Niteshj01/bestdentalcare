@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { DoctorProfile } from "../types";
 import { motion, AnimatePresence } from "motion/react";
+import { resolveAsset } from "../utils/resolveAsset";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,7 +18,7 @@ export default function Doctors() {
       name: "Dr. Gagandeep S Gauba",
       role: "BDS, MDS - Senior Dentist & Dental Implants Specialist",
       bio: "Dr. Gagandeep S Gauba is a highly distinguished dental implants provider and senior clinician with over 14 years of clinical experience. Specializing in advanced painless implantology, dental aesthetics, single-visit root canals, and precision orthodontics, Dr. Gauba is dedicated to transforming smiles using the latest advancements like digital radiovisiography, endomotors, and state-of-the-art restorative techniques.",
-      image: "/888.jpg",
+      image: resolveAsset("/888.jpg"),
       badge: "Lead Implantologist",
       qualifications: ["B.D.S. & M.D.S. Specialist", "Advanced Implantology", "14+ Years Clinical Excellence"]
     }
@@ -73,7 +74,7 @@ export default function Doctors() {
                     clickedDocId === doc.id ? "grayscale-0 scale-110" : "grayscale"
                   }`}
                   referrerPolicy="no-referrer"
-                  src={doc.image && doc.image.trim() !== "" && !doc.image.includes("ibb.co") ? doc.image : "/888.jpg"}
+                  src={doc.image && doc.image.trim() !== "" && !doc.image.includes("ibb.co") ? resolveAsset(doc.image) : resolveAsset("/888.jpg")}
                 />
                 <div className="absolute top-2 right-2 bg-gradient-to-br from-gold to-gold-light text-[#001D11] font-dm text-[7px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full shadow z-10">
                   {doc.badge || "Specialist"}
@@ -147,7 +148,7 @@ export default function Doctors() {
                   alt={selectedDoctor.name}
                   className="w-full h-full object-cover object-center grayscale-0 scale-105"
                   referrerPolicy="no-referrer"
-                  src={selectedDoctor.image}
+                  src={resolveAsset(selectedDoctor.image)}
                 />
                 <div className="absolute top-2 right-1/2 translate-x-1/2 bg-gradient-to-br from-gold to-gold-light text-[#1F2C24] font-dm text-[8px] font-bold tracking-widest uppercase px-3 py-1 rounded-full shadow">
                   {selectedDoctor.badge}

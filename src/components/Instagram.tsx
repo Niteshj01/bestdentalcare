@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { InstagramPost } from "../types";
+import { resolveAsset } from "../utils/resolveAsset";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -122,7 +123,7 @@ export default function Instagram() {
                 alt={post.alt}
                 className="w-full h-full object-cover object-center group-hover:scale-112 transition-transform duration-700 select-none animate-gpu"
                 referrerPolicy="no-referrer"
-                src={post.image}
+                src={resolveAsset(post.image)}
               />
 
               {/* Mint hover overlay with central vector symbol */}

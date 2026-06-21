@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ArticleItem, VideoItem } from "../types";
 import { BookOpen, Play, Calendar, ExternalLink, Video, ChevronRight, X, Heart, Clock, Activity, CheckCircle2, HelpCircle, ChevronDown, Shield } from "lucide-react";
+import { resolveAsset } from "../utils/resolveAsset";
 
 const fallbackArticles: ArticleItem[] = [
   {
@@ -221,7 +222,7 @@ export default function JournalAndVideos() {
                         <div className="aspect-[16/10] overflow-hidden bg-emerald-950/50 relative">
                           {item.coverImage ? (
                             <img
-                              src={item.coverImage}
+                              src={resolveAsset(item.coverImage)}
                               alt={item.title}
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                               referrerPolicy="no-referrer"
@@ -365,7 +366,7 @@ export default function JournalAndVideos() {
               {selectedArticle.coverImage && (
                 <div className="w-full aspect-[21/9] rounded-xl overflow-hidden bg-emerald-950/30">
                   <img
-                    src={selectedArticle.coverImage}
+                    src={resolveAsset(selectedArticle.coverImage)}
                     alt={selectedArticle.title}
                     className="w-full h-full object-cover"
                     referrerPolicy="no-referrer"
