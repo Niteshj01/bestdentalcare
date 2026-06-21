@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ServiceItem } from "../types";
-import { useServices } from "../hooks/useServices";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -212,8 +211,7 @@ export default function Services() {
   const [activeCard, setActiveCard] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
-  const { services: liveServices, loading } = useServices();
-  const services = liveServices && liveServices.length > 0 ? liveServices : dentalServices;
+  const services = dentalServices;
 
   // Filter services dynamically by category tabs
   const filteredServices = services.filter((item) => {

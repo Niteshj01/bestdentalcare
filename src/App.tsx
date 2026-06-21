@@ -23,7 +23,6 @@ import Instagram from "./components/Instagram";
 import Footer from "./components/Footer";
 import FloatingControls from "./components/FloatingControls";
 import ReviewModal from "./components/ReviewModal";
-import AdminRouter from "./admin/AdminRouter";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -128,7 +127,6 @@ export default function App() {
   return (
     <HashRouter>
       <Routes>
-        <Route path="/admin/*" element={<AdminRouter />} />
         <Route path="*" element={<LandingPage />} />
       </Routes>
     </HashRouter>

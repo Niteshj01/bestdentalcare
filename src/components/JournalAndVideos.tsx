@@ -1,51 +1,49 @@
 import { useEffect, useState } from "react";
-import { getArticles, getVideos } from "../firebase/firestore";
 import { ArticleItem, VideoItem } from "../types";
 import { BookOpen, Play, Calendar, ExternalLink, Video, ChevronRight, X, Heart } from "lucide-react";
 
+const fallbackArticles: ArticleItem[] = [
+  {
+    id: "root-canal-care",
+    title: "Understanding Modern Painless Root Canal Therapy",
+    content: "Root canal treatment has evolved significantly over the last decade. With advanced electronic endomotors, digital radiography, and micro-precision tools, the therapy is completely painless, comfortable, and highly successful. At Dr. Sky Dentistry, we preserve your natural teeth using advanced biological techniques designed to restore absolute strength.",
+    coverImage: "/111.jpg",
+    publishDate: "JUNE 15, 2026"
+  },
+  {
+    id: "digital-dental-implants",
+    title: "The Ultimate Guide to Digital Dental Implants",
+    content: "Dental implants provide the most natural-feeling, beautiful option for replacing missing teeth. This surgical guide walks you through digital implant targeting, customized abutment modeling, and biological tooth osseointegration. Experience lifetime smile integrity and natural bite forces.",
+    coverImage: "/113.jpg",
+    publishDate: "MAY 28, 2026"
+  },
+  {
+    id: "clear-aligners-revolution",
+    title: "Why Clear Aligners are Restructuring Modern Orthodontics",
+    content: "Forget visible metal wires. Clear orthodontics and micro-precision aligners allow patient teeth straightening under invisible, comfortable parameters. Dr. Sky's advanced aligner plans use custom bio-tracking aligners tailored exactly to your unique orthodontic scan.",
+    coverImage: "/112.jpg",
+    publishDate: "APRIL 10, 2026"
+  }
+];
+
+const fallbackVideos: VideoItem[] = [
+  {
+    id: "video-1",
+    title: "Virtually Explore Dr. Sky Dentistry",
+    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    description: "Take an interactive look around our luxury dental clinic, from painless treatment suites to professional clinical specialists."
+  }
+];
+
 export default function JournalAndVideos() {
-  const [articles, setArticles] = useState<ArticleItem[]>([]);
-  const [videos, setVideos] = useState<VideoItem[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [articles, setArticles] = useState<ArticleItem[]>(fallbackArticles);
+  const [videos, setVideos] = useState<VideoItem[]>(fallbackVideos);
+  const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState<"articles" | "videos">("articles");
   const [selectedArticle, setSelectedArticle] = useState<ArticleItem | null>(null);
 
   useEffect(() => {
-    async function loadData() {
-      try {
-        const [fetchedArticles, fetchedVideos] = await Promise.all([
-          getArticles(),
-          getVideos()
-        ]);
-        setArticles(fetchedArticles);
-        setVideos(fetchedVideos);
-      } catch (err) {
-        console.error("Error loading frontend journal datasets:", err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    loadData();
-    
-    // Set up custom listeners to reload when new items are saved/published
-    const handleSync = async () => {
-      try {
-        const [fetchedArticles, fetchedVideos] = await Promise.all([
-          getArticles(),
-          getVideos()
-        ]);
-        setArticles(fetchedArticles);
-        setVideos(fetchedVideos);
-      } catch (e) {
-        console.error(e);
-      }
-    };
-    window.addEventListener("new-article-submitted", handleSync);
-    window.addEventListener("new-video-submitted", handleSync);
-    return () => {
-      window.removeEventListener("new-article-submitted", handleSync);
-      window.removeEventListener("new-video-submitted", handleSync);
-    };
+    // No data loading required - utilizando fallback statically
   }, []);
 
   const getYoutubeId = (url: string): string | null => {

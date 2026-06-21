@@ -3,7 +3,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { DoctorProfile } from "../types";
 import { motion, AnimatePresence } from "motion/react";
-import { useDoctors } from "../hooks/useDoctors";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,8 +10,6 @@ export default function Doctors() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [selectedDoctor, setSelectedDoctor] = useState<DoctorProfile | null>(null);
   const [clickedDocId, setClickedDocId] = useState<string | null>(null);
-
-  const { doctors: liveDoctors, loading } = useDoctors();
 
   const staticClinicians: DoctorProfile[] = [
     {
@@ -26,7 +23,7 @@ export default function Doctors() {
     }
   ];
 
-  const clinicians = liveDoctors && liveDoctors.length > 0 ? liveDoctors : staticClinicians;
+  const clinicians = staticClinicians;
 
   return (
     <section

@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { addAppointment } from "../firebase/firestore";
-import { useServices } from "../hooks/useServices";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,8 +8,6 @@ export default function Appointment() {
   const containerRef = useRef<HTMLDivElement>(null);
   const leftColRef = useRef<HTMLDivElement>(null);
   const rightColRef = useRef<HTMLDivElement>(null);
-
-  const { services, loading: servicesLoading } = useServices();
 
   // Form Fields
   const [name, setName] = useState("");
@@ -50,15 +46,15 @@ export default function Appointment() {
     );
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitLoading(true);
 
     try {
-      await addAppointment({
+      console.log("Appointment Booked Locally:", {
         name,
         phone,
-        service: selectedService || (services[0]?.title || "General Consultation"),
+        service: selectedService || "General Consultation",
         date: date || new Date().toISOString().split("T")[0]
       });
 
@@ -76,16 +72,12 @@ export default function Appointment() {
   };
 
   const treatmentOptions = [
-    ...(services && services.length > 0
-      ? services.map(s => ({ id: s.id, name: s.title }))
-      : [
-          { id: "root-canal", name: "Root Canal Treatment" },
-          { id: "orthodontic", name: "Orthodontic Treatment" },
-          { id: "implants", name: "Dental Implants" },
-          { id: "crowns", name: "Crowns, Bridges & Veneers" },
-          { id: "fillings", name: "Tooth Colour Fillings" },
-          { id: "whitening", name: "Teeth Whitening" }
-        ]),
+    { id: "root-canal", name: "Root Canal Treatment" },
+    { id: "orthodontic", name: "Orthodontic Treatment" },
+    { id: "implants", name: "Dental Implants" },
+    { id: "crowns", name: "Crowns, Bridges & Veneers" },
+    { id: "fillings", name: "Tooth Colour Fillings" },
+    { id: "whitening", name: "Teeth Whitening" },
     { id: "other", name: "Other / General Consultation" }
   ];
 

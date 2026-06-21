@@ -1,11 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { getGallery } from "../firebase/firestore";
 import { GalleryItem } from "../types";
 import { motion, AnimatePresence } from "motion/react";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const staticGallery: GalleryItem[] = [
+  { id: "g1", url: "/111.jpg", createdAt: "" },
+  { id: "g2", url: "/112.jpg", createdAt: "" },
+  { id: "g3", url: "/113.jpg", createdAt: "" },
+  { id: "g4", url: "/114.jpg", createdAt: "" },
+  { id: "g5", url: "/115.jpg", createdAt: "" },
+  { id: "g6", url: "/116.jpg", createdAt: "" },
+  { id: "g7", url: "/117.jpg", createdAt: "" },
+  { id: "g8", url: "/118.jpg", createdAt: "" },
+  { id: "g9", url: "/119.jpg", createdAt: "" },
+  { id: "g10", url: "/120.jpg", createdAt: "" }
+];
 
 export default function BeforeAfter() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -15,15 +27,8 @@ export default function BeforeAfter() {
   const [isDragging, setIsDragging] = useState(false);
 
   // Live Gallery State
-  const [galleryImages, setGalleryImages] = useState<GalleryItem[]>([]);
+  const [galleryImages, setGalleryImages] = useState<GalleryItem[]>(staticGallery);
   const [activeZoomUrl, setActiveZoomUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    // Read Firestore Gallery items
-    getGallery()
-      .then(items => setGalleryImages(items))
-      .catch(err => console.error("Could not fetch homepage gallery items:", err));
-  }, []);
 
   useEffect(() => {
     const noMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
