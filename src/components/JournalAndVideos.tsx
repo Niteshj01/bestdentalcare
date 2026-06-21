@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ArticleItem, VideoItem } from "../types";
-import { BookOpen, Play, Calendar, ExternalLink, Video, ChevronRight, X, Heart } from "lucide-react";
+import { BookOpen, Play, Calendar, ExternalLink, Video, ChevronRight, X, Heart, Clock, Activity, CheckCircle2, HelpCircle, ChevronDown, Shield } from "lucide-react";
 
 const fallbackArticles: ArticleItem[] = [
   {
@@ -8,21 +8,87 @@ const fallbackArticles: ArticleItem[] = [
     title: "Understanding Modern Painless Root Canal Therapy",
     content: "Root canal treatment has evolved significantly over the last decade. With advanced electronic endomotors, digital radiography, and micro-precision tools, the therapy is completely painless, comfortable, and highly successful. At Dr. Sky Dentistry, we preserve your natural teeth using advanced biological techniques designed to restore absolute strength.",
     coverImage: "/111.jpg",
-    publishDate: "JUNE 15, 2026"
+    publishDate: "JUNE 15, 2026",
+    detailedBlueprint: {
+      duration: "1-2 Sessions (45-60 mins each)",
+      complexity: "Micro-Endodontic Precision",
+      objective: "Eliminate bacterial decay, save the natural tooth root structure, and re-establish durable bite strength.",
+      introduction: "Root canal therapy (endodontic treatment) is required when the soft inner pulp of a tooth becomes inflamed or infected due to deep decay, trauma, or a cracked surface. At Dr. Sky Dentistry, we utilize state-of-the-art micro-precision tools, active fluid irrigation, and digital radiography. What used to be a long, uncomfortable procedure is now completely painless, swift, and highly comfortable.",
+      clinicalSteps: [
+        { title: "Step 1: High-Definition 3D Imaging", description: "First, we take a digital snapshot or micro-radiograph of the tooth and its roots to identify the precise shape of the canals and detect any surrounding bone infection." },
+        { title: "Step 2: Absolute Comfort Localization", description: "Dr. Sky administers localized advanced biological anesthesia to completely desensitize the tooth structure, assuring absolute patient comfort prior to any treatment." },
+        { title: "Step 3: Micro-Cleansing & Shaping", description: "Using flexible NiTi electronic endomotors, we perform micro-cleansing of the infected root canals, rinsing the biological pathway with warm antibacterial fluid to eliminate all pathogens." },
+        { title: "Step 4: Biocompatible Hermetic Sealing", description: "The cleared biological passages are filled and hermetically sealed with a natural biocompatible resin compound (Gutta-Percha) that blocks future bacterial infiltration." },
+        { title: "Step 5: Structural Reinforcement", description: "To complete the therapy and return natural bite resilience, a premium monolithic porcelain crown or ceramic filling is placed to cover the pristine natural architecture." }
+      ],
+      careGuidelines: [
+        "Avoid hard chew foods on the treated side for the first 48 hours until structural healing is fully complete.",
+        "Take mild over-the-counter anti-inflammatories if you experience slight biological tenderness during the first day.",
+        "Maintain excellent brushing and flossing routines; the restored tooth behaves exactly like your healthy natural teeth."
+      ],
+      faq: [
+        { question: "Is root canal treatment really painless?", answer: "Yes! Modern anesthesia paired with Dr. Sky's advanced soft-tissue techniques ensures you won't feel anything during the procedure. It feels similar to getting a routine composite filling." },
+        { question: "How long does a completed root canal treatment last?", answer: "A root canal treatment has a success rate of over 95%. When reinforced with a high-strength custom crown, it can easily last a lifetime with proper hygiene." }
+      ]
+    }
   },
   {
     id: "digital-dental-implants",
     title: "The Ultimate Guide to Digital Dental Implants",
     content: "Dental implants provide the most natural-feeling, beautiful option for replacing missing teeth. This surgical guide walks you through digital implant targeting, customized abutment modeling, and biological tooth osseointegration. Experience lifetime smile integrity and natural bite forces.",
     coverImage: "/113.jpg",
-    publishDate: "MAY 28, 2026"
+    publishDate: "MAY 28, 2026",
+    detailedBlueprint: {
+      duration: "Completed over 3-6 Months in stages",
+      complexity: "Surgical Bio-Integration",
+      objective: "Securely anchor a biocompatible titanium fixture directly into the jawbone, supporting a beautiful custom-milled crown.",
+      introduction: "When a natural tooth is lost, both the cosmetic crown and the root underneath disappear. This can lead to bone decay and teeth shifting. A digital dental implant replicates the natural tooth's overall structure by placing a grade-4 titanium post directly into the bone. At Dr. Sky Dentistry, implants are placed using digital guide-sleeves customized precisely to your CBCT 3D bone scan, guaranteeing perfect placement.",
+      clinicalSteps: [
+        { title: "Step 1: CBCT 3D Bone Scopes", description: "We conduct high-resolution computerized tomography (CBCT) scans to map your underlying bone density, sinuses, and nerves in 3D." },
+        { title: "Step 2: Virtual Surgical Planning", description: "Dr. Sky plans the exact angle, depth, and diameter of the titanium post within a virtual 3D rendering, creating a custom surgical guide template." },
+        { title: "Step 3: Biocompatible Placement", description: "The surgical guide is positioned in the mouth to place the implant within fractions of a millimeter. The procedure represents minimal discomfort and is faster than standard implants." },
+        { title: "Step 4: Osseointegration Period", description: "Over a span of 3 to 4 months, the surrounding jawbone tissue fuses organically with the titanium implant surface in a process known as osseointegration." },
+        { title: "Step 5: Hand-Crafted Crown Restoration", description: "An aesthetic custom abutment is connected, and a premium Zirconia or porcelain crown is permanently locked into position, creating flawless visual harmony." }
+      ],
+      careGuidelines: [
+        "Stick to a soft diet for the first week post-placement to prevent unneeded stress on the early-stage implant.",
+        "Rinse gently with warm salt water or a prescribed antiseptic mouthwash instead of aggressive brushing of the surgical spot.",
+        "Avoid smoking and tobacco, as nicotine restricts healthy blood circulation and can inhibit proper osseointegration."
+      ],
+      faq: [
+        { question: "Who is a candidate for dental implants?", answer: "Any adult with good systemic medical health and sufficient bone volume is an ideal candidate. Even if bone depth is low, bone grafting can be done to prepare for an implant." },
+        { question: "How do I care for my dental implant?", answer: "Dental implants are brushed and flossed exactly like natural teeth! You do not need any special tools, just regular cleanings and checkups with Dr. Sky." }
+      ]
+    }
   },
   {
     id: "clear-aligners-revolution",
     title: "Why Clear Aligners are Restructuring Modern Orthodontics",
     content: "Forget visible metal wires. Clear orthodontics and micro-precision aligners allow patient teeth straightening under invisible, comfortable parameters. Dr. Sky's advanced aligner plans use custom bio-tracking aligners tailored exactly to your unique orthodontic scan.",
     coverImage: "/112.jpg",
-    publishDate: "APRIL 10, 2026"
+    publishDate: "APRIL 10, 2026",
+    detailedBlueprint: {
+      duration: "6-15 Months depending on misalignment",
+      complexity: "Computerized Orthodontic Movement",
+      objective: "Systematically reposition misaligned, crowded, or spaced teeth using a consecutive sequence of invisible polyurethane trays.",
+      introduction: "Clear aligners represent a revolutionary leap in modern orthodontics. Using state-of-the-art clear thermoplastic materials and advanced predictive software, we can shift teeth into their optimal aesthetic and functional orientation without unsightly metal brackets or wire adjustments. It is incredibly comfortable, hygienic, and fits seamlessly into any busy lifestyle.",
+      clinicalSteps: [
+        { title: "Step 1: Intraoral 3D Scan", description: "No messy physical molds are used. We use a high-speed intraoral scanner to capture a high-fidelity 3D digital model of your dental arches." },
+        { title: "Step 2: Orthodontic Path Simulation", description: "Using predictive simulation software, Dr. Sky plans the precise movement path of each individual tooth, showing you a virtual 3D video of your future smile." },
+        { title: "Step 3: Micro-Print Aligner Fabrication", description: "A sequential set of active, medical-grade polyurethane aligners is laser-cut and hand-polished specifically to match each precise milestone of your sequence." },
+        { title: "Step 4: Consistent Wear Routine", description: "You wear each clear aligner tray for 20 to 22 hours daily, popping them out only to eat, brush, and floss. You will swap to a new set every 7 to 10 days." },
+        { title: "Step 5: Aesthetic Smile Realization", description: "After the target series is completed, a thin, discrete retainer is placed on the inside surfaces to lock your beautiful outcome securely in place." }
+      ],
+      careGuidelines: [
+        "Always clean and brush your natural teeth before re-inserting your aligners to prevent sugar and plaque from being trapped against the enamel.",
+        "Only drink cold water while wearing your aligners; hot beverages can warp the active thermoplastic material.",
+        "Clean your aligners with mild, unscented soap and lukewarm water, avoiding colored toothpaste that can scratch or cloud them."
+      ],
+      faq: [
+        { question: "Is clear orthodontic treatment painful?", answer: "No, but you will feel a mild, snug sensation of pressure for the first day or two after shifting to a fresh aligner tray. This indicates that your teeth are moving correctly." },
+        { question: "Can aligners fix adult crowding and bite issues?", answer: "Absolutely! Over 80% of adult mild-to-moderate alignment, overbite, deep bite, and spacing issues can be treated successfully using clear aligners." }
+      ]
+    }
   }
 ];
 
@@ -41,6 +107,12 @@ export default function JournalAndVideos() {
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState<"articles" | "videos">("articles");
   const [selectedArticle, setSelectedArticle] = useState<ArticleItem | null>(null);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+
+  const handleOpenArticle = (item: ArticleItem) => {
+    setSelectedArticle(item);
+    setOpenFaqIndex(null);
+  };
 
   useEffect(() => {
     // No data loading required - utilizando fallback statically
@@ -129,7 +201,7 @@ export default function JournalAndVideos() {
                     {articles.map((item) => (
                       <div
                         key={item.id}
-                        onClick={() => setSelectedArticle(item)}
+                        onClick={() => handleOpenArticle(item)}
                         className="group bg-[#002517]/40 border border-[#002f1d] hover:border-primary-mint/40 rounded-2xl overflow-hidden transition-all duration-300 flex flex-col cursor-pointer hover:shadow-xl hover:-translate-y-1"
                       >
                         {/* Cover Image */}
@@ -296,10 +368,123 @@ export default function JournalAndVideos() {
                 </h2>
               </div>
 
-              {/* Rich MD Paragraph Formatting */}
+              {/* Spec Sheet Grid if Detailed Blueprint is Available */}
+              {selectedArticle.detailedBlueprint && (
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 bg-[#002517]/60 border border-[#002f1d] p-4 rounded-xl">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-1.5 text-xs font-mono font-semibold uppercase tracking-wider text-[#dfba5c]">
+                      <Clock className="w-3.5 h-3.5" />
+                      <span>Duration</span>
+                    </div>
+                    <p className="text-sm font-sans text-white font-medium">{selectedArticle.detailedBlueprint.duration}</p>
+                  </div>
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-1.5 text-xs font-mono font-semibold uppercase tracking-wider text-[#dfba5c]">
+                      <Activity className="w-3.5 h-3.5" />
+                      <span>Complexity</span>
+                    </div>
+                    <p className="text-sm font-sans text-white font-medium">{selectedArticle.detailedBlueprint.complexity}</p>
+                  </div>
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-1.5 text-xs font-mono font-semibold uppercase tracking-wider text-[#dfba5c]">
+                      <Shield className="w-3.5 h-3.5" />
+                      <span>Key Objective</span>
+                    </div>
+                    <p className="text-xs font-sans text-gray-300 leading-normal">{selectedArticle.detailedBlueprint.objective}</p>
+                  </div>
+                </div>
+              )}
+
+              {/* Clinical Introduction / Overview */}
               <div className="font-sans text-sm stroke-none text-gray-300 leading-relaxed font-light space-y-4 whitespace-pre-line border-t border-[#002f1d] pt-6">
-                {selectedArticle.content}
+                <p>
+                  {selectedArticle.detailedBlueprint?.introduction || selectedArticle.content}
+                </p>
               </div>
+
+              {/* Step-by-Step Treatment Protocol Roadmap */}
+              {selectedArticle.detailedBlueprint?.clinicalSteps && (
+                <div className="space-y-4 pt-4">
+                  <h3 className="font-cormorant text-2xl font-bold text-white border-b border-[#002f1d] pb-2">
+                    Treatment Protocol Overview & Steps
+                  </h3>
+                  <div className="space-y-4">
+                    {selectedArticle.detailedBlueprint.clinicalSteps.map((step, idx) => (
+                      <div key={idx} className="flex gap-4 p-4 rounded-xl bg-[#002517]/20 border border-[#002f1d]/60 hover:border-primary-mint/30 transition-all">
+                        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary-mint/10 border border-primary-mint/35 flex items-center justify-center font-mono text-xs font-bold text-primary-mint">
+                          {String(idx + 1).padStart(2, "0")}
+                        </div>
+                        <div className="space-y-1">
+                          <h4 className="text-sm font-semibold text-white font-sans">{step.title}</h4>
+                          <p className="text-xs text-gray-400 leading-relaxed font-sans">{step.description}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Biological Post-Treatment Guidelines */}
+              {selectedArticle.detailedBlueprint?.careGuidelines && (
+                <div className="space-y-4 pt-4">
+                  <div className="p-5 rounded-xl border border-primary-mint/20 bg-gradient-to-br from-[#002517]/50 to-[#001D11] space-y-3">
+                    <h4 className="font-cormorant text-xl font-bold text-[#dfba5c] flex items-center gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-primary-mint" />
+                      Biological Post-Treatment Protocol
+                    </h4>
+                    <ul className="space-y-2.5">
+                      {selectedArticle.detailedBlueprint.careGuidelines.map((guideline, idx) => (
+                        <li key={idx} className="flex items-start gap-2.5 text-xs text-gray-300 font-sans leading-relaxed">
+                          <span className="text-primary-mint mt-1">✦</span>
+                          <span>{guideline}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
+
+              {/* Collapsible FAQ Accordion for patients */}
+              {selectedArticle.detailedBlueprint?.faq && (
+                <div className="space-y-4 pt-4 pb-2">
+                  <h3 className="font-cormorant text-2xl font-bold text-white border-b border-[#002f1d] pb-2">
+                    Patient Frequently Asked Questions
+                  </h3>
+                  <div className="space-y-2">
+                    {selectedArticle.detailedBlueprint.faq.map((item, idx) => {
+                      const isOpen = openFaqIndex === idx;
+                      return (
+                        <div
+                          key={idx}
+                          className="border border-[#002f1d] bg-[#002517]/20 rounded-xl overflow-hidden transition-all"
+                        >
+                          <button
+                            type="button"
+                            onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
+                            className="w-full flex items-center justify-between p-4 text-left font-sans text-xs font-semibold text-white tracking-wide hover:text-primary-mint transition-colors cursor-pointer"
+                          >
+                            <span>{item.question}</span>
+                            <ChevronDown
+                              className={`w-4 h-4 text-gray-400 transition-transform duration-300 ${
+                                isOpen ? "transform rotate-180 text-primary-mint" : ""
+                              }`}
+                            />
+                          </button>
+                          <div
+                            className={`transition-all duration-300 ease-in-out ${
+                              isOpen ? "max-h-[300px] border-t border-[#002f1d] p-4 opacity-100" : "max-h-0 opacity-0 overflow-hidden"
+                            }`}
+                          >
+                            <p className="text-xs text-gray-400 font-sans leading-relaxed">
+                              {item.answer}
+                            </p>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
 
               <div className="pt-6 border-t border-[#002f1d] flex items-center justify-between text-[11px] font-sans text-gray-400">
                 <div className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-primary-mint">

@@ -50,6 +50,15 @@ export interface ArticleItem {
   coverImage: string;
   content: string;
   publishDate: string;
+  detailedBlueprint?: {
+    duration: string;
+    complexity: string;
+    objective: string;
+    introduction: string;
+    clinicalSteps: { title: string; description: string }[];
+    careGuidelines: string[];
+    faq: { question: string; answer: string }[];
+  };
 }
 
 export interface VideoItem {

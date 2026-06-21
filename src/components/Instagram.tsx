@@ -92,7 +92,7 @@ export default function Instagram() {
             </h3>
           </div>
           <a
-            href="https://instagram.com"
+            href="https://www.instagram.com/dr.sky.dentistry?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
             target="_blank"
             referrerPolicy="no-referrer"
             className="font-dm text-[11px] uppercase tracking-widest font-semibold text-primary-mint hover:text-deep-green flex items-center gap-1.5 transition-colors"
@@ -112,7 +112,7 @@ export default function Instagram() {
           {posts.map((post) => (
             <a
               key={post.id}
-              href="https://instagram.com"
+              href="https://www.instagram.com/dr.sky.dentistry?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
               target="_blank"
               referrerPolicy="no-referrer"
               className="ig-item relative block aspect-square rounded-2xl overflow-hidden group shadow-md hover:shadow-xl transition-all duration-300 opacity-0 bg-teal-950/15"
