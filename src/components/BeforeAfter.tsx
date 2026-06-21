@@ -10,6 +10,19 @@ export default function BeforeAfter() {
   const cardRef = useRef<HTMLDivElement>(null);
   const [sliderPos, setSliderPos] = useState(50); // percentage (0 - 100)
   const [isDragging, setIsDragging] = useState(false);
+  const [activeCase, setActiveCase] = useState<"whitening" | "scaling">("whitening");
+  const [cardWidth, setCardWidth] = useState<number>(800);
+
+  useEffect(() => {
+    if (!cardRef.current) return;
+    const observer = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        setCardWidth(entry.contentRect.width);
+      }
+    });
+    observer.observe(cardRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const noMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -92,9 +105,9 @@ export default function BeforeAfter() {
     <section
       id="gallery"
       ref={containerRef}
-      className="py-24 md:py-36 bg-[#f2fff6] px-6 md:px-12 relative overflow-hidden text-center"
+      className="py-24 md:py-36 bg-[#f2fff6] px-6 md:px-12 relative overflow-hidden text-center animate-gpu"
     >
-      <div className="w-full max-w-5xl mx-auto space-y-16 relative z-10">
+      <div className="w-full max-w-5xl mx-auto space-y-12 relative z-10">
         
         {/* Section Heading */}
         <div className="text-center space-y-4">
@@ -107,8 +120,34 @@ export default function BeforeAfter() {
             </h2>
           </div>
           <div className="w-16 h-[1.5px] bg-primary-mint mx-auto" style={{ transform: "scaleX(1)" }} />
-          <p className="font-sans text-sage text-xs md:text-sm max-w-md mx-auto">
-            Interact with our slider to inspect the exact precision of Dr. Sky's premium restorative cosmetic rejuvenations.
+          
+          <div className="flex flex-wrap justify-center gap-4 pt-2">
+            <button
+              onClick={() => setActiveCase("whitening")}
+              className={`px-5 py-2.5 rounded-full font-dm text-xs uppercase tracking-wider font-semibold transition-all duration-300 ${
+                activeCase === "whitening"
+                  ? "bg-primary-mint text-white shadow-md shadow-primary-mint/25 scale-102"
+                  : "bg-white text-[#4A5E54] border border-primary-mint/20 hover:border-primary-mint/50"
+              }`}
+            >
+              Teeth Whitening
+            </button>
+            <button
+              onClick={() => setActiveCase("scaling")}
+              className={`px-5 py-2.5 rounded-full font-dm text-xs uppercase tracking-wider font-semibold transition-all duration-300 ${
+                activeCase === "scaling"
+                  ? "bg-primary-mint text-white shadow-md shadow-primary-mint/25 scale-102"
+                  : "bg-white text-[#4A5E54] border border-primary-mint/20 hover:border-primary-mint/50"
+              }`}
+            >
+              Scaling & Polishing
+            </button>
+          </div>
+
+          <p className="font-sans text-[#4A5E54] text-xs md:text-sm max-w-lg mx-auto min-h-[40px] pt-2 leading-relaxed">
+            {activeCase === "whitening"
+              ? "Case #0492: Complete removal of deep tobacco & tea stains with our premium biological whitening system."
+              : "Case #0812: Heavy calculus and tartar build-up polished away, renewing gums and dynamic structural freshness."}
           </p>
         </div>
 
@@ -121,33 +160,40 @@ export default function BeforeAfter() {
           onMouseDown={() => setIsDragging(true)}
           onTouchStart={() => setIsDragging(true)}
         >
-          {/* Slower bottom brightness shifts on hover */}
-          {/* Before Case Wrapper: Underlay */}
+          {/* Before Case Wrapper: Underlay (shows the Left half) */}
           <div className="absolute inset-0 w-full h-full" style={{ filter: "brightness(0.9) contrast(1.02)" }}>
             <img
-              src="/images/before_case.jpg"
-              alt="Case #0492 Before"
-              className="absolute inset-0 w-full h-full object-cover"
+              src={activeCase === "whitening" ? "/118.jpg" : "/122.jpg"}
+              alt="Before Treatment"
+              className="absolute inset-y-0 left-0 h-full max-w-none pointer-events-none"
+              style={{
+                width: "200%",
+                objectFit: "cover",
+                objectPosition: "left center"
+              }}
             />
             {/* Before Tag badge */}
-            <div className="absolute top-6 left-6 bg-charcoal/70 backdrop-blur text-white font-dm text-[9px] uppercase tracking-widest px-4 py-2 rounded-full z-10">
-              Case #0492 • Before
+            <div className="absolute top-6 left-6 bg-charcoal/70 backdrop-blur text-white font-dm text-[9px] uppercase tracking-widest px-4 py-2 rounded-full z-10 backdrop-filter">
+              {activeCase === "whitening" ? "Case #0492" : "Case #0812"} • Before
             </div>
           </div>
 
-          {/* After Case Wrapper: Overlay with clipped width */}
+          {/* After Case Wrapper: Overlay with clipped width (shows the Right half) */}
           <div
-            className="absolute inset-0 w-full h-full overflow-hidden border-r-2 border-gold/40"
+            className="absolute inset-0 h-full overflow-hidden border-r-2 border-gold/40"
             style={{ width: `${sliderPos}%` }}
           >
-            <div className="absolute inset-0 w-full h-full" style={{
-              width: cardRef.current?.getBoundingClientRect().width || "100%",
-              maxWidth: "100vw"
-            }}>
+            <div className="absolute inset-y-0 h-full" style={{ width: cardWidth }}>
               <img
-                src="/images/after_case.jpg"
-                alt="Case #0492 After"
-                className="absolute inset-0 w-full h-full object-cover"
+                src={activeCase === "whitening" ? "/118.jpg" : "/122.jpg"}
+                alt="After Treatment"
+                className="absolute inset-y-0 h-full max-w-none pointer-events-none"
+                style={{
+                  width: "200%",
+                  left: "-100%",
+                  objectFit: "cover",
+                  objectPosition: "right center"
+                }}
               />
               {/* After Tag badge with glow pulse */}
               <div className="absolute top-6 right-6 bg-gradient-to-r from-gold to-gold-light text-charcoal font-dm text-[9.5px] font-bold uppercase tracking-widest px-5 py-2 rounded-full shadow-lg pulse-badge z-10">
