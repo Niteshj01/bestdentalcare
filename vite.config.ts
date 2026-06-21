@@ -4,6 +4,8 @@ import path from 'path';
 import { defineConfig } from 'vite';
 import https from 'https';
 
+import { cloudflare } from "@cloudflare/vite-plugin";
+
 function fetchHtml(url: string): Promise<string> {
   return new Promise((resolve, reject) => {
     https.get(url, {
@@ -22,7 +24,7 @@ function fetchHtml(url: string): Promise<string> {
 export default defineConfig(() => {
   return {
     base: "/",
-    plugins: [react(), tailwindcss()],
+    plugins: [react(), tailwindcss(), cloudflare()],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
