@@ -101,19 +101,19 @@ const dentalServices: ServiceItem[] = [
 
 // Curated high-resolution dental photography matching exactly their clinic contexts
 const serviceImagesMap: Record<string, string> = {
-  "root-canal": "/111.jpg",
-  "orthodontic": "/112.jpg",
-  "dental-implants": "/113.jpg",
-  "crowns-bridges-veneers": "/114.jpg",
-  "tooth-fillings": "/115.jpg",
-  "extractions-impactions": "/116.jpg",
-  "dentures": "/117.jpg",
-  "teeth-whitening": "/118.jpg",
-  "laser-surgery": "/119.jpg",
-  "kids-dentistry": "/120.jpg",
-  "digital-xray": "/121.jpg",
-  "scaling-polishing": "/122.jpg",
-  "aligners": "/123.jpg"
+  "root-canal": "111.jpg",
+  "orthodontic": "112.jpg",
+  "dental-implants": "113.jpg",
+  "crowns-bridges-veneers": "114.jpg",
+  "tooth-fillings": "115.jpg",
+  "extractions-impactions": "116.jpg",
+  "dentures": "117.jpg",
+  "teeth-whitening": "118.jpg",
+  "laser-surgery": "119.jpg",
+  "kids-dentistry": "120.jpg",
+  "digital-xray": "121.jpg",
+  "scaling-polishing": "122.jpg",
+  "aligners": "123.jpg"
 };
 
 const getServiceImage = (id: string, title?: string, itemImage?: string) => {
@@ -155,7 +155,7 @@ const getServiceImage = (id: string, title?: string, itemImage?: string) => {
   }
   
   // Generic beautiful premium dental office fallback
-  return "/19.jpg";
+  return "19.jpg";
 };
 
 const getServiceCategory = (id: string, title?: string): "cosmetic" | "restorative" | "preventive" | "orthodontics" => {

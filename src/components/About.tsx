@@ -149,7 +149,7 @@ export default function About() {
               alt="Dr. Gagandeep S Gauba"
               className="w-full h-full object-cover object-center grayscale hover:grayscale-0 transition-all duration-700 select-none animate-gpu"
               referrerPolicy="no-referrer"
-              src="/88899.jpg"
+              src="88899.jpg"
             />
           </div>
 

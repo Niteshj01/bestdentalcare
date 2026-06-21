@@ -388,7 +388,7 @@ export default function Hero({ startAnimation }: HeroProps) {
                 className="w-full h-[115%] object-cover object-center translate-y-[-5%] rendering-crisp"
                 style={{ imageRendering: "-webkit-optimize-contrast" }}
                 referrerPolicy="no-referrer"
-                src="/19.jpg"
+                src="19.jpg"
               />
             </div>
 

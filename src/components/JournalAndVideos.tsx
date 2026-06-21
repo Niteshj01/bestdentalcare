@@ -7,7 +7,7 @@ const fallbackArticles: ArticleItem[] = [
     id: "root-canal-care",
     title: "Understanding Modern Painless Root Canal Therapy",
     content: "Root canal treatment has evolved significantly over the last decade. With advanced electronic endomotors, digital radiography, and micro-precision tools, the therapy is completely painless, comfortable, and highly successful. At Dr. Sky Dentistry, we preserve your natural teeth using advanced biological techniques designed to restore absolute strength.",
-    coverImage: "/111.jpg",
+    coverImage: "111.jpg",
     publishDate: "JUNE 15, 2026",
     detailedBlueprint: {
       duration: "1-2 Sessions (45-60 mins each)",
@@ -36,7 +36,7 @@ const fallbackArticles: ArticleItem[] = [
     id: "digital-dental-implants",
     title: "The Ultimate Guide to Digital Dental Implants",
     content: "Dental implants provide the most natural-feeling, beautiful option for replacing missing teeth. This surgical guide walks you through digital implant targeting, customized abutment modeling, and biological tooth osseointegration. Experience lifetime smile integrity and natural bite forces.",
-    coverImage: "/113.jpg",
+    coverImage: "113.jpg",
     publishDate: "MAY 28, 2026",
     detailedBlueprint: {
       duration: "Completed over 3-6 Months in stages",
@@ -65,7 +65,7 @@ const fallbackArticles: ArticleItem[] = [
     id: "clear-aligners-revolution",
     title: "Why Clear Aligners are Restructuring Modern Orthodontics",
     content: "Forget visible metal wires. Clear orthodontics and micro-precision aligners allow patient teeth straightening under invisible, comfortable parameters. Dr. Sky's advanced aligner plans use custom bio-tracking aligners tailored exactly to your unique orthodontic scan.",
-    coverImage: "/112.jpg",
+    coverImage: "112.jpg",
     publishDate: "APRIL 10, 2026",
     detailedBlueprint: {
       duration: "6-15 Months depending on misalignment",
