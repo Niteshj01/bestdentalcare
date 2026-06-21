@@ -12,32 +12,32 @@ export default function Instagram() {
   const posts: InstagramPost[] = [
     {
       id: "ig-1",
-      image: "19.jpg",
+      image: "/19.jpg",
       alt: "Pristine clinical rooms and reception"
     },
     {
       id: "ig-2",
-      image: "121.jpg",
+      image: "/121.jpg",
       alt: "Pristine technical precision tools"
     },
     {
       id: "ig-3",
-      image: "123.jpg",
+      image: "/123.jpg",
       alt: "Beautiful sparkling alignment results"
     },
     {
       id: "ig-4",
-      image: "120.jpg",
+      image: "/120.jpg",
       alt: "Boutique clinic reads and reception"
     },
     {
       id: "ig-5",
-      image: "122.jpg",
+      image: "/122.jpg",
       alt: "Botanical wellness components and spa feel"
     },
     {
       id: "ig-6",
-      image: "118.jpg",
+      image: "/118.jpg",
       alt: "Cosmetic facial consulting suites"
     }
   ];
