@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { InstagramPost } from "../types";
@@ -6,44 +6,76 @@ import { resolveAsset } from "../utils/resolveAsset";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const fallbackPosts: InstagramPost[] = [
+  {
+    id: "ig-1",
+    image: "/19.jpg",
+    alt: "Pristine clinical rooms and reception"
+  },
+  {
+    id: "ig-2",
+    image: "/121.jpg",
+    alt: "Pristine technical precision tools"
+  },
+  {
+    id: "ig-3",
+    image: "/123.jpg",
+    alt: "Beautiful sparkling alignment results"
+  },
+  {
+    id: "ig-4",
+    image: "/120.jpg",
+    alt: "Boutique clinic reads and reception"
+  },
+  {
+    id: "ig-5",
+    image: "/122.jpg",
+    alt: "Botanical wellness components and spa feel"
+  },
+  {
+    id: "ig-6",
+    image: "/118.jpg",
+    alt: "Cosmetic facial consulting suites"
+  }
+];
+
 export default function Instagram() {
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-
-  const posts: InstagramPost[] = [
-    {
-      id: "ig-1",
-      image: "/19.jpg",
-      alt: "Pristine clinical rooms and reception"
-    },
-    {
-      id: "ig-2",
-      image: "/121.jpg",
-      alt: "Pristine technical precision tools"
-    },
-    {
-      id: "ig-3",
-      image: "/123.jpg",
-      alt: "Beautiful sparkling alignment results"
-    },
-    {
-      id: "ig-4",
-      image: "/120.jpg",
-      alt: "Boutique clinic reads and reception"
-    },
-    {
-      id: "ig-5",
-      image: "/122.jpg",
-      alt: "Botanical wellness components and spa feel"
-    },
-    {
-      id: "ig-6",
-      image: "/118.jpg",
-      alt: "Cosmetic facial consulting suites"
-    }
-  ];
+  const [posts, setPosts] = useState<InstagramPost[]>(fallbackPosts);
 
   useEffect(() => {
+    const fetchGallery = async () => {
+      try {
+        const workerUrl = (import.meta as any).env?.VITE_WORKER_URL || "";
+        const isValidUrl = workerUrl && (workerUrl.startsWith("http://") || workerUrl.startsWith("https://") || workerUrl.startsWith("/"));
+        if (!isValidUrl) return;
+
+        const res = await fetch(`${workerUrl}/api/photos`);
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data) && data.length > 0) {
+            const mapped = data.map((item: any) => ({
+              id: String(item.id),
+              image: item.url,
+              alt: item.caption || "Clinic photo"
+            }));
+            setPosts(mapped);
+          }
+        }
+      } catch (err) {
+        console.warn("Clinical gallery photos offline or unreachable, using local fallback photos.");
+      }
+    };
+    fetchGallery();
+  }, []);
+
+  useEffect(() => {
+    if (posts.length === 0) return;
+
+    // Refresh ScrollTrigger as dimensions of newly rendered images might change
+    ScrollTrigger.refresh();
+
     const noMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (noMotion) {
       const items = trackRef.current?.querySelectorAll(".ig-item");
@@ -73,7 +105,7 @@ export default function Instagram() {
         once: true
       });
     }
-  }, []);
+  }, [posts]);
 
   return (
     <section

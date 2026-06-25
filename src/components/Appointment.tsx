@@ -16,6 +16,29 @@ export default function Appointment() {
   const [date, setDate] = useState("");
   const [submitLoading, setSubmitLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [services, setServices] = useState<{ id: any; name: string }[]>([]);
+
+  useEffect(() => {
+    // Fetch active services list
+    const fetchServices = async () => {
+      try {
+        const workerUrl = (import.meta as any).env?.VITE_WORKER_URL || "";
+        const isValidUrl = workerUrl && (workerUrl.startsWith("http://") || workerUrl.startsWith("https://") || workerUrl.startsWith("/"));
+        if (!isValidUrl) return;
+
+        const res = await fetch(`${workerUrl}/api/services`);
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data) && data.length > 0) {
+            setServices(data);
+          }
+        }
+      } catch (err) {
+        console.warn("Active services fetch offline or unreachable, using local fallback options.");
+      }
+    };
+    fetchServices();
+  }, []);
 
   useEffect(() => {
     const noMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -46,17 +69,31 @@ export default function Appointment() {
     );
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitLoading(true);
 
     try {
-      console.log("Appointment Booked Locally:", {
+      const payload = {
         name,
         phone,
-        service: selectedService || "General Consultation",
+        service: selectedService || "Other / General Consultation",
         date: date || new Date().toISOString().split("T")[0]
-      });
+      };
+
+      const workerUrl = (import.meta as any).env?.VITE_WORKER_URL || "";
+      if (workerUrl) {
+        const res = await fetch(`${workerUrl}/api/appointments`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        if (!res.ok) {
+          throw new Error("API submission was rejected by the server.");
+        }
+      } else {
+        console.log("No VITE_WORKER_URL configured. Falling back to local log:", payload);
+      }
 
       setSuccess(true);
       setName("");
@@ -71,7 +108,7 @@ export default function Appointment() {
     }
   };
 
-  const treatmentOptions = [
+  const treatmentOptions = services.length > 0 ? services : [
     { id: "root-canal", name: "Root Canal Treatment" },
     { id: "orthodontic", name: "Orthodontic Treatment" },
     { id: "implants", name: "Dental Implants" },

@@ -110,6 +110,74 @@ export default function JournalAndVideos() {
   const [selectedArticle, setSelectedArticle] = useState<ArticleItem | null>(null);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
+  useEffect(() => {
+    const fetchMedia = async () => {
+      setLoading(true);
+      try {
+        const workerUrl = (import.meta as any).env?.VITE_WORKER_URL || "";
+        const isValidUrl = workerUrl && (workerUrl.startsWith("http://") || workerUrl.startsWith("https://") || workerUrl.startsWith("/"));
+        if (!isValidUrl) {
+          setLoading(false);
+          return;
+        }
+
+        const [resArticles, resVideos] = await Promise.all([
+          fetch(`${workerUrl}/api/articles`),
+          fetch(`${workerUrl}/api/videos`)
+        ]);
+
+        if (resArticles.ok) {
+          const dataArticles = await resArticles.json();
+          if (Array.isArray(dataArticles) && dataArticles.length > 0) {
+            const mappedArticles: ArticleItem[] = dataArticles.map((art: any) => ({
+              id: String(art.id),
+              title: art.title,
+              content: art.content,
+              coverImage: art.cover_image,
+              publishDate: art.publish_date,
+              detailedBlueprint: {
+                duration: "1 Session (30-45 mins)",
+                complexity: "Educational Consultative Guidance",
+                objective: `Inform patient protocols concerning ${art.title}.`,
+                introduction: art.content,
+                clinicalSteps: [
+                  { title: "Step 1: Clinical Assessment", description: "Reviewing oral logs and establishing pristine diagnostic baselines." },
+                  { title: "Step 2: Interactive Consultation", description: "Dr. Sky walks through targeted biological parameters customized to your health structure." }
+                ],
+                careGuidelines: [
+                  "Maintain excellent daily brushing and flossing routines.",
+                  "Schedule general maintenance checkups every 6 months."
+                ],
+                faq: [
+                  { question: "Who should read this guide?", answer: "Any patient looking to optimize their personal care and overall oral health." }
+                ]
+              }
+            }));
+            setArticles(mappedArticles);
+          }
+        }
+
+        if (resVideos.ok) {
+          const dataVideos = await resVideos.json();
+          if (Array.isArray(dataVideos) && dataVideos.length > 0) {
+            const mappedVideos: VideoItem[] = dataVideos.map((vid: any) => ({
+              id: String(vid.id),
+              title: vid.title,
+              videoUrl: vid.youtube_url,
+              description: vid.description || "Video demonstration"
+            }));
+            setVideos(mappedVideos);
+          }
+        }
+      } catch (err) {
+        console.warn("Clinical articles/videos offline or unreachable, using local fallback content.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchMedia();
+  }, []);
+
   const handleOpenArticle = (item: ArticleItem) => {
     setSelectedArticle(item);
     setOpenFaqIndex(null);
@@ -339,11 +407,11 @@ export default function JournalAndVideos() {
 
       {/* ARTICLE FULL READ LIGHTBOX MODAL */}
       {selectedArticle && (
-        <div className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-[#001D11] border border-[#002f1d] rounded-2xl w-full max-w-3xl overflow-hidden shadow-2xl relative max-h-[85vh] flex flex-col animate-fade-in text-white/95">
+        <div className="fixed inset-0 z-[9999] bg-black/85 backdrop-blur-md overflow-y-auto p-4 md:py-12 flex justify-center items-start">
+          <div className="bg-[#001D11] border border-[#002f1d] rounded-2xl w-full max-w-3xl shadow-2xl relative flex flex-col animate-fade-in text-white/95 my-auto">
             
             {/* Modal sticky bar */}
-            <div className="p-4 border-b border-[#002f1d] flex items-center justify-between bg-[#001D11]">
+            <div className="p-4 border-b border-[#002f1d] flex items-center justify-between bg-[#001D11] rounded-t-2xl sticky top-0 z-10">
               <div className="flex items-center gap-2 text-primary-mint uppercase font-mono text-[10px] font-bold tracking-widest">
                 <BookOpen className="w-3.5 h-3.5" />
                 <span>Dental Care Masterclass</span>
@@ -357,10 +425,10 @@ export default function JournalAndVideos() {
               </button>
             </div>
 
-            {/* Scrollable Document Content */}
+            {/* Document Content */}
             <div 
               data-lenis-prevent
-              className="flex-1 min-h-0 p-6 md:p-8 overflow-y-auto space-y-6 scrollbar-thin animate-gpu"
+              className="p-6 md:p-8 space-y-6 animate-gpu"
             >
               {/* Cover Banner */}
               {selectedArticle.coverImage && (
