@@ -94,7 +94,7 @@ export default function AdminPage() {
   const [statusMessage, setStatusMessage] = useState<{ text: string; isError: boolean } | null>(null);
 
   // Gallery Add fields
-  const [photoFile, setPhotoFile] = useState<File | null>(null);
+  const [photoUrl, setPhotoUrl] = useState("");
   const [photoCaption, setPhotoCaption] = useState("");
 
   // Article Add fields
@@ -244,43 +244,40 @@ export default function AdminPage() {
     }
   };
 
-  // Upload photo to R2 + D1
+  // Upload photo directly using Image URL
   const handlePhotoUpload = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!photoFile) {
-      showStatus("Please pick an image file to upload.", true);
+    if (!photoUrl) {
+      showStatus("Please enter an image URL.", true);
       return;
     }
 
     setActionLoading("gallery-add");
     try {
-      const formData = new FormData();
-      formData.append("file", photoFile);
-      formData.append("caption", photoCaption);
-
       const response = await fetch(`${WORKER_URL}/api/photos`, {
         method: "POST",
         headers: {
+          "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`
         },
-        body: formData
+        body: JSON.stringify({
+          url: photoUrl,
+          caption: photoCaption
+        })
       });
 
       if (response.ok) {
         const newPhoto = await response.json();
         setPhotos(prev => [newPhoto, ...prev]);
-        setPhotoFile(null);
+        setPhotoUrl("");
         setPhotoCaption("");
-        // Reset file input element manually
-        const fileInput = document.getElementById("gallery-file-input") as HTMLInputElement;
-        if (fileInput) fileInput.value = "";
-        showStatus("Image uploaded and published successfully.");
+        showStatus("Image published successfully.");
       } else {
         const errData = await response.json();
-        showStatus(errData.error || "Failed to finalize image upload.", true);
+        showStatus(errData.error || "Failed to finalize image publication.", true);
       }
     } catch (err) {
-      showStatus("Failed to execute multi-part network upload.", true);
+      showStatus("Failed to execute network request.", true);
     } finally {
       setActionLoading(null);
     }
@@ -945,14 +942,14 @@ export default function AdminPage() {
 
               <form onSubmit={handlePhotoUpload} className="space-y-4">
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Select Image File</label>
+                  <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Image URL</label>
                   <input
                     required
-                    id="gallery-file-input"
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => setPhotoFile(e.target.files?.[0] || null)}
-                    className="w-full text-xs font-semibold text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-[11px] file:font-bold file:uppercase file:tracking-widest file:bg-[#3EB489]/10 file:text-[#0A1A12] file:cursor-pointer hover:file:bg-[#3EB489]/20"
+                    type="url"
+                    placeholder="https://example.com/image.jpg"
+                    value={photoUrl}
+                    onChange={(e) => setPhotoUrl(e.target.value)}
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl outline-none text-xs font-medium focus:border-[#3EB489]/60"
                   />
                 </div>
 
@@ -975,12 +972,12 @@ export default function AdminPage() {
                   {actionLoading === "gallery-add" ? (
                     <>
                       <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>Uploading to R2 Storage...</span>
+                      <span>Saving Photo...</span>
                     </>
                   ) : (
                     <>
                       <PlusCircle className="w-4 h-4" />
-                      <span>Upload & Publish Photo</span>
+                      <span>Publish Photo</span>
                     </>
                   )}
                 </button>

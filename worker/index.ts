@@ -1,12 +1,8 @@
 // Cloudflare Worker backend for Dr. Sky Dentistry
-// Utilizes standard Web Crypto APIs, Cloudflare D1 Database, and Cloudflare R2 Storage.
-
-// Change this value to your actual custom R2 custom domain or R2 public URL
-const R2_PUBLIC_URL = "PLACEHOLDER_REPLACE_WITH_REAL_URL";
+// Utilizes standard Web Crypto APIs and Cloudflare D1 Database.
 
 export interface Env {
   DB: any; // D1Database
-  BUCKET: any; // R2Bucket
   JWT_SECRET: string;
 }
 
@@ -313,40 +309,29 @@ export default {
         return makeResponse(results);
       }
 
-      // POST /api/photos (Auth protected, multipart upload to R2)
+      // POST /api/photos (Auth protected, JSON body directly to D1)
       if (method === "POST" && path === "/api/photos") {
         const admin = await authenticate(request, env);
         if (!admin) return makeResponse({ error: "Unauthorized" }, 401);
 
-        const formData = await request.formData();
-        const file = formData.get("file") as File | null;
-        const caption = formData.get("caption") as string || "";
+        const { url, caption } = await request.json() as {
+          url?: string;
+          caption?: string;
+        };
 
-        if (!file) {
-          return makeResponse({ error: "No image file provided" }, 400);
+        if (!url) {
+          return makeResponse({ error: "Image URL is required" }, 400);
         }
 
-        const timestamp = Date.now();
-        const safeName = file.name.replace(/[^a-zA-Z0-9.-]/g, "_");
-        const r2Key = `photos/${timestamp}-${safeName}`;
-
-        // Upload file stream directly to R2 bucket
-        await env.BUCKET.put(r2Key, file.stream(), {
-          httpMetadata: { contentType: file.type || "image/jpeg" }
-        });
-
-        // Resolve clean public URL
-        const url = `https://${R2_PUBLIC_URL}/${r2Key}`;
-
-        // Store meta in D1
+        // Store meta in D1. r2_key is NOT NULL, so we store an empty string.
         const result = await env.DB.prepare(
           "INSERT INTO photos (url, r2_key, caption) VALUES (?, ?, ?)"
-        ).bind(url, r2Key, caption).run();
+        ).bind(url, "", caption || "").run();
 
         return makeResponse({
           id: result.meta.last_row_id,
           url,
-          caption
+          caption: caption || ""
         });
       }
 
@@ -357,19 +342,6 @@ export default {
         if (!admin) return makeResponse({ error: "Unauthorized" }, 401);
 
         const id = photoMatch.id;
-
-        // Retrieve R2 Key first to delete from R2 Storage
-        const photo = await env.DB.prepare(
-          "SELECT r2_key FROM photos WHERE id = ?"
-        ).bind(id).first() as { r2_key: string } | null;
-
-        if (photo) {
-          try {
-            await env.BUCKET.delete(photo.r2_key);
-          } catch (r2Err) {
-            console.error("Failed to delete from R2 storage:", r2Err);
-          }
-        }
 
         await env.DB.prepare("DELETE FROM photos WHERE id = ?").bind(id).run();
         return makeResponse({ success: true });
