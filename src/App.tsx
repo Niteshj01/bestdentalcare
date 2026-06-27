@@ -20,6 +20,7 @@ import JournalAndVideos from "./components/JournalAndVideos";
 import FAQ from "./components/FAQ";
 import Appointment from "./components/Appointment";
 import Instagram from "./components/Instagram";
+import LocationMap from "./components/LocationMap";
 import Footer from "./components/Footer";
 import FloatingControls from "./components/FloatingControls";
 import ReviewModal from "./components/ReviewModal";
@@ -115,6 +116,7 @@ function LandingPage() {
         <FAQ />
         <Appointment />
         <Instagram />
+        <LocationMap />
         <Footer />
         <FloatingControls />
         
